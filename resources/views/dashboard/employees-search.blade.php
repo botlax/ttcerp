@@ -68,17 +68,17 @@ Employees | {{config('app.name')}}
 				    <th rowspan="2">Staff No.</th>
 				    <th rowspan="2">Name</th>
 				    <th rowspan="2">Nationality</th>
-				    <th rowspan="2">Join Date</th>
-				    <th rowspan="2">DoB</th>
+				    <th rowspan="2">Join Date</br><span style="display:inline-block; font-size:13px;">(dd-mm-yyyy)</span></th>
+				    <th rowspan="2">DoB</br><span style="display:inline-block; font-size:13px;">(dd-mm-yyyy)</span></th>
 				    <th colspan="2">Residency Permit</th>
 				    <th colspan="2">Passport</th>
 				    <th colspan="2">Total Monthly Salary</th>
   				</tr>
   				<tr>
 				    <td>RP No.</td>
-				    <td>Exp Date</td>
+				    <td>Exp Date</br><span style="display:inline-block; font-size:13px;">(dd-mm-yyyy)</span></td>
 				    <td>PPT No.</td>
-				    <td>Exp Date</td>
+				    <td>Exp Date</br><span style="display:inline-block; font-size:13px;">(dd-mm-yyyy)</span></td>
 				    <td>Basic</td>
 				    <td>Allowance</td>
 				    <td class="ph">Tools</td>
@@ -92,12 +92,12 @@ Employees | {{config('app.name')}}
 					<td>{{$emp->emp_id}}</td>
 					<td><a href="{{url('employees/'.$emp->id)}}">{{$emp->name}}</a></td>
 					<td>{{$emp->nationality?$emp->nationality:'--'}}</td>
-					<td>{{$emp->joined?$emp->joined->format('M d, Y'):'--'}}</td>
-					<td>{{$emp->dob?$emp->dob->format('M d, Y'):'--'}}</td>
+					<td>{{$emp->joined?$emp->joined->format('d/m/Y'):'--'}}</td>
+					<td>{{$emp->dob?$emp->dob->format('d/m/Y'):'--'}}</td>
 					<td>{{$emp->qid?$emp->qid:'--'}}</td>
-					<td>{{$emp->qid_expiry?$emp->qid_expiry->format('M d, Y'):'--'}}</td>
+					<td>{{$emp->qid_expiry?$emp->qid_expiry->format('d/m/Y'):'--'}}</td>
 					<td>{{$emp->passport?$emp->passport:'--'}}</td>
-					<td>{{$emp->passport_expiry?$emp->passport_expiry->format('M d, Y'):'--'}}</td>
+					<td>{{$emp->passport_expiry?$emp->passport_expiry->format('d/m/Y'):'--'}}</td>
 					<td>{{$emp->salary()->first()?$emp->salary()->first()->basic:'--'}}</td>
 					<td>{{$emp->salary()->first()?$emp->salary()->first()->subTotal:'--'}}</td>
 					<td class="ph">
