@@ -1,0 +1,1107 @@
+
+@import "fonts";
+@import "skel";
+@import "variables";
+
+	@include skel-breakpoints((
+		wide: '(max-width: 1680px)',
+		normal: '(max-width: 1280px)',
+		narrow: '(max-width: 980px)',
+		narrower: '(max-width: 840px)',
+		mobile: '(max-width: 736px)',
+		small: '(max-width: 530px)'
+	));
+
+	@include skel-layout((
+		reset: 'full',
+		boxModel: 'border',
+		grid: ( gutters: (50px, 50px) ),
+		conditionals: true,
+		containers: 1400px,
+		breakpoints: (
+			wide: (
+				containers: 1200px,
+				grid: (
+					gutters: (40px, 40px)
+				),
+			),
+			normal: (
+				containers: 95%
+			),
+			narrow: (
+				
+				grid: (
+					gutters: (30px, 30px)
+				),
+			),
+			narrower: (
+				containers: (95%, true),
+			),
+			small: (
+				containers: (95%, true),
+			)
+		)
+	));
+
+
+/*General Setup*/
+
+.clearfix:after {
+  	content: "";
+  	display: table;
+  	clear: both;
+}
+
+p.major{
+	font-size: 1.5em;
+}
+
+em{
+	font-style: italic;
+	font-weight: 700;
+	color: $font-dark;
+}
+
+.ctc{
+	padding: 2em;
+	text-align: center;
+
+	a{
+		display: inline-block;
+		color: #fff;
+		text-decoration: none;
+		font-weight: 700;
+		font-size: 1.5em;
+		border: 1px solid $blue-dark;
+		border-bottom: 5px solid $blue-dark;
+		padding: 10px 15px;
+		border-radius: 10px;
+		background: $blue-base;
+	}
+}
+
+body *{
+	font-family: $main-font;
+}
+
+body * p{
+	color: $font-base;
+}	
+
+/*LeanModal*/
+#lean_overlay {
+	position: fixed;
+	z-index:10500;
+	top: 0px;
+	left: 0px;
+	height:100%;
+	width:100%;
+	background: #000;
+	display: none;
+}
+
+.modal_close {
+	position: absolute;  
+	top: 0; right: 0; 
+	display: block; 
+	line-height: 35px;
+	width: 35px;
+	text-align: center;
+	z-index: 2;
+	outline: none;
+	border: none;
+	color: $blue-base;
+	font-size: 1.5em;
+}
+div[id*=leanmodal]{
+	position: relative;
+	top: 50% !important;
+	background-color: #fff;
+	border-radius: 10px;
+	width: 50%; height: auto;  /*size of modal window*/
+	padding: 3em;
+	overflow: auto;
+	display: none;
+	border: 5px solid $blue-base;
+
+	p{
+		color: $font-base;
+		font-size: 1.3em;
+		margin-bottom: 1em;
+		font-weight: 700;
+	}
+
+	.options{
+		text-align: right;
+	}
+
+	.options .option{
+		font-size: 1.3em;
+		font-weight: 700;
+		color: #fff;
+		margin-left: 0.5em;
+		padding: 5px 10px;
+		border-radius: 5px;
+		cursor: pointer;
+		outline: none;
+		border: none;
+		transition: background 0.2s ease-in-out;
+	}
+
+	.options .yes{
+		border: 1px solid $success;
+		border-bottom: 5px solid $success-darker;
+		background: $success;
+
+		&:hover{
+			background: $success-darker;
+		}
+	}
+
+	.options .cancel{
+		border: 1px solid $error;
+		border-bottom: 5px solid $error-darker;
+		background: $error;
+
+		&:hover{
+			background: $error-darker;
+		}
+	}
+}
+
+/*FLASH*/
+
+.flash-wrap{
+	position: fixed;
+	width: 350px;
+	height: auto;
+	right: 5px;
+	bottom: 5px;
+	z-index: 10100;
+	overflow: hidden;
+
+	.flash{
+		padding: 1em 1.5em;
+		text-align: center;
+		border-radius: 10px;
+		color: #fff;
+		font-weight: 700;
+		transform: translateX(400px);
+		transition: all 0.3s ease-in-out;
+
+		button.close{
+			display: inline-block;
+			position: absolute;
+			right: 0;
+			top: 0;
+			line-height: 30px;
+			width: 30px;
+			text-align: center;
+			cursor: pointer;
+			color: #fff;
+			background: none;
+			border: none;
+			outline: none;
+		}
+	}
+
+	.flash.show{
+		transform: translateX(0px);
+	}
+
+	.flash-danger{
+		background: $error;
+		border: 1px solid $error-darker;
+		border-bottom: 9px solid $error-darker;
+	}
+
+	.flash-info{
+		background: $info;
+		border: 1px solid $info-darker;
+		border-bottom: 9px solid $info-darker;
+	}
+
+	.flash-success{
+		background: $success;
+		border: 1px solid $success-darker;
+		border-bottom: 9px solid $success-darker;
+	}
+
+	.flash-warning{
+		background: $warning;
+		border: 1px solid $warning-darker;
+		border-bottom: 9px solid $warning-darker;
+	}
+}
+
+/*LOGIN*/
+
+body.login #main{
+	> header{
+		height: 50vh;
+		min-height: 300px;
+		max-height: 750px;
+		position: relative;
+		z-index: 2000;
+
+		h1{
+			text-indent: -9999px;
+			width: 200px;
+			height: 150px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin-left: -100px;
+			margin-top: -75px;
+			background-image: url('images/talal-logo.png');
+			background-repeat: no-repeat;
+			background-size: 100% auto;
+		}
+
+		&:after{
+			content:"\f0d7";
+			position: absolute;
+			font-family: FontAwesome;
+			font-size: 6em;
+			line-height: 20px;
+			bottom: -15px;
+			color: #fff;
+			width: 100%;
+			text-align: center;
+		}
+	}
+	#login-form{
+		height: 50vh;
+		min-height: 300px;
+		max-height: 750px;
+		background: $blue-base;
+		padding: 3em 53px;
+		position: relative;
+		z-index: 1000;
+
+		p{
+			font-size: 0.8em;
+			padding: 1em;
+			color: $blue-lighter;
+			position: absolute;
+			left:0;
+			bottom:0;
+		}
+	}
+}
+
+#login-form form{
+	width: 630px;
+	margin: 0 auto;
+	transition: all 0.5s ease-in-out;
+
+	.form-input{
+		display: inline-block;
+		position: relative;
+		vertical-align: top;
+		
+		input{
+			border: 2px solid $blue-darker;
+			border-top: 2px solid $blue-darker;
+			border-bottom: 2px solid $blue-light;
+			width: 300px;
+		}
+
+		&:first-of-type{
+			margin-right: 30px;
+		}
+
+		label{
+			color: #fff;
+			display: block;
+			padding: 0 0 5px 5px;
+		}
+
+		.error{
+			display: block;
+			color: #fff;
+			background: $red-error;
+			border-radius: 5px;
+			font-size: 0.9em;
+			font-weight: 400;
+			padding: 5px;
+			font-style: italic;
+		}
+	}
+
+	.form-misc{
+		margin-bottom: 30px;
+		padding-top: 5px;
+		a{
+			display: block;
+			float: right;
+			color: #fff;
+			text-decoration: none;
+			cursor: pointer;
+		}
+
+		.remember-wrap{
+			float: left;
+
+			input{
+				display: inline-block;
+				margin-bottom: 0;
+			}
+
+			label{
+				color: #fff;
+				font-size: 0.8em;
+			}
+		}
+
+	}
+
+	input{
+		font-family: $main-font;
+		font-weight: 700;
+		font-size: 1.2em;
+		padding: .5em;
+		display: block;
+		border-radius: 5px;
+		background: $blue-dark;
+		color: #fff;
+
+		&:focus{
+			outline: none;
+		}
+	}
+
+	input[type=submit]{
+		display: block;
+		width: 100%;
+		background: #fff;
+		color: $font-base;
+	}
+}
+
+/*Dashboard*/
+
+
+body.dashboard {
+	background: $grey-base;
+
+	> .dropdown-overlay{
+		position: fixed;
+		background: transparent;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		z-index: 9000;
+	}
+}
+
+header#header{
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left: 0;
+	background: $grey-dark;
+	z-index: 10000;
+
+	#user-wrap{
+		background: $grey-dark;	
+		height: 80px;
+		padding: 15px 1em;
+		position: absolute;
+		width: 220px;
+		left: 0;
+		top: 0;
+
+		h1, h2{
+			display: inline-block;
+			vertical-align: middle;
+			height: 50px;
+		}
+		h1{
+			width: 30%;
+			background-image: url('images/talal-logo.png');
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-position: center center;
+			text-indent: -9999px;
+		}
+
+		h2{
+			width: 70%;
+			color: #fff;
+			font-weight: 700;
+			font-style: oblique;
+
+			span{
+				font-size: 1.7em;
+				line-height: 50px;
+				padding-left: 10px;
+				font-style: normal;
+			}
+		}
+	}
+
+	nav{
+		margin-left: 220px;
+		position: relative;
+		
+		> .dropdown-overlay{
+			position: absolute;
+			background: transparent;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			z-index: 1000;
+		}
+	}
+
+	nav > ul{
+		z-index: 2000;
+		position: relative;
+		display: inline-block;
+		border-right: 1px solid $grey-base;
+		border-left: 1px solid $grey-darker;
+
+		> li{
+			position: relative;
+			display: inline-block;
+			vertical-align: top;
+			border-right: 1px solid $grey-darker;
+			border-left: 1px solid $grey-base;
+
+			a{
+				display: block;
+				line-height: 40px;
+				padding: 0 1em;
+				text-align: center;
+				text-decoration: none;
+				color: $grey-lighter;
+				cursor: pointer;
+				transition: all 0.2s ease-in-out;
+
+				&:hover{
+					background: $grey-darker;
+					color: #fff;
+				}
+
+				&.active{
+					background: $grey-darker;
+					color: #fff;
+				}
+			}
+
+			a i{
+				display: inline-block;
+				line-height: 40px;
+				margin-right: 10px;
+			}
+
+			&:last-child ul{
+				right:0;
+				left: auto !important;
+			}
+
+			&:last-child ul:before{
+				right: 10px;
+				left: auto !important;
+			}
+
+			&.with-dropdown{
+				> a{
+					padding-right: 2em;
+				}
+
+				> a:after{
+					content: "\f0d7";
+					position: absolute;
+					right: 1em;
+					font-family: FontAwesome;
+					color: #000;
+				}
+			}
+
+			&.with-dropdown:hover{
+				> a:after{
+					color: #fff;
+				}
+			}
+		}
+
+		.dropdown{
+			position: absolute;
+			width: 200px;
+			top: 0%;
+			left: 0;
+			margin-top: 3px;
+			border: 1px solid $grey-lighter;
+			padding: 0.5em 0;
+			background: #fff;
+			visibility: hidden;
+			opacity: 0;
+			transition: all 0.3s ease-in-out;
+			box-shadow: 1px 1px 10px $grey-light;
+			
+			&.show{
+				top: 100%;
+				visibility: visible;
+				opacity: 1;
+			}
+
+			&:before{
+				content: "\f0d8";
+				font-family: FontAwesome;
+				position: absolute;
+				color: #fff;
+				font-size: 1.5em;
+				line-height: 10px;
+				top: -10px;
+				left: 10px;
+			}
+
+			li{
+				display: block;
+
+				&:last-child a{
+					border-bottom: none !important;
+				}
+			}
+
+			li a{
+
+				&:hover{
+					background: $grey-lighter;
+					color: #fff;
+				}
+
+				color: $font-base;
+				background: #fff;
+				border-bottom: 1px solid $font-light;
+				text-align: left;
+			}
+		}
+	}
+
+	nav > ul#nav-mobile{
+		z-index: 2000;
+		display: none;
+
+		>li >a i{
+			margin-right: 0;
+		}
+	}
+}
+
+article#main{
+	position: relative;
+	z-index: 1000;
+}
+
+article#main #nav-panel{
+	background: $grey-base;
+	width: 220px;
+	display: block;
+	position: relative;
+	float: left;
+	z-index: 2000;
+
+	#nav-button{
+		display: none;
+	}
+
+	#sub-nav > ul{
+
+		margin-top: 80px;
+
+		li{
+			border-bottom: 1px solid $grey-dark;
+			border-top: 1px solid $grey-light;
+			position: relative;
+
+			a{
+				color: $grey-lighter;
+				text-decoration: none;
+				display: block;
+				position: relative;
+				line-height: 60px;
+				padding: 0 1em;
+				font-size: 1.2em;
+				transition: all 0.2s ease-in-out;
+
+				&:hover{
+					background: $blue-light;
+					color: #fff;
+				}
+			}
+
+			a i{
+				margin-right: 15px;
+			}
+
+			&.active a{
+				background: $blue-light;
+				color: #fff;
+
+				&:after{
+					content: "\f0d9";
+					font-family: FontAwesome;
+					position: absolute;
+					right: 0;
+					font-size: 1.5em;
+					color: #eee;
+				}
+			}
+
+			ul{
+				display: none;
+				background: $grey-dark;
+
+				li{
+					border-bottom: 1px solid $grey-darker;
+					border-top: 1px solid $grey-base;
+				}
+				li a{
+					font-size: 0.9em;
+					padding-left: 2em;
+
+					&:hover{
+						background: $red-base;
+					}
+				}
+			}
+		}
+	}
+
+	#sub-nav-mobile{
+		display: none;
+	}
+
+	#sub-nav-mobile > ul{
+		margin-top: 40px;
+
+		> li{
+			border-bottom: 1px solid $grey-dark;
+			border-top: 1px solid $grey-light;
+			position: relative;
+			white-space: nowrap;
+
+			ul{
+				position: absolute;
+				right: -200px;
+				top: 0;
+				display: none;
+
+				li a{
+					width: 200px;
+					text-align: left;
+					padding: 0 1em;
+					background: $grey-dark;
+
+					&:hover{
+						background: $red-base;
+					}
+				}
+			}
+
+			&.active a{
+				background: $blue-light;
+				color: #fff;
+
+				&:after{
+					content: "\f0d9";
+					font-family: FontAwesome;
+					position: absolute;
+					right: 0;
+					font-size: 1.5em;
+					color: #eee;
+				}
+			}
+		}
+
+		> li a{
+			display: block;
+			color: $grey-lighter;
+			text-decoration: none;
+			cursor: pointer;
+			line-height: 60px;
+			width: 60px;
+			text-align: center;
+
+			&:hover{
+				background: $blue-light;
+				color: #fff;
+			}
+		}
+	}
+}
+
+article#main #content{
+	
+	background: #eee;
+	margin-left: 220px;
+	margin-right: 0;
+	padding-top: 40px;
+	position: relative;
+	min-height: 100vh;
+	width: auto;
+	color: $grey-base;
+	z-index: 1000;
+
+	header h3{
+		i{
+			margin-right: 10px;
+		}
+
+		line-height: 40px;
+		padding-left: 40px;
+		background: #fff;
+		color: $font-light;
+		font-size: 0.9em;
+	}
+
+	#main-content{
+		padding: 40px;
+	}
+	
+}
+
+footer#footer p{
+	text-align: center;
+	color: $grey-lighter;
+	font-size: 0.85em;
+	padding: 15px 0;
+}
+
+
+/*Media Queries*/
+
+@media screen and (max-width: 1680px){
+	
+}
+
+@media screen and (max-width: 1280px){
+	
+}
+
+@media screen and (max-width: 980px){
+	
+	/*Flash*/
+	
+	.flash-wrap{
+		width: 300px;
+
+		.flash{
+			border-radius: 5px;
+			color: #fff;
+			font-weight: 400;
+			transform: translateX(350px);
+			font-size: 0.9em;
+
+			button.close{
+				line-height: 25px;
+				width: 25px;
+			}
+		}
+	}
+	/*Dashboard*/
+
+	article#main #nav-panel{
+		width: 60px;
+
+		#sub-nav{
+			display: none;
+		}
+
+		#sub-nav-mobile{
+			display: block;
+		}
+	}
+
+	article#main #content{
+		margin-left: 60px;
+	}
+
+	/*HEADER*/
+	header#header{
+		#user-wrap{
+			height: 40px;
+			padding: 0px 1em;
+			h1, h2{
+				height: 40px;
+			}
+			h2{
+				span{
+					font-size: 1.4em;
+					line-height: 40px;
+					padding-left: 10px;
+					font-style: normal;
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 840px){
+	
+}
+
+@media screen and (max-width: 736px){
+
+	/*LeanModal*/
+
+	div[id*=leanmodal]{
+		border-radius: 5px;
+		width: 70%;
+		padding: 2em;
+		border: 3px solid $blue-base;
+
+		p{
+			font-size: 1.1em;
+		}
+
+		.options .option{
+			font-size: 1.1em;
+		}
+
+		.options .yes{
+			border-bottom: 3px solid $success-darker;
+		}
+
+		.options .cancel{
+			border-bottom: 3px solid $error-darker;
+		}
+	}
+	/*LOGIN*/
+
+	body.login #main{
+		> header{
+			height: 40vh;
+			min-height: 200px;
+
+			h1{
+				width: 150px;
+				height: 112px;
+				margin-left: -75px;
+				margin-top: -56px;
+			}
+
+			&:after{
+				font-size: 4em;
+				line-height: 20px;
+			}
+		}
+		#login-form{
+			height: 60vh;
+			min-height: 350px;
+			padding: 2em 30px;
+		}
+	}
+
+	#login-form form{
+		width: 300px;
+
+		.form-input{
+			display: block;
+			
+			input{
+				border: 1px solid $blue-darker;
+				border-top: 1px solid $blue-darker;
+				border-bottom: 1px solid $blue-light;
+				width: 300px;
+			}
+
+			&:first-of-type{
+				margin-right: 0;
+			}
+
+			.error{
+				font-size: 0.8em;
+			}
+
+		}
+
+		input{
+			font-weight: 700;
+			font-size: 1.2em;
+			padding: .5em;
+		}
+
+		.form-misc{
+			a{
+				float: none;
+				text-align: center;
+				margin-top: 20px;
+			}
+
+			.remember-wrap{
+				float: none;
+
+			}
+		}
+	}
+
+	/*Header*/
+
+	header#header nav > ul{
+		display: none;
+	}
+
+	header#header nav > ul#nav-mobile{
+		display: inline-block;
+	}
+	
+}
+
+@media screen and (max-width: 530px){
+	/*LeanModal*/
+
+	div[id*=leanmodal]{
+		width: 90%;
+		padding: 1.5em;
+	}
+
+	/*LOGIN*/
+	#login-form form{
+		width: 250px;
+
+		.form-input{
+			display: block;
+			
+			input{
+				border: 1px solid $blue-darker;
+				border-top: 1px solid $blue-darker;
+				border-bottom: 1px solid $blue-light;
+				width: 250px;
+			}
+
+			&:first-of-type{
+				margin-right: 0;
+			}
+
+		}
+
+		input{
+			font-weight: 400;
+			font-size: 1em;
+			padding: .5em;
+		}
+
+		input[type=submit]{
+			font-weight: 700;
+		}
+	}
+
+	/*Dashboard*/
+	article#main #nav-panel{
+		width: 100%;
+		float: none;
+
+		#nav-button{
+			display: block;
+			margin-top: 100px;
+			line-height: 40px;
+			padding: 0 1em;
+			color: #fff;
+			text-decoration: none;
+			background: $blue-light;
+		}
+
+		#sub-nav{
+			display: none;
+		}
+
+		#sub-nav > ul{
+
+			margin-top: 0px;
+
+			li{
+
+				a{
+					line-height: 40px;
+					padding: 0 1em;
+					font-size: 1em;
+				}
+
+				a i{
+					margin-right: 15px;
+				}
+
+				&.active a{
+
+					&:after{
+						right: 14px;
+					}
+				}
+
+				ul{
+					li a{
+						font-size: 0.8em;
+					}
+				}
+			}
+		}
+
+		#sub-nav-mobile{
+			display: none;
+		}
+	}
+
+	article#main #content{
+	
+		margin-left: 0;
+		padding-top: 0;
+		width: 100%;
+
+		header h3{
+			text-align: center;
+			padding: 0;
+		}
+	}
+
+	/*Header*/
+
+	header#header{
+
+		#user-wrap{
+			height: 60px;
+			padding: 5px 1em;
+			position: static;
+			width: 100%;
+			text-align: center;
+
+			h1, h2{
+				display: inline-block;
+				vertical-align: middle;
+				height: 50px;
+			}
+			h1{
+				width: 50px;
+			}
+
+			h2{
+				width: 130px;
+
+				span{
+					font-size: 1.7em;
+					line-height: 50px;
+				}
+			}
+		}
+
+		nav{
+			text-align: center;
+			margin-left: 0px;
+		}
+
+		nav > ul#nav-mobile{
+			z-index: 2000;
+			display: inline-block;
+
+			>li >a i{
+				margin-right: 0;
+			}
+		}
+	}
+
+}
