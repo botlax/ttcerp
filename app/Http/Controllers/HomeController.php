@@ -108,26 +108,26 @@ class HomeController extends Controller
 
         if($adj){
             if($attr == 'license'){
-                $employees = User::whereHas('license');
+                $employees = User::sort()->whereHas('license');
             }
             elseif($attr == 'salary') {
-                $employees = User::whereHas('salary');
+                $employees = User::sort()->whereHas('salary');
             }
             else{
-                $employees = User::whereHas('files',function($q)use($attr){
+                $employees = User::sort()->whereHas('files',function($q)use($attr){
                     $q->where($attr,'!=',null)->orWhere($attr,'!=','');
                 });
             }
         }
         else{
             if($attr == 'license'){
-                $employees = User::whereDoesntHave('license');
+                $employees = User::sort()->whereDoesntHave('license');
             }
             elseif($attr == 'salary') {
-                $employees = User::whereDoesntHave('salary');
+                $employees = User::sort()->whereDoesntHave('salary');
             }
             else{
-                $employees = User::where(function($q)use($attr){
+                $employees = User::sort()->where(function($q)use($attr){
                     $q->whereDoesntHave('files');
                 })->orWhere(function($q)use($attr){
                     $q->whereHas('files',function($q)use($attr){
