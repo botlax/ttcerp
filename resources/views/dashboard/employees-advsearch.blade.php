@@ -68,17 +68,17 @@ Employees | {{config('app.name')}}
 				    <th rowspan="2">Staff No.</th>
 				    <th rowspan="2">Name</th>
 				    <th rowspan="2">Nationality</th>
-				    <th rowspan="2">Join Date</br><span style="display:inline-block; font-size:10px;">(dd-mm-yyyy)</span></th>
-				    <th rowspan="2">DoB</br><span style="display:inline-block; font-size:10px;">(dd-mm-yyyy)</span></th>
+				    <th rowspan="2">Join Date</br><span style="display:inline-block; font-size:11px;">(dd-mm-yyyy)</span></th>
+				    <th rowspan="2">DoB</br><span style="display:inline-block; font-size:11px;">(dd-mm-yyyy)</span></th>
 				    <th colspan="2">Residency Permit</th>
 				    <th colspan="2">Passport</th>
 				    <th colspan="2">Total Monthly Salary</th>
   				</tr>
   				<tr>
 				    <td>RP No.</td>
-				    <td>Exp Date</br><span style="display:inline-block; font-size:10px;">(dd-mm-yyyy)</span></td>
+				    <td>Exp Date</br><span style="display:inline-block; font-size:11px;">(dd-mm-yyyy)</span></td>
 				    <td>PPT No.</td>
-				    <td>Exp Date</br><span style="display:inline-block; font-size:10px;">(dd-mm-yyyy)</span></td>
+				    <td>Exp Date</br><span style="display:inline-block; font-size:11px;">(dd-mm-yyyy)</span></td>
 				    <td>Basic</td>
 				    <td>Allowance</td>
 				    <td class="ph">Tools</td>

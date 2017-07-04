@@ -52,8 +52,8 @@ Cancelled Employees | {{config('app.name')}}
 				    <th rowspan="2">Staff No.</th>
 				    <th rowspan="2">Name</th>
 				    <th rowspan="2">Nationality</th>
-				    <th rowspan="2">Join Date</br><span style="display:inline-block; font-size:10px;">(dd-mm-yyyy)</span></th>
-				    <th rowspan="2">DoB</br><span style="display:inline-block; font-size:10px;">(dd-mm-yyyy)</span></th>
+				    <th rowspan="2">Join Date</br><span style="display:inline-block; font-size:11px;">(dd-mm-yyyy)</span></th>
+				    <th rowspan="2">DoB</br><span style="display:inline-block; font-size:11px;">(dd-mm-yyyy)</span></th>
 				    <th colspan="2">Residency Permit</th>
 				    <th colspan="2">Passport</th>
 				    <th colspan="2">Total Monthly Salary</th>
@@ -61,9 +61,9 @@ Cancelled Employees | {{config('app.name')}}
   				</tr>
   				<tr>
 				    <th>RP No.</th>
-				    <th>Exp Date</br><span style="display:inline-block; font-size:10px;">(dd-mm-yyyy)</span></th>
+				    <th>Exp Date</br><span style="display:inline-block; font-size:11px;">(dd-mm-yyyy)</span></th>
 				    <th>PPT No.</th>
-				    <th>Exp Date</br><span style="display:inline-block; font-size:10px;">(dd-mm-yyyy)</span></th>
+				    <th>Exp Date</br><span style="display:inline-block; font-size:11px;">(dd-mm-yyyy)</span></th>
 				    <th>Basic</th>
 				    <th>Allowance</th>
   				</tr>
