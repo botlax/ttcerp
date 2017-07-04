@@ -53,8 +53,8 @@ Cancelled Employees | {{config('app.name')}}
 				    <th rowspan="2">Staff No.</th>
 				    <th rowspan="2">Name</th>
 				    <th rowspan="2">Nationality</th>
-				    <th rowspan="2">Join Date</th>
-				    <th rowspan="2">DoB</th>
+				    <th rowspan="2">Join Date</br>(dd-mm-yyyy)</th>
+				    <th rowspan="2">DoB</br>(dd-mm-yyyy)</th>
 				    <th colspan="2">Residency Permit</th>
 				    <th colspan="2">Passport</th>
 				    <th colspan="2">Total Monthly Salary</th>
@@ -62,9 +62,9 @@ Cancelled Employees | {{config('app.name')}}
   				</tr>
   				<tr>
 				    <th>RP No.</th>
-				    <th>Exp Date</th>
+				    <th>Exp Date</br>(dd-mm-yyyy)</th>
 				    <th>PPT No.</th>
-				    <th>Exp Date</th>
+				    <th>Exp Date</br>(dd-mm-yyyy)</th>
 				    <th>Basic</th>
 				    <th>Allowance</th>
   				</tr>

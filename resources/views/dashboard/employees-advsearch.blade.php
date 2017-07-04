@@ -68,17 +68,17 @@ Employees | {{config('app.name')}}
 				    <th rowspan="2">Staff No.</th>
 				    <th rowspan="2">Name</th>
 				    <th rowspan="2">Nationality</th>
-				    <th rowspan="2">Join Date</th>
-				    <th rowspan="2">DoB</th>
+				    <th rowspan="2">Join Date</br>(dd-mm-yyyy)</th>
+				    <th rowspan="2">DoB</br>(dd-mm-yyyy)</th>
 				    <th colspan="2">Residency Permit</th>
 				    <th colspan="2">Passport</th>
 				    <th colspan="2">Total Monthly Salary</th>
   				</tr>
   				<tr>
 				    <td>RP No.</td>
-				    <td>Exp Date</td>
+				    <td>Exp Date</br>(dd-mm-yyyy)</td>
 				    <td>PPT No.</td>
-				    <td>Exp Date</td>
+				    <td>Exp Date</br>(dd-mm-yyyy)</td>
 				    <td>Basic</td>
 				    <td>Allowance</td>
 				    <td class="ph">Tools</td>
