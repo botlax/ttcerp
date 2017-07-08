@@ -37,6 +37,7 @@ class HomeController extends Controller
     public function index()
     {
         $employees = User::sort()->take(10)->get();
+        dd($_SERVER['REMOTE_HOST']);
         return view('dashboard.home',compact('employees'));
     }
 
