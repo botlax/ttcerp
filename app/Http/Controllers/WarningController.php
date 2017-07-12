@@ -21,6 +21,7 @@ class WarningController extends Controller
      */
     public function __construct()
     {
+        $this->middleware('intranet');
         $this->middleware('auth');
         $this->middleware('spectator')->only(['store','update','drop']);
     }

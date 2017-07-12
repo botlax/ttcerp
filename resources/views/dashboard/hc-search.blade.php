@@ -59,7 +59,7 @@ Health Card Expiry | {{config('app.name')}}
 		</div>
 
 		@if(!empty($emps->toArray()))
-			<table id="employees" class="table7">
+			<table id="employees" class="table8">
 				<thead>
 	  				<tr>
 					    <th rowspan="2">SN</th>
@@ -67,6 +67,7 @@ Health Card Expiry | {{config('app.name')}}
 					    <th rowspan="2">Name</th>
 					    <th rowspan="2">Nationality</th>
 					    <th rowspan="2">Join Date</th>
+					    <th rowspan="2">QID</th>
 					    <th colspan="2">Health Card</th>
 	  				</tr>
 	  				<tr>
@@ -83,6 +84,7 @@ Health Card Expiry | {{config('app.name')}}
 						<td><a href="{{url('employees/'.$emp->id)}}">{{$emp->name}}</a></td>
 						<td>{{$emp->nationality?$emp->nationality:'--'}}</td>
 						<td>{{$emp->joined?$emp->joined->format('d/m/Y'):'--'}}</td>
+						<td>{{$emp->qid?$emp->qid:'--'}}</td>
 						<td>{{$emp->health_card}}</td>
 						<td>{{$emp->hc_expiry->format('d/m/Y')}}</td>
 					</tr>

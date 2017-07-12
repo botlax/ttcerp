@@ -38,7 +38,7 @@ Cancelled Employees | {{config('app.name')}}
 		<div id="tools" class="ph">
 			{!! Form::open(['method' => 'GET','route' => 'cancel-search','id' => 'searchForm']) !!}
 				{!! Form::text('q','') !!}
-				{!! Form::select('designation',['' => '--Select Designation--', 'plumber' => 'Plumber', 'carpenter' => 'Carpenter', 'steel fixer' => 'Steel Fixer', 'leadman' => 'Leadman','foreman' => 'Foreman', 'mason' => 'Mason','driver' => 'Driver','cleaner' => 'Cleaner','painter' => 'Painter','labor' => 'Labor','mechanic' => 'Mechanic','watchman' => 'Watchman','project engineer' => 'Project Engineer','project manager' => 'Project Manager','safety officer' => 'Safety Officer','office staff' => 'Office Staff']) !!}
+				{!! Form::select('designation',['' => '--Select Designation--', 'plumber' => 'Plumber', 'carpenter' => 'Carpenter', 'steel fixer' => 'Steel Fixer', 'leadman' => 'Leadman','foreman' => 'Foreman', 'mason' => 'Mason','driver' => 'Driver','cleaner' => 'Cleaner','painter' => 'Painter','labor' => 'Labor','mechanic' => 'Mechanic','watchman' => 'Watchman','project engineer' => 'Project / Site Engineer','project manager' => 'Project Manager','safety officer' => 'Safety Officer','office staff' => 'Office Staff','Management' => 'Management']) !!}
 				{!! Form::submit('search') !!}
 			{!! Form::close() !!}
 			<a href="{{url('employees')}}">Employees</a>
@@ -88,6 +88,7 @@ Cancelled Employees | {{config('app.name')}}
 						<a href="{{url('employees/'.$emp->id.'/edit')}}"><i class="fa fa-wrench"></i></a>
 						<a href="#revive-leanmodal" data-id="{{$emp->id}}" class="revive" rel="leanModal" title="revive"><i class="fa fa-check"></i></a>
 						{!! Form::open(['route' => ['emp-revive',$emp->id],'style' => 'display: none;','id' => 'revive'.$emp->id]) !!}{!! Form::close() !!}
+						<a href="#info-leanmodal" data-id="{{$emp->id}}" class="info" rel="leanModal" title="info"><i class="fa fa-info-circle"></i></a>
 					</td>
 				</tr>
 				<?php $x++; ?>
@@ -114,6 +115,11 @@ Cancelled Employees | {{config('app.name')}}
 		<button class="option cancel">Cancel</button>
 	</div>
 </div>
+<div id="info-leanmodal">
+	<a class="modal_close" href="#"><i class="fa fa-close"></i></a>
+	<p style="font-size:1em;font-weight:300;">Reason: </p><p class="reason"></p>
+	<p style="font-size:1em;font-weight:300;">Cancel Date: </p><p class="cancel_date"></p>
+</div>
 @endsection
 
 @section('script')
@@ -125,6 +131,29 @@ Cancelled Employees | {{config('app.name')}}
 
 		$('#revive-leanmodal .options .yes').click(function(){
 			$('#revive'+empId).submit();
+		});
+
+		$.ajaxSetup({
+	    	headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+	  	});
+
+		$(document).on('click','.info',function(){
+			$.ajax({
+			    url: '{{url('cancel/info')}}',
+			    dataType:'JSON',
+			    type: "POST",
+			    data: {'id':empId},
+			    success: function(data){
+			    	$('#info-leanmodal p').show();
+			    	$('#info-leanmodal p.reason').append(data['reason']);
+			    	$('#info-leanmodal p.cancel_date').append(data['date']);
+			    	$('#info-leanmodal').append('<a class="cancel-button" href="{{url('/')}}/employees/'+empId+'/cancellation/edit"><i class="fa fa-wrench"></i>Edit Cancellation Details</a>');
+			    },
+			    error: function(xhr, status, error) {
+			    	$('#info-leanmodal p').hide();
+			    	$('#info-leanmodal').append('<a class="cancel-button" href="{{url('/')}}/employees/'+empId+'/cancellation"><i class="fa fa-plus"></i>Add Cancellation Details</a>');
+				}
+			});
 		});
 
 	});

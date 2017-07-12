@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Carbon\Carbon;
 
 class User extends Authenticatable
 {
@@ -15,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email','designation','position', 'nationality', 'joined', 'qid', 'passport', 'health_card', 'dob', 'mobile', 'airport', 'children' ,'religion', 'degree', 'grad_date', 'work_start_date', 'status', 'role', 'password', 'emp_id', 'qid_expiry', 'passport_expiry', 'hc_expiry'
+        'name', 'email','designation','position', 'nationality', 'joined', 'qid', 'passport', 'health_card', 'dob', 'mobile', 'airport', 'children' ,'religion', 'degree', 'grad_date', 'work_start_date', 'status', 'role', 'password', 'emp_id', 'qid_expiry', 'passport_expiry', 'hc_expiry', 'location', 'location_prefix'
     ];
 
     protected $dates = [
@@ -49,6 +50,14 @@ class User extends Authenticatable
 
     public function salary(){
         return $this->hasOne('App\Salary','emp_id');
+    }
+
+    public function emergency(){
+        return $this->hasOne('App\Emergency','emp_id');
+    }
+
+    public function cancel(){
+        return $this->hasOne('App\Cancel','emp_id');
     }
 
     public function ai(){
@@ -108,7 +117,7 @@ class User extends Authenticatable
     public function getPositionAttribute($s){
         return ucwords($s);
     }
-
+    
     public function isAdmin(){
         if(\Auth::user()->role == 'admin'){
             return true;

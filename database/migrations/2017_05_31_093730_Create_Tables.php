@@ -17,6 +17,9 @@ class CreateTables extends Migration
             $table->increments('id')->unsigned();
             $table->date('vac_from');
             $table->date('vac_to');
+            $table->dateTime('vac_from_time')->nullable();
+            $table->dateTime('vac_to_time')->nullable();
+            $table->string('airlines',100)->nullable();
             $table->string('ticket',100)->nullable();
             $table->string('exit_permit',100)->nullable();
             $table->string('vacation_form',100)->nullable();
@@ -60,6 +63,8 @@ class CreateTables extends Migration
             $table->increments('id')->unsigned();
             $table->integer('basic');
             $table->integer('transpo')->nullable();
+            $table->integer('food')->nullable();
+            $table->integer('special')->nullable();
             $table->integer('accomodation')->nullable();
             $table->integer('work_nature')->nullable();
             $table->integer('others')->nullable();
@@ -152,6 +157,44 @@ class CreateTables extends Migration
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
         });
+
+        Schema::create('settings', function (Blueprint $table) {
+            $table->increments('id')->unsigned();
+            $table->string('visa',4);
+            $table->string('license',4);
+            $table->string('hc',4);
+            $table->string('passport',4);
+            $table->string('qid',4);
+            $table->string('vac',4);
+            $table->string('public_ip1',5)->nullable();
+            $table->string('public_ip2',5)->nullable();
+            $table->string('public_ip3',5)->nullable();
+            $table->string('public_ip4',5)->nullable();
+        });
+
+        Schema::create('emergency', function (Blueprint $table) {
+            $table->increments('id')->unsigned();
+            $table->string('kin',100);
+            $table->string('relation',30)->nullable();
+            $table->string('contact',30)->nullable();
+            $table->string('address',100)->nullable();
+            $table->integer('emp_id')->nullable()->unsigned();
+            $table->foreign('emp_id')
+                  ->references('id')->on('users')
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
+        });
+
+        Schema::create('cancel', function (Blueprint $table) {
+            $table->increments('id')->unsigned();
+            $table->string('reason',100)->nullable();
+            $table->date('cancel_date');
+            $table->integer('emp_id')->nullable()->unsigned();
+            $table->foreign('emp_id')
+                  ->references('id')->on('users')
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
+        });
     }
 
     /**
@@ -171,5 +214,8 @@ class CreateTables extends Migration
         Schema::dropIfExists('others');
         Schema::dropIfExists('logs');
         Schema::dropIfExists('visas');
+        Schema::dropIfExists('settings');
+        Schema::dropIfExists('emergency');
+        Schema::dropIfExists('cancel');
     }
 }

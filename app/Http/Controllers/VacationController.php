@@ -21,6 +21,7 @@ class VacationController extends Controller
      */
     public function __construct()
     {
+        $this->middleware('intranet');
         $this->middleware('auth');
         $this->middleware('spectator')->only(['store','update','drop','add','create']);
     }
@@ -100,6 +101,9 @@ class VacationController extends Controller
         $validator = Validator::make($request->all(), [
             'vac_from' => 'required|date',
             'vac_to' => 'required|date',
+            'vac_from_time' => 'nullable',
+            'vac_to_time' => 'nullable',
+            'airlines' => 'nullable',
             'ticket' => 'nullable|mimes:jpg,jpeg,gif,png,pdf|max:2048',
             'exit_permit' => 'nullable|mimes:jpg,jpeg,gif,png,pdf|max:2048',
             'original_form' => 'nullable|mimes:jpg,jpeg,gif,png,pdf|max:2048',
@@ -143,6 +147,9 @@ class VacationController extends Controller
 
         $data['vac_from'] = $request->input('vac_from');
         $data['vac_to'] = $request->input('vac_to');
+        $data['vac_from_time'] = $request->input('vac_from_time');
+        $data['vac_to_time'] = $request->input('vac_to_time');
+        $data['airlines'] = $request->input('airlines');
         $data['emp_id'] = $id;
 
         $vac = Vacation::create($data);
@@ -213,6 +220,8 @@ class VacationController extends Controller
         $validator = Validator::make($request->all(), [
             'vac_from' => 'required|date',
             'vac_to' => 'required|date',
+            'vac_from_time' => 'nullable',
+            'vac_to_time' => 'nullable',
             'ticket' => 'nullable|mimes:jpg,jpeg,gif,png,pdf|max:2048',
             'exit_permit' => 'nullable|mimes:jpg,jpeg,gif,png,pdf|max:2048',
             'original_form' => 'nullable|mimes:jpg,jpeg,gif,png,pdf|max:2048',
@@ -251,6 +260,9 @@ class VacationController extends Controller
 
         $data['vac_from'] = $request->input('vac_from');
         $data['vac_to'] = $request->input('vac_to');
+        $data['vac_from_time'] = $request->input('vac_from_time');
+        $data['vac_to_time'] = $request->input('vac_to_time');
+        $data['airlines'] = $request->input('airlines');
 
         if($request->file('ticket')){
             $f = $request->file('ticket');

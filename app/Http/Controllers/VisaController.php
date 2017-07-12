@@ -15,6 +15,7 @@ class VisaController extends Controller
      */
     public function __construct()
     {
+        $this->middleware('intranet');
         $this->middleware('auth');
         $this->middleware('god')->only(['drop']);
         $this->middleware('spectator')->only(['store','update','drop','create','store']);

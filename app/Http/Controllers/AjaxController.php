@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Cancel;
 
 class AjaxController extends Controller
 {
@@ -45,6 +46,20 @@ class AjaxController extends Controller
     	$employees = User::cancelled()->get();
 
     	echo json_encode($employees);
+    }
+
+    public function info(Request $request){
+        $emp = User::findOrFail($request->input('id'));
+        $info = $emp->cancel()->first();
+
+        if($info){
+            $data['reason'] = $info->reason;
+            $data['date'] = $info->cancel_date->format('F d, Y');
+            echo json_encode($data);
+        }
+        else{
+            echo 'empty';
+        }
     }
 
 }

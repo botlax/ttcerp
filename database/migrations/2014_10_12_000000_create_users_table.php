@@ -18,6 +18,8 @@ class CreateUsersTable extends Migration
             $table->string('name',50);
             $table->string('designation',40);
             $table->string('position',40);
+            $table->string('location',10)->nullable();
+            $table->string('location_prefix',5)->nullable();
             $table->string('email',100)->nullable();
             $table->string('nationality',20)->nullable();
             $table->date('joined')->nullable();

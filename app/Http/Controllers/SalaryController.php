@@ -20,6 +20,7 @@ class SalaryController extends Controller
      */
     public function __construct()
     {
+        $this->middleware('intranet');
         $this->middleware('auth');
         $this->middleware('spectator')->only(['store','update','drop']);
     }
@@ -57,6 +58,8 @@ class SalaryController extends Controller
             'accomodation' => 'nullable|numeric',
             'work_nature' => 'nullable|numeric',
             'others' => 'nullable|numeric',
+            'food' => 'nullable|numeric',
+            'special' => 'nullable|numeric',
         ]);
 
         if ($validator->fails()) {
@@ -71,6 +74,8 @@ class SalaryController extends Controller
         $data['accomodation'] = $request->input('accomodation');
         $data['work_nature'] = $request->input('work_nature');
         $data['others'] = $request->input('others');
+        $data['special'] = $request->input('special');
+        $data['food'] = $request->input('food');
         $data['emp_id'] = $id;
         
         Salary::create($data);
@@ -116,6 +121,8 @@ class SalaryController extends Controller
             'accomodation' => 'nullable|numeric',
             'work_nature' => 'nullable|numeric',
             'others' => 'nullable|numeric',
+             'food' => 'nullable|numeric',
+            'special' => 'nullable|numeric',
         ]);
 
         if ($validator->fails()) {
@@ -130,6 +137,8 @@ class SalaryController extends Controller
         $data['accomodation'] = $request->input('accomodation');
         $data['work_nature'] = $request->input('work_nature');
         $data['others'] = $request->input('others');
+        $data['special'] = $request->input('special');
+        $data['food'] = $request->input('food');
         $data['emp_id'] = $id;
         
         $salary = User::sort()->findOrFail($id)->salary()->first();

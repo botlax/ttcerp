@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Vacation extends Model
 {
     protected $table = 'vacation';
-    protected $fillable = ['vac_from','vac_to','ticket','exit_permit','vacation_form','original_form','leave_wpay','emp_id'];
+    protected $fillable = ['vac_from','vac_to','vac_from_time','vac_to_time','airlines','ticket','exit_permit','vacation_form','original_form','leave_wpay','emp_id'];
     public $timestamps = false;
-    protected $dates = ['vac_from','vac_to'];
+    protected $dates = ['vac_from','vac_to','vac_from_time','vac_to_time'];
 
     public function user(){
     	return $this->belongsTo('App\User','emp_id');

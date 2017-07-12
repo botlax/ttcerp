@@ -11,7 +11,7 @@
 			<li><a href="{{url('admin/password')}}"><i class="fa fa-lock"></i>Change Password</a></li>
 			<li><a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i>Logout</a></li>
 		</ul>
-		</li><li><a href="{{url('employees/add')}}"><i class="fa fa-user-plus"></i>Add Employee</a></li><li><a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i>Logout</a></li>
+		</li><li><a href="{{url('employees/add')}}"><i class="fa fa-user-plus"></i>Add Employee</a></li><li><a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i>Logout</a></li><li><a href="{{url('settings')}}"><i class="fa fa-cog"></i>App Settings</a></li>
 	</ul>
 
 	<ul id="nav-mobile">
@@ -23,7 +23,7 @@
 			<li><a href="{{url('admin/password')}}"><i class="fa fa-lock"></i>Change Password</a></li>
 			<li><a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i>Logout</a></li>
 		</ul>
-		</li><li><a href="{{url('employees/add')}}"><i class="fa fa-user-plus"></i></a></li><li><a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i></a></li>
+		</li><li><a href="{{url('employees/add')}}"><i class="fa fa-user-plus"></i></a></li><li><a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i></a></li><li><a href="{{url('settings')}}"><i class="fa fa-cog"></i></a></li>
 
 	</ul>
 </nav>

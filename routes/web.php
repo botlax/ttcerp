@@ -26,9 +26,14 @@ Route::get('/employees/{id}/edit', 'HomeController@edit')->where('id', '^[0-9]*$
 Route::post('/employees/{id}/update', 'HomeController@update')->name('emp-update')->where('id', '^[0-9]*$');
 Route::get('/employees/{id}', 'HomeController@show')->where('id', '^[0-9]*$');
 Route::post('/employees/{id}/delete', 'HomeController@delete')->name('emp-delete')->where('id', '^[0-9]*$');
+Route::get('/employees/{id}/cancellation', 'CancelController@create')->where('id', '^[0-9]*$');
+Route::post('/employees/{id}/cancellation', 'CancelController@store')->name('cancel-add')->where('id', '^[0-9]*$');
+Route::get('/employees/{id}/cancellation/edit', 'CancelController@edit')->where('id', '^[0-9]*$');
+Route::post('/employees/{id}/cancellation/edit', 'CancelController@update')->name('cancel-update')->where('id', '^[0-9]*$');
 Route::post('/employees/{id}/revive', 'HomeController@revive')->name('emp-revive')->where('id', '^[0-9]*$');
 Route::post('/employees/{id}/destroy', 'HomeController@destroy')->name('emp-destroy')->where('id', '^[0-9]*$');
 Route::post('/employees/{id}/drop', 'HomeController@drop')->name('emp-drop')->where('id', '^[0-9]*$');
+Route::post('/cancel/info', 'AjaxController@info');
 
 Route::get('/employees/search', 'HomeController@empSearch')->name('emp-search');
 Route::get('/employees/advanced_search', 'HomeController@advSearch')->name('emp-advsearch');
@@ -46,6 +51,8 @@ Route::post('/hc/search', 'HomeController@hcSearch')->name('hc-search');
 Route::post('/license/search', 'HomeController@licSearch')->name('lic-search');
 
 Route::get('/logs', 'HomeController@logs');
+Route::get('/settings', 'HomeController@settings');
+Route::post('/settings', 'HomeController@updateSettings')->name('settings');
 
 //-------------ADMIN
 Route::get('/admin/password', 'AdminController@password')->name('show-pass');
@@ -117,6 +124,11 @@ Route::post('/vacation/{id}/drop', 'VacationController@drop')->name('vac-drop')-
 Route::post('/leave/{id}/add', 'LeaveController@store')->name('leave-store')->where('id', '^[0-9]*$');
 Route::post('/leave/{id}/update', 'LeaveController@update')->name('leave-update')->where('id', '^[0-9]*$');
 Route::post('/leave/{id}/drop', 'LeaveController@drop')->name('leave-drop')->where('id', '^[0-9]*$');
+
+//-------------EMERGENCY
+Route::post('/emergency/add', 'EmergencyController@store')->name('emergency-store')->where('id', '^[0-9]*$');
+Route::post('/emergency/{id}/update', 'EmergencyController@update')->name('emergency-update')->where('id', '^[0-9]*$');
+Route::post('/emergency/{id}/delete', 'EmergencyController@destroy')->name('emergency-drop')->where('id', '^[0-9]*$');
 
 //-------------BATCH
 Route::get('/batch', 'BatchController@index');

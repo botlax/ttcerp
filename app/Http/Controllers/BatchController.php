@@ -18,6 +18,7 @@ class BatchController extends Controller
      */
     public function __construct()
     {
+    	$this->middleware('intranet');
         $this->middleware('auth');
         $this->middleware('spectator');
     }

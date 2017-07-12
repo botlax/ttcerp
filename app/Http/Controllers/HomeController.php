@@ -8,6 +8,9 @@ use App\Vacation;
 use App\Others;
 use App\License;
 use App\Logs;
+use App\Settings;
+use App\Emergency;
+use App\Cancel;
 use Carbon\Carbon;
 use Validator;
 use Illuminate\Support\Facades\Storage;
@@ -23,7 +26,8 @@ class HomeController extends Controller
      * @return void
      */
     public function __construct()
-    {
+    {   
+        $this->middleware('intranet');
         $this->middleware('auth');
         $this->middleware('god')->only(['destroy','logs']);
         $this->middleware('spectator')->only(['store','update','delete','add','edit','drop','destroy']);
@@ -72,12 +76,12 @@ class HomeController extends Controller
         }
         elseif($request->input('q') && !$request->input('designation')){
             $employees = User::sort()->where(function($q)use($s){
-                $q->where('name','like','%'.$s.'%')->orWhere('qid','like','%'.$s.'%')->orWhere('emp_id','like','%'.$s.'%');
+                $q->where('name','like','%'.$s.'%')->orWhere('qid','like',$s.'%')->orWhere('emp_id','like','%'.$s.'%');
             });
         }
         elseif($request->input('q') && $request->input('designation')){
             $employees = User::sort()->where('designation',$d)->where(function($q)use($s){
-                $q->where('name','like','%'.$s.'%')->orWhere('qid','like','%'.$s.'%')->orWhere('emp_id','like','%'.$s.'%');
+                $q->where('name','like','%'.$s.'%')->orWhere('qid','like', $s.'%')->orWhere('emp_id','like','%'.$s.'%');
             });
         }
 
@@ -157,12 +161,12 @@ class HomeController extends Controller
         }
         elseif($request->input('q') && !$request->input('designation')){
             $employees = User::cancelled()->where(function($q)use($s){
-                $q->where('name','like','%'.$s.'%')->orWhere('qid','like','%'.$s.'%')->orWhere('emp_id','like','%'.$s.'%');
+                $q->where('name','like','%'.$s.'%')->orWhere('qid','like',$s.'%')->orWhere('emp_id','like','%'.$s.'%');
             });
         }
         elseif($request->input('q') && $request->input('designation')){
             $employees = User::cancelled()->where('designation',$d)->where(function($q)use($s){
-                $q->where('name','like','%'.$s.'%')->orWhere('qid','like','%'.$s.'%')->orWhere('emp_id','like','%'.$s.'%');
+                $q->where('name','like','%'.$s.'%')->orWhere('qid','like',$s.'%')->orWhere('emp_id','like','%'.$s.'%');
             });
         }
      
@@ -249,7 +253,9 @@ class HomeController extends Controller
             'grad_date' => 'nullable|date',
             'work_start_date' => 'nullable|date',
             'mobile' => 'nullable|numeric|digits:8',
-            'children' => 'nullable|numeric'
+            'children' => 'nullable|numeric',
+            'location' => 'nullable|required_with:location_prefix',
+            'location_prefix' => 'nullable|required_with:location'
         ]);
 
         if ($validator->fails()) {
@@ -258,6 +264,8 @@ class HomeController extends Controller
                         ->withErrors($validator)
                         ->withInput();
         }
+
+        $prefix = $request->input('location_prefix');
 
         User::create($request->all());
 
@@ -272,9 +280,12 @@ class HomeController extends Controller
         $next = User::where('emp_id','>',$emp->emp_id)->orderBy('emp_id','ASC')->first();
         $prev = User::where('emp_id','<',$emp->emp_id)->orderBy('emp_id','DESC')->first();
 
+        $emergency = $emp->emergency()->first();
+
         $files = $emp->files()->first();
         $nats = $this->getNat();
         $vacation['on'] = false;
+        $vacation['current'] = null;
         $vacation['upcoming'] = null;
         $vacation['past'] = null;
         if(!empty($emp->vacation()->get()->toArray())){
@@ -337,9 +348,20 @@ class HomeController extends Controller
             }
         }
 
-        //dd($ot);
-
-        return view('dashboard.employee',compact('emp','files','nats','vacation','ot','next','prev'));
+        $salary = $emp->salary()->first();
+        if($salary){
+            $basic = $emp->salary()->first()->basic;
+            $margin = new Carbon('2005-1-1');
+            if($emp->joined < $margin){
+                $gratuity = ($margin->diffInYears(Carbon::today()))*$basic;
+            }
+            else{
+                $gratuity = ($emp->joined->diffInYears(Carbon::today()))*$basic;
+            }
+        }else{
+            $gratuity = null;
+        }
+        return view('dashboard.employee',compact('emp','files','nats','vacation','ot','next','prev','emergency','gratuity'));
     }
 
     public function edit($id)
@@ -364,7 +386,9 @@ class HomeController extends Controller
             'grad_date' => 'nullable|date',
             'work_start_date' => 'nullable|date',
             'mobile' => 'nullable|numeric|digits:8',
-            'children' => 'nullable|numeric'
+            'children' => 'nullable|numeric',
+            'location' => 'nullable|required_with:location_prefix',
+            'location_prefix' => 'nullable|required_with:location'
         ]);
 
         if ($validator->fails()) {
@@ -449,6 +473,12 @@ class HomeController extends Controller
                     case 'work_start_date':
                         $user->work_start_date = $value;
                         break;
+                    case 'location':
+                        $user->location = $value;
+                        break;
+                    case 'location_prefix':
+                        $user->location_prefix = $value;
+                        break;
                 }
             }
         }
@@ -475,7 +505,7 @@ class HomeController extends Controller
         $this->addLog('Cancelled employee '.$user->name);
         flash('Employee successfully cancelled.')->success();
 
-        return redirect()->back();
+        return redirect('employees/'.$id.'/cancellation');
     }
 
     public function revive($id)
@@ -483,6 +513,8 @@ class HomeController extends Controller
         $user = User::cancelled()->findOrFail($id);
         $user->role = 'emp';
         $user->save();
+
+        $user->cancel()->first()->delete();
 
         $this->addLog('Rehired employee '.$user->name);
         flash('Employee successfully rehired.')->success();
@@ -516,7 +548,6 @@ class HomeController extends Controller
         $field = $request->input('field');
         $user = User::findOrFail($id);
         switch ($field) {
-            
             
             case 'religion':
                 $user->religion = null;
@@ -674,6 +705,63 @@ class HomeController extends Controller
         $data['log_date'] = Carbon::now();
         $data['logs'] = $log;
         $user->logs()->save(Logs::create($data));
+    }
+
+    public function settings(){
+        $settings = Settings::first();
+        return view('dashboard.settings',compact('settings'));
+    }
+
+    public function updateSettings(Request $request){
+        $field = $request->input('field');
+
+        if($field == 'ip'){
+            $settings = Settings::first();
+            if($request->input('intranet')){
+                $validator = Validator::make($request->all(), [
+                    'public_ip1' => 'required_with:public_ip2|required_with:public_ip3|required_with:public_ip4|max:255|numeric',
+                    'public_ip2' => 'required_with:public_ip1|required_with:public_ip3|required_with:public_ip4|max:255|numeric',
+                    'public_ip3' => 'required_with:public_ip1|required_with:public_ip2|required_with:public_ip4|max:255|numeric',
+                    'public_ip4' => 'required_with:public_ip1|required_with:public_ip2|required_with:public_ip3|max:255|numeric',
+                ]);
+
+                if ($validator->fails()) {
+                    flash('Wooops! Please try again and review the error messages.')->error()->important();
+                    return redirect()->back()
+                                ->withErrors($validator)
+                                ->withInput();
+                }
+
+                $settings->public_ip1 = $request->input('public_ip1');
+                $settings->public_ip2 = $request->input('public_ip2');
+                $settings->public_ip3 = $request->input('public_ip3');
+                $settings->public_ip4 = $request->input('public_ip4');
+                $settings->save();
+            }
+            else{
+                $settings->public_ip1 = null;
+                $settings->public_ip2 = null;
+                $settings->public_ip3 = null;
+                $settings->public_ip4 = null;
+                $settings->save();
+            }
+        }
+        elseif($field == 'report'){
+            $this->validate($request,[
+                'qid' => 'required|numeric',
+                'passport' => 'required|numeric',
+                'hc' => 'required|numeric',
+                'license' => 'required|numeric',
+                'visa' => 'required|numeric',
+            ]);
+
+            $settings = Settings::first();
+
+            $settings->update($request->all());
+        }
+
+        flash('Successfully updated!')->success();
+        return redirect()->back();
     }
 
     public function getNat(){
@@ -874,4 +962,5 @@ class HomeController extends Controller
       "zimbabwean" => "Zimbabwean"];
     }
 
-} 
+}
+

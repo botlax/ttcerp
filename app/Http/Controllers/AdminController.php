@@ -19,6 +19,7 @@ class AdminController extends Controller
      */
     public function __construct()
     {
+        $this->middleware('intranet');
         $this->middleware('auth');
         $this->middleware('spectator');
         $this->middleware('god')->only(['admins']);

@@ -117,6 +117,8 @@
   	$(document).on('click','.modal_close, .options .cancel, #lean_overlay',function(){
         $("div[id$=leanmodal]").css({'display':'none'});
         $("#lean_overlay").css({'display':'none'});
+        $('.reason, .cancel_date').html('');
+        $('.cancel-button').remove();
   	});
 
   	//------------Upload form

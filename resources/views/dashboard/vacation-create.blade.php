@@ -48,6 +48,33 @@ Add Vacation | {{config('app.name')}}
             @endif
             </div>
             <div>
+            {!! Form::label('vac_from_time','Departure') !!}
+            {!! Form::text('vac_from_time',old('vac_from_time'),['class' => 'time-input']) !!}
+            @if ($errors->has('vac_from_time'))
+                <span class="error">
+                    <strong>{{ $errors->first('vac_from_time') }}</strong>
+                </span>
+            @endif
+            </div>
+            <div>
+            {!! Form::label('vac_to_time','Arrival') !!}
+            {!! Form::text('vac_to_time',old('vac_to_time'),['class' => 'time-input']) !!}
+            @if ($errors->has('vac_to_time'))
+                <span class="error">
+                    <strong>{{ $errors->first('vac_to_time') }}</strong>
+                </span>
+            @endif
+            </div>
+            <div>
+            {!! Form::label('airlines','Airlines') !!}
+            {!! Form::text('airlines',old('airlines'),['placeholder' => 'Type it.. :)']) !!}
+            @if ($errors->has('airlines'))
+                <span class="error">
+                    <strong>{{ $errors->first('airlines') }}</strong>
+                </span>
+            @endif
+            </div>
+            <div>
             {!! Form::label('ticket','Upload Ticket',['class'=>'vac-upload']) !!}
             {!! Form::file('ticket',['class'=>'inputfile']) !!}
             @if ($errors->has('ticket'))
@@ -103,13 +130,40 @@ Add Vacation | {{config('app.name')}}
 
 @section('script')
 	$(document).ready(function(){
-		$('#vac_from,#vac_to').datepicker();
-		$('#vac_from,#vac_to').datepicker("option", "dateFormat", "yy-mm-dd");
+		$('#vac_from,#vac_to,#vac_from_time,#vac_to_time').datepicker();
+		$('#vac_from,#vac_to,#vac_from_time,#vac_to_time').datepicker("option", "dateFormat", "yy-mm-dd");
 		if($('#vac_from').attr('value') != undefined){
 			$('#vac_from').val($('#vac_from').attr('value').replace(' 00:00:00',''));
 		}
 		if($('#vac_to').attr('value') != undefined){
 			$('#vac_to').val($('#vac_to').attr('value').replace(' 00:00:00',''));
 		}
+        if($('#vac_from_time').attr('value') != undefined){
+            $('#vac_from_time').val($('#vac_from_time').attr('value').replace(' 00:00:00',''));
+        }
+        if($('#vac_to_time').attr('value') != undefined){
+            $('#vac_to_time').val($('#vac_to_time').attr('value').replace(' 00:00:00',''));
+        }
+
+        $('.time-input').inputmask("yyyy-mm-dd hh:mm:ss", {
+                mask: "y-1-2 h:s:s",
+                placeholder: "yyyy-mm-dd hh:mm:ss",
+                alias: "datetime",
+                separator: "-",
+                leapday: "-02-29",
+                regex: {
+                    val2pre: function(separator) {
+                        var escapedSeparator = Inputmask.escapeRegex.call(this, separator);
+                        return new RegExp("((0[13-9]|1[012])" + escapedSeparator + "[0-3])|(02" + escapedSeparator + "[0-2])");
+                    },
+                    val2: function(separator) {
+                        var escapedSeparator = Inputmask.escapeRegex.call(this, separator);
+                        return new RegExp("((0[1-9]|1[012])" + escapedSeparator + "(0[1-9]|[12][0-9]))|((0[13-9]|1[012])" + escapedSeparator + "30)|((0[13578]|1[02])" + escapedSeparator + "31)");
+                    },
+                    val1pre: new RegExp("[01]"),
+                    val1: new RegExp("0[1-9]|1[012]")
+                },
+                onKeyDown: function(e, buffer, caretPos, opts) {}
+            });
 	});
 @endsection

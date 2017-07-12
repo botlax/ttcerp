@@ -3129,6 +3129,11 @@ footer#footer p {
 	font-size: 0.9em;
 }
 
+.table-wrap{
+	overflow: auto;
+	max-height: 500px;
+}
+
 table#employees,table#vacation{
 	width: 100%;
 	border: 3px solid #000;
@@ -3544,7 +3549,7 @@ form .upload-label{
 
 #admins #admin-list li span{
 	display: inline-block;
-	width: 200px;
+	width: 300px;
 }
 
 #admins #admin-list li a.delete{
@@ -3607,7 +3612,7 @@ ul#employees li a{
 	width: 300px;
 }
 
-table.table7{
+table.table7, table.table8{
 	table-layout: fixed;
 }
 
@@ -3633,6 +3638,95 @@ table.table7 thead tr:first-child th:nth-child(5){
 
 table.table7 thead tr:first-child th:nth-child(6){
 	width: 23%;
+}
+
+table.table8 thead tr:first-child th:first-child{
+	width: 5.5%;
+}
+
+table.table8 thead tr:first-child th:nth-child(2){
+	width: 6.5%;
+}
+
+table.table8 thead tr:first-child th:nth-child(3){
+	width: 21.5%;
+}
+
+table.table8 thead tr:first-child th:nth-child(4){
+	width: 12.5%;
+}
+
+table.table8 thead tr:first-child th:nth-child(5){
+	width: 10.5%;
+}
+
+table.table8 thead tr:first-child th:nth-child(6){
+	width: 10.5%;
+}
+
+table.table8 thead tr:first-child th:nth-child(7){
+	width: 20.5%;
+}
+
+table.table9 thead tr:first-child th:first-child{
+	width: 5.5%;
+}
+
+table.table9 thead tr:first-child th:nth-child(2){
+	width: 6.5%;
+}
+
+table.table9 thead tr:first-child th:nth-child(3){
+	width: 21.5%;
+}
+
+table.table9 thead tr:first-child th:nth-child(4){
+	width: 12.5%;
+}
+
+table.table9 thead tr:first-child th:nth-child(5){
+	width: 13.5%;
+}
+
+table.table9 thead tr:first-child th:nth-child(6){
+	width: 13.5%;
+}
+
+table.table9 thead tr:first-child th:nth-child(7){
+	width: 14.5%;
+}
+
+/*-------Form Full-------*/
+#form-full form{
+	
+}
+
+#form-full form div label{
+	width: 20%;
+	display: inline-block;
+	text-align: right;
+}
+#form-full form input{
+	width: 30%;
+	display: inline-block;
+	padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+#form-full form input[type=submit]{
+	margin-left: 20%;
+}
+
+#form-full form div textarea{
+	width: 50%;
+	padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    resize: vertical;
+    font-size: 1.1em;
+    margin-bottom: 20px;
 }
 
 /*-------DASHBOARD-------*/

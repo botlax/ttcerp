@@ -28,4 +28,9 @@
 	footer#footer{
 		display: none;
 	}
+
+	.table-wrap{
+		overflow: visible;
+		max-height: auto;
+	}
 }

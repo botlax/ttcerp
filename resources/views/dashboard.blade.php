@@ -44,6 +44,10 @@
             <script src="{{url('/')}}/assets/js/skel.min.js"></script>
             <script src="{{url('/')}}/assets/js/skel-layout.min.js"></script>
             <script src="{{url('/')}}/assets/js/util.js"></script>
+            <script src="{{url('/')}}/assets/js/inputmask.min.js"></script>
+            <script src="{{url('/')}}/assets/js/inputmask.extensions.min.js"></script>
+            <script src="{{url('/')}}/assets/js/inputmask.date.extensions.min.js"></script>
+            <script src="{{url('/')}}/assets/js/jquery.inputmask.min.js"></script>
             <!--[if lte IE 8]><script src="{{url('/')}}/assets/js/ie/respond.min.js"></script><![endif]-->
             <script src="{{url('/')}}/assets/js/main.js"></script>
             <script type="text/javascript">

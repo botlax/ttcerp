@@ -59,14 +59,15 @@ Vacation | {{config('app.name')}}
 		</div>
 		
 		@if(!empty($vacation->toArray()))
-			<table id="employees" class="table7">
+			<table id="employees" class="table9">
 				<thead>
 	  				<tr>
 					    <th rowspan="2">SN</th>
 					    <th rowspan="2">Staff No.</th>
 					    <th rowspan="2">Name</th>
-					    <th rowspan="2">Nationality</th>
-					    <th rowspan="2">Join Date</th>
+					    <th rowspan="2">Airlines</th>
+					    <th rowspan="2">Departure</th>
+					    <th rowspan="2">Arrival</th>
 					    <th colspan="2">Vacation Duration</th>
 	  				</tr>
 	  				<tr>
@@ -81,8 +82,9 @@ Vacation | {{config('app.name')}}
 						<td>{{$x}}</td>
 						<td>{{$vac->user()->first()->emp_id}}</td>
 						<td><a href="{{url('employees/'.$vac->user()->first()->id)}}">{{$vac->user()->first()->name}}</a></td>
-						<td>{{$vac->user()->first()->nationality?$vac->user()->first()->nationality:'--'}}</td>
-						<td>{{$vac->user()->first()->joined?$vac->user()->first()->joined->format('d/m/Y'):'--'}}</td>
+						<td>{{$vac->airlines?$vac->airlines:'--'}}</td>
+						<td>{{$vac->vac_from_time?$vac->vac_from_time->format('d/m/Y g:i a'):'--'}}</td>
+						<td>{{$vac->vac_to_time?$vac->vac_to_time->format('d/m/Y g:i a'):'--'}}</td>
 						<td>{{$vac->vac_from->format('d/m/Y')}}</td>
 						<td>{{$vac->vac_to->format('d/m/Y')}}</td>
 					</tr>

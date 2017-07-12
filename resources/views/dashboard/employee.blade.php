@@ -131,15 +131,30 @@
 			</div>
 			<!--============Position===========-->
 			<div class="separate">
-			<p>Position: {{$emp->position or '--'}}</p>
+			<p>Position: {{$emp->position or '--'}} {{$emp->location?'@':''}} {{$emp->location_prefix or ''}}{{$emp->location or ''}}</p>
 			<a href="#" data-field="position" rel="formOpen"><i class="fa fa-wrench"></i></a>
 			{!! Form::model($emp,['route' => ['emp-update',$emp->id], 'id' => 'positionForm', 'class' => 'userUpdateForm']) !!}
-	            {!! Form::select('position',['' => '--Select Position--','Accountant'	=>	'Accountant','Assist. Foreman'	=>	'Assist. Foreman','Block Mason'	=>	'Block Mason','Camp Boss'	=>	'Camp Boss','Camp Cleaner No. 12'	=>	'Camp Cleaner No. 12','Camp Cleaner No. 13'	=>	'Camp Cleaner No. 13','Camp Security'	=>	'Camp Security','Civil Engineer-Purchase'	=>	'Civil Engineer-Purchase','Decorative Painter'	=>	'Decorative Painter','Draftsman'	=>	'Draftsman','Driver'	=>	'Driver','Elect / Plumber'	=>	'Elect / Plumber','Executive Manager'	=>	'Executive Manager','General Service Assistant'	=>	'General Service Assistant','General Service Manager'	=>	'General Service Manager','Head of Tender Department'	=>	'Head of Tender Department','Heavy Driver'	=>	'Heavy Driver','In-charge, Steel Fixer Grp'	=>	'In-charge, Steel Fixer Grp','JCB Operator'	=>	'JCB Operator','Labourer'	=>	'Labourer','Leadman'	=>	'Leadman','Male Nurse'	=>	'Male Nurse','Mason'	=>	'Mason','Mechanic'	=>	'Mechanic','Mechanic Assistant'	=>	'Mechanic Assistant','Office Boy'	=>	'Office Boy','Office Security'	=>	'Office Security','Painter'	=>	'Painter','Plumber'	=>	'Plumber','Project Engineer'	=>	'Project Engineer','Projects Manager'	=>	'Projects Manager','Public Relation Manager'	=>	'Public Relation Manager','Purchase Representative'	=>	'Purchase Representative','QS / Estimator'	=>	'QS / Estimator','Safety Officer'	=>	'Safety Officer','Secretary'	=>	'Secretary','Secretary/IT Assistant'	=>	'Secretary/IT Assistant','Shutter Carpenter'	=>	'Shutter Carpenter','Steel Fixer'	=>	'Steel Fixer','Store Kepeer'	=>	'Store Kepeer','Technical Engineer'	=>	'Technical Engineer','Timekeeper'	=>	'Timekeeper','Watchman'	=>	'Watchman'], $emp->position?$emp->position:null,['required','id'=>'position']) !!}
+	            {!! Form::select('position',['' => '--Select Position--','Accountant'	=>	'Accountant','Assist. Foreman'	=>	'Assist. Foreman','Block Mason'	=>	'Block Mason','Camp Boss'	=>	'Camp Boss' ,'Camp Cleaner'	=>	'Camp Cleaner','Camp Security'	=>	'Camp Security','Civil Engineer-Purchase'	=>	'Civil Engineer-Purchase','Decorative Painter'	=>	'Decorative Painter','Draftsman'	=>	'Draftsman','Driver'	=>	'Driver','Elect / Plumber'	=>	'Elect / Plumber','Executive Manager'	=>	'Executive Manager','General Manager'	=>	'General Manager','General Service Assistant'	=>	'General Service Assistant','General Service Manager'	=>	'General Service Manager','Head of Tender Department'	=>	'Head of Tender Department','Heavy Driver'	=>	'Heavy Driver','In-charge, Steel Fixer Grp'	=>	'In-charge, Steel Fixer Grp','JCB Operator'	=>	'JCB Operator','Labourer'	=>	'Labourer','Leadman'	=>	'Leadman','Male Nurse'	=>	'Male Nurse','Mason'	=>	'Mason','Mechanic'	=>	'Mechanic','Mechanic Assistant'	=>	'Mechanic Assistant','Office Boy'	=>	'Office Boy','Office Security'	=>	'Office Security','Painter'	=>	'Painter','Plumber'	=>	'Plumber','Project Engineer'	=>	'Project Engineer','Projects Manager'	=>	'Projects Manager','Public Relation Manager'	=>	'Public Relation Manager','Purchase Representative'	=>	'Purchase Representative','QS / Estimator'	=>	'QS / Estimator','Safety Officer'	=>	'Safety Officer','Secretary'	=>	'Secretary','Secretary/IT Assistant'	=>	'Secretary/IT Assistant','Shutter Carpenter'	=>	'Shutter Carpenter','Steel Fixer'	=>	'Steel Fixer','Store Kepeer'	=>	'Store Kepeer','Technical Engineer'	=>	'Technical Engineer','Timekeeper'	=>	'Timekeeper','Watchman'	=>	'Watchman'], $emp->position?$emp->position:null,['required','id'=>'position']) !!}
 				@if ($errors->has('position'))
 	                <span class="error">
 	                    <strong>{{ $errors->first('position') }}</strong>
 	                </span>
 	            @endif
+
+	            <div>
+                {!! Form::select('location_prefix', ['' => '--', 'P' => 'P', 'T' => 'T', 'PI' => 'PI'],old('location_prefix'), ['style' => 'width:70px;']) !!}
+                {!! Form::text('location', old('location'),['style' => 'width:100px;']) !!}
+                @if ($errors->has('location'))
+                    <span class="error">
+                        <strong>{{ $errors->first('location') }}</strong>
+                    </span>
+                @endif
+                @if ($errors->has('location_prefix'))
+                    <span class="error">
+                        <strong>{{ $errors->first('location_prefix') }}</strong>
+                    </span>
+                @endif
+                </div>
 				{!! Form::submit('Add') !!}
 				<button class="cancel"><i class="fa fa-remove"></i></button>
 			{!! Form::close() !!}
@@ -166,7 +181,7 @@
 			<a href="#" data-field="religion" rel="formOpen"><i class="fa fa-wrench"></i></a>
 			{!! Form::open(['route' => ['emp-drop',$emp->id],'class' => 'emp-delete']) !!}
 	            {!! Form::hidden('field','religion') !!}
-				<button><i class="fa fa-remove"></i></button>
+				<button class="delete-entry"><i class="fa fa-remove"></i></button>
 			{!! Form::close() !!}
 			@else
 			<p>Religion: <a href="#" data-field="religion" rel="formOpen"><i class="fa fa-plus">Add Religion</i></a></p>
@@ -191,7 +206,7 @@
 			<a href="#" data-field="gender" rel="formOpen"><i class="fa fa-wrench"></i></a>
 			{!! Form::open(['route' => ['emp-drop',$emp->id],'class' => 'emp-delete']) !!}
 	            {!! Form::hidden('field','gender') !!}
-				<button><i class="fa fa-remove"></i></button>
+				<button class="delete-entry"><i class="fa fa-remove"></i></button>
 			{!! Form::close() !!}
 			@else
 			<p>Gender: <a href="#" data-field="gender" rel="formOpen"><i class="fa fa-plus">Add Gender</i></a></p>
@@ -229,7 +244,7 @@
 			<a href="#" data-field="dob" rel="formOpen"><i class="fa fa-wrench"></i></a>
 			{!! Form::open(['route' => ['emp-drop',$emp->id],'class' => 'emp-delete']) !!}
 	            {!! Form::hidden('field','dob') !!}
-				<button><i class="fa fa-remove"></i></button>
+				<button class="delete-entry"><i class="fa fa-remove"></i></button>
 			{!! Form::close() !!}
 			@else
 			<p>Date of Birth: <a href="#" data-field="dob" rel="formOpen"><i class="fa fa-plus">Add Date of Birth</i></a></p>
@@ -257,7 +272,7 @@
 			<a href="#" data-field="qid" rel="formOpen"><i class="fa fa-wrench"></i></a>
 			{!! Form::open(['route' => ['emp-drop',$emp->id],'class' => 'emp-delete']) !!}
 	            {!! Form::hidden('field','qid') !!}
-				<button><i class="fa fa-remove"></i></button>
+				<button class="delete-entry"><i class="fa fa-remove"></i></button>
 			{!! Form::close() !!}
 			@else
 			<a href="#" data-field="qid" rel="formOpen"><i class="fa fa-plus">Add QID</i></a>
@@ -290,7 +305,7 @@
 			<a href="#" data-field="passport" rel="formOpen"><i class="fa fa-wrench"></i></a>
 			{!! Form::open(['route' => ['emp-drop',$emp->id],'class' => 'emp-delete']) !!}
 	            {!! Form::hidden('field','passport') !!}
-				<button><i class="fa fa-remove"></i></button>
+				<button class="delete-entry"><i class="fa fa-remove"></i></button>
 			{!! Form::close() !!}
 			@else
 			<a href="#" data-field="passport" rel="formOpen"><i class="fa fa-plus">Add passport</i></a>
@@ -323,7 +338,7 @@
 			<a href="#" data-field="health_card" rel="formOpen"><i class="fa fa-wrench"></i></a>
 			{!! Form::open(['route' => ['emp-drop',$emp->id],'class' => 'emp-delete']) !!}
 	            {!! Form::hidden('field','health_card') !!}
-				<button><i class="fa fa-remove"></i></button>
+				<button class="delete-entry"><i class="fa fa-remove"></i></button>
 			{!! Form::close() !!}
 			@else
 			<a href="#" data-field="health_card" rel="formOpen"><i class="fa fa-plus">Add health card</i></a>
@@ -347,6 +362,54 @@
 				<button class="cancel"><i class="fa fa-remove"></i></button>
 			{!! Form::close() !!}
 			</div>
+		<!--============Emergency Contact===========-->
+			<div class="separate">
+			<h4>Emergency Contact</h4>
+			@if($emergency)
+			<p>Name: {{$emergency->kin?$emergency->kin:'--'}}</p>
+			<p>Relation: {{$emergency->relation?$emergency->relation:'--'}}</p>
+			<p>Contact: {{$emergency->contact?$emergency->contact:'--'}}</p>
+			<p>Address: {{$emergency->address?$emergency->address:'--'}}</p>
+			<a href="#" data-field="emergency" rel="formOpen"><i class="fa fa-wrench"></i></a>
+			{!! Form::open(['route' => ['emergency-drop',$emergency->id],'class' => 'emp-delete']) !!}
+				<button class="delete-entry"><i class="fa fa-remove"></i></button>
+			{!! Form::close() !!}
+			@else
+			<a href="#" data-field="emergency" rel="formOpen"><i class="fa fa-plus">Add Emergency Contact</i></a>
+			@endif
+			{!! Form::model($emergency,['route' => ['emergency-update',$emp->id], 'id' => 'emergencyForm', 'class' => 'userUpdateForm']) !!}
+	            {!! Form::label('kin', 'Name') !!}
+				{!! Form::text('kin', old('kin')) !!}
+				@if ($errors->has('kin'))
+	                <span class="error">
+	                    <strong>{{ $errors->first('kin') }}</strong>
+	                </span>
+	            @endif
+	            {!! Form::label('relation', 'Relation') !!}
+				{!! Form::text('relation', old('relation')) !!}
+				@if ($errors->has('relation'))
+	                <span class="error">
+	                    <strong>{{ $errors->first('relation') }}</strong>
+	                </span>
+	            @endif
+	            {!! Form::label('contact', 'Contact') !!}
+				{!! Form::text('contact', old('contact')) !!}
+				@if ($errors->has('contact'))
+	                <span class="error">
+	                    <strong>{{ $errors->first('contact') }}</strong>
+	                </span>
+	            @endif
+	            {!! Form::label('address', 'Address') !!}
+				{!! Form::text('address', old('address')) !!}
+				@if ($errors->has('address'))
+	                <span class="error">
+	                    <strong>{{ $errors->first('address') }}</strong>
+	                </span>
+	            @endif
+				{!! Form::submit('Add') !!}
+				<button class="cancel"><i class="fa fa-remove"></i></button>
+			{!! Form::close() !!}
+			</div>
 		<!--============Driving License===========-->
 			<div class="separate">
 			<h4>Driving License</h4>
@@ -357,7 +420,7 @@
 			<p>Expiry: {{$emp->license()->first()?$emp->license()->first()->expiry_date->format('F d, Y'):'--'}}</p>
 			<a href="#" data-field="license" rel="formOpen"><i class="fa fa-wrench"></i></a>
 			{!! Form::open(['route' => ['lic-drop',$emp->license()->first()->id]]) !!}
-				<button><i class="fa fa-remove"></i></button>
+				<button class="delete-entry"><i class="fa fa-remove"></i></button>
 			{!! Form::close() !!}
 
 			{!! Form::model($emp->license()->first(),['route' => ['lic-update',$emp->id], 'id' => 'licenseForm', 'class' => 'userUpdateForm','files' => true]) !!}
@@ -430,7 +493,7 @@
 			<a href="#" data-field="mobile" rel="formOpen"><i class="fa fa-wrench"></i></a>
 			{!! Form::open(['route' => ['emp-drop',$emp->id],'class' => 'emp-delete']) !!}
 	            {!! Form::hidden('field','mobile') !!}
-				<button><i class="fa fa-remove"></i></button>
+				<button class="delete-entry"><i class="fa fa-remove"></i></button>
 			{!! Form::close() !!}
 			@else
 			<a href="#" data-field="mobile" rel="formOpen"><i class="fa fa-plus">Add Mobile No.</i></a>
@@ -455,7 +518,7 @@
 			<a href="#" data-field="status" rel="formOpen"><i class="fa fa-wrench"></i></a>
 			{!! Form::open(['route' => ['emp-drop',$emp->id],'class' => 'emp-delete']) !!}
 	            {!! Form::hidden('field','status') !!}
-				<button><i class="fa fa-remove"></i></button>
+				<button class="delete-entry"><i class="fa fa-remove"></i></button>
 			{!! Form::close() !!}
 			@else
 			<a href="#" data-field="status" rel="formOpen"><i class="fa fa-plus">Add Marital Status</i></a>
@@ -479,7 +542,7 @@
 			<a href="#" data-field="children" rel="formOpen"><i class="fa fa-wrench"></i></a>
 			{!! Form::open(['route' => ['emp-drop',$emp->id],'class' => 'emp-delete']) !!}
 	            {!! Form::hidden('field','children') !!}
-				<button><i class="fa fa-remove"></i></button>
+				<button class="delete-entry"><i class="fa fa-remove"></i></button>
 			{!! Form::close() !!}
 			@else
 			<a href="#" data-field="children" rel="formOpen"><i class="fa fa-plus">Add no. of children</i></a>
@@ -504,7 +567,7 @@
 			<a href="#" data-field="degree" rel="formOpen"><i class="fa fa-wrench"></i></a>
 			{!! Form::open(['route' => ['emp-drop',$emp->id],'class' => 'emp-delete']) !!}
 	            {!! Form::hidden('field','degree') !!}
-				<button><i class="fa fa-remove"></i></button>
+				<button class="delete-entry"><i class="fa fa-remove"></i></button>
 			{!! Form::close() !!}
 			@else
 			<a href="#" data-field="degree" rel="formOpen"><i class="fa fa-plus">Add Degree</i></a>
@@ -529,7 +592,7 @@
 			<a href="#" data-field="grad_date" rel="formOpen"><i class="fa fa-wrench"></i></a>
 			{!! Form::open(['route' => ['emp-drop',$emp->id],'class' => 'emp-delete']) !!}
 	            {!! Form::hidden('field','grad_date') !!}
-				<button><i class="fa fa-remove"></i></button>
+				<button class="delete-entry"><i class="fa fa-remove"></i></button>
 			{!! Form::close() !!}
 			@else
 			<a href="#" data-field="grad_date" rel="formOpen"><i class="fa fa-plus">Add Work Start Date</i></a>
@@ -554,7 +617,7 @@
 			<a href="#" data-field="work_start_date" rel="formOpen"><i class="fa fa-wrench"></i></a>
 			{!! Form::open(['route' => ['emp-drop',$emp->id],'class' => 'emp-delete']) !!}
 	            {!! Form::hidden('field','work_start_date') !!}
-				<button><i class="fa fa-remove"></i></button>
+				<button class="delete-entry"><i class="fa fa-remove"></i></button>
 			{!! Form::close() !!}
 			@else
 			<a href="#" data-field="work_start_date" rel="formOpen"><i class="fa fa-plus">Add Work Start Date</i></a>
@@ -579,7 +642,7 @@
 			<a href="#" data-field="airport" rel="formOpen"><i class="fa fa-wrench"></i></a>
 			{!! Form::open(['route' => ['emp-drop',$emp->id],'class' => 'emp-delete']) !!}
 	            {!! Form::hidden('field','airport') !!}
-				<button><i class="fa fa-remove"></i></button>
+				<button class="delete-entry"><i class="fa fa-remove"></i></button>
 			{!! Form::close() !!}
 			@else
 			<a href="#" data-field="airport" rel="formOpen"><i class="fa fa-plus">Add home destination airport</i></a>
@@ -599,7 +662,7 @@
 			<div class="separate">
 			<h4>Gratuity</h4>
 			@if($emp->salary()->first())
-			<p>QAR {{$emp->salary()->first()->basic * ($emp->joined->diffInYears(\Carbon\Carbon::today()))}}</p>
+			<p>QAR {{$gratuity}}</p>
 			@else
 			<p class="note ph">Please add salary details to obtain total gratuity.</p>
 			@endif
@@ -948,6 +1011,33 @@
 			            @endif
 			            </div>
 			            <div>
+			            {!! Form::label('vac_from_time','Departure') !!}
+			            {!! Form::text('vac_from_time',old('vac_from_time'),['class' => 'time-input']) !!}
+			            @if ($errors->has('vac_from_time'))
+			                <span class="error">
+			                    <strong>{{ $errors->first('vac_from_time') }}</strong>
+			                </span>
+			            @endif
+			            </div>
+			           	<div>
+			            {!! Form::label('vac_to_time','Arrival') !!}
+			            {!! Form::text('vac_to_time',old('vac_to_time'),['class' => 'time-input']) !!}
+			            @if ($errors->has('vac_to_time'))
+			                <span class="error">
+			                    <strong>{{ $errors->first('vac_to_time') }}</strong>
+			                </span>
+			            @endif
+			            </div>
+			            <div>
+			            {!! Form::label('airlines','Airlines') !!}
+			            {!! Form::text('airlines',old('airlines'),['placeholder' => 'Type it.. :)']) !!}
+			            @if ($errors->has('airlines'))
+			                <span class="error">
+			                    <strong>{{ $errors->first('airlines') }}</strong>
+			                </span>
+			            @endif
+			            </div>
+			            <div>
 			            {!! Form::label('ticket','Upload Ticket',['class' => 'upload-label']) !!}
 			            {!! Form::file('ticket',['class'=>'inputfile']) !!}
 			            @if ($errors->has('ticket'))
@@ -998,10 +1088,13 @@
 					<ul>
 						<a href="#" class="data-tool" data-field="vacation{{$vacation['current']->id}}" rel="formOpen"><i class="fa fa-wrench"></i></a>
 						{!! Form::open(['route' => ['vac-drop',$vacation['current']->id],'class' => 'data-tool']) !!}
-							<button><i class="fa fa-remove"></i></button>
+							<button class="delete-entry"><i class="fa fa-remove"></i></button>
 						{!! Form::close() !!}
 						<li>From: {{$vacation['current']->vac_from->format('F d, Y')}}</li>
 						<li>To: {{$vacation['current']->vac_to->format('F d, Y')}}</li>
+						<li>Departure: {{$vacation['current']->vac_to_time->format('F d, Y g:i a')}}</li>
+						<li>Arrival: {{$vacation['current']->vac_from_time->format('F d, Y g:i a')}}</li>
+						<li>Airlines: {{$vacation['current']->airlines}}</li>
 						<li>Ticket: <a href="{{$vacation['current']->ticket?$vacation['current']->ticket:'#'}}">Ticket <i class="fa fa-download"></i></a></li>
 						<li>Exit Permit: <a href="{{$vacation['current']->exit_permit?$vacation['current']->exit_permit:'#'}}">Exit Permit <i class="fa fa-download"></i></a></li>
 						<li>Original Form: <a href="{{$vacation['current']->original_form?$vacation['current']->original_form:'#'}}">Original Form <i class="fa fa-download"></i></a></li>
@@ -1033,6 +1126,33 @@
 			            @if ($errors->has('vac_to'))
 			                <span class="error">
 			                    <strong>{{ $errors->first('vac_to') }}</strong>
+			                </span>
+			            @endif
+			            </div>
+			            <div>
+			            {!! Form::label('vac_from_time','Departure') !!}
+			            {!! Form::text('vac_from_time',old('vac_from_time'),['class' => 'time-input']) !!}
+			            @if ($errors->has('vac_from_time'))
+			                <span class="error">
+			                    <strong>{{ $errors->first('vac_from_time') }}</strong>
+			                </span>
+			            @endif
+			            </div>
+			           	<div>
+			            {!! Form::label('vac_to_time','Arrival') !!}
+			            {!! Form::text('vac_to_time',old('vac_to_time'),['class' => 'time-input']) !!}
+			            @if ($errors->has('vac_to_time'))
+			                <span class="error">
+			                    <strong>{{ $errors->first('vac_to_time') }}</strong>
+			                </span>
+			            @endif
+			            </div>
+			            <div>
+			            {!! Form::label('airlines','Airlines') !!}
+			            {!! Form::text('airlines',old('airlines'),['placeholder' => 'Type it.. :)']) !!}
+			            @if ($errors->has('airlines'))
+			                <span class="error">
+			                    <strong>{{ $errors->first('airlines') }}</strong>
 			                </span>
 			            @endif
 			            </div>
@@ -1087,10 +1207,13 @@
 					<ul>
 						<a href="#" class="data-tool" data-field="vacation{{$vacation['upcoming']->id}}" rel="formOpen"><i class="fa fa-wrench"></i></a>
 						{!! Form::open(['route' => ['vac-drop',$vacation['upcoming']->id],'class' => 'data-tool']) !!}
-							<button><i class="fa fa-remove"></i></button>
+							<button class="delete-entry"><i class="fa fa-remove"></i></button>
 						{!! Form::close() !!}
 						<li>From: {{$vacation['upcoming']->vac_from->format('F d, Y')}}</li>
 						<li>To: {{$vacation['upcoming']->vac_to->format('F d, Y')}}</li>
+						<li>Departure: {{$vacation['upcoming']->vac_to_time->format('F d, Y g:i a')}}</li>
+						<li>Arrival: {{$vacation['upcoming']->vac_from_time->format('F d, Y g:i a')}}</li>
+						<li>Airlines: {{$vacation['upcoming']->airlines}}</li>
 						<li>Ticket: <a href="{{$vacation['upcoming']->ticket?$vacation['upcoming']->ticket:'#'}}">Ticket <i class="fa fa-download"></i></a></li>
 						<li>Exit Permit: <a href="{{$vacation['upcoming']->exit_permit?$vacation['upcoming']->exit_permit:'#'}}">Exit Permit <i class="fa fa-download"></i></a></li>
 						<li>Original Form: <a href="{{$vacation['upcoming']->original_form?$vacation['upcoming']->original_form:'#'}}">Original Form <i class="fa fa-download"></i></a></li>
@@ -1123,6 +1246,33 @@
 			            @if ($errors->has('vac_to'))
 			                <span class="error">
 			                    <strong>{{ $errors->first('vac_to') }}</strong>
+			                </span>
+			            @endif
+			            </div>
+			            <div>
+			            {!! Form::label('vac_from_time','Departure') !!}
+			            {!! Form::text('vac_from_time',old('vac_from_time'),['class' => 'time-input']) !!}
+			            @if ($errors->has('vac_from_time'))
+			                <span class="error">
+			                    <strong>{{ $errors->first('vac_from_time') }}</strong>
+			                </span>
+			            @endif
+			            </div>
+			           	<div>
+			            {!! Form::label('vac_to_time','Arrival') !!}
+			            {!! Form::text('vac_to_time',old('vac_to_time'),['class' => 'time-input']) !!}
+			            @if ($errors->has('vac_to_time'))
+			                <span class="error">
+			                    <strong>{{ $errors->first('vac_to_time') }}</strong>
+			                </span>
+			            @endif
+			            </div>
+			            <div>
+			            {!! Form::label('airlines','Airlines') !!}
+			            {!! Form::text('airlines',old('airlines'),['placeholder' => 'Type it.. :)']) !!}
+			            @if ($errors->has('airlines'))
+			                <span class="error">
+			                    <strong>{{ $errors->first('airlines') }}</strong>
 			                </span>
 			            @endif
 			            </div>
@@ -1177,10 +1327,13 @@
 					<ul>
 						<a href="#" class="data-tool" data-field="vacation{{$vac->id}}" rel="formOpen"><i class="fa fa-wrench"></i></a>
 						{!! Form::open(['route' => ['vac-drop',$vac->id],'class' => 'data-tool']) !!}
-							<button><i class="fa fa-remove"></i></button>
+							<button class="delete-entry"><i class="fa fa-remove"></i></button>
 						{!! Form::close() !!}
 						<li>From: {{$vac->vac_from->format('F d, Y')}}</li>
 						<li>To: {{$vac->vac_to->format('F d, Y')}}</li>
+						<li>Departure: {{$vac->vac_to_time->format('F d, Y g:i a')}}</li>
+						<li>Arrival: {{$vac->vac_from_time->format('F d, Y g:i a')}}</li>
+						<li>Airlines: {{$vac->airlines}}</li>
 						<li>Ticket: <a href="{{$vac->ticket?$vac->ticket:'#'}}">Ticket <i class="fa fa-download"></i></a></li>
 						<li>Exit Permit: <a href="{{$vac->exit_permit?$vac->exit_permit:'#'}}">Exit Permit <i class="fa fa-download"></i></a></li>
 						<li>Original Form: <a href="{{$vac->original_form?$vac->original_form:'#'}}">Original Form <i class="fa fa-download"></i></a></li>
@@ -1215,6 +1368,33 @@
 		            @if ($errors->has('vac_to'))
 		                <span class="error">
 		                    <strong>{{ $errors->first('vac_to') }}</strong>
+		                </span>
+		            @endif
+		            </div>
+		            <div>
+		            {!! Form::label('vac_from_time','Departure') !!}
+		            {!! Form::text('vac_from_time',old('vac_from_time'),['class' => 'time-input']) !!}
+		            @if ($errors->has('vac_from_time'))
+		                <span class="error">
+		                    <strong>{{ $errors->first('vac_from_time') }}</strong>
+		                </span>
+		            @endif
+		            </div>
+		           	<div>
+		            {!! Form::label('vac_to_time','Arrival') !!}
+		            {!! Form::text('vac_to_time',old('vac_to_time'),['class' => 'time-input']) !!}
+		            @if ($errors->has('vac_to_time'))
+		                <span class="error">
+		                    <strong>{{ $errors->first('vac_to_time') }}</strong>
+		                </span>
+		            @endif
+		            </div>
+		            <div>
+		            {!! Form::label('airlines','Airlines') !!}
+		            {!! Form::text('airlines',old('airlines'),['placeholder' => 'Type it.. :)']) !!}
+		            @if ($errors->has('airlines'))
+		                <span class="error">
+		                    <strong>{{ $errors->first('airlines') }}</strong>
 		                </span>
 		            @endif
 		            </div>
@@ -1326,7 +1506,7 @@
 					<ul>
 						<a href="#" class="data-tool" data-field="leave{{$leave->id}}" rel="formOpen"><i class="fa fa-wrench"></i></a>
 						{!! Form::open(['route' => ['leave-drop',$leave->id],'class' => 'data-tool']) !!}
-							<button><i class="fa fa-remove"></i></button>
+							<button class="delete-entry"><i class="fa fa-remove"></i></button>
 						{!! Form::close() !!}
 						<li>From: {{$leave->leave_from->format('F d, Y')}}</li>
 						<li>To: {{$leave->leave_to->format('F d, Y')}}</li>
@@ -1435,6 +1615,24 @@
 			            @endif
 			            </div>
 			            <div>
+			            {!! Form::label('food','Food') !!}
+			            {!! Form::text('food',old('food')) !!}
+			            @if ($errors->has('food'))
+			                <span class="error">
+			                    <strong>{{ $errors->first('food') }}</strong>
+			                </span>
+			            @endif
+			            </div>
+			            <div>
+			            {!! Form::label('special','Special') !!}
+			            {!! Form::text('special',old('special')) !!}
+			            @if ($errors->has('special'))
+			                <span class="error">
+			                    <strong>{{ $errors->first('special') }}</strong>
+			                </span>
+			            @endif
+			            </div>
+			            <div>
 			            {!! Form::label('others','Others') !!}
 			            {!! Form::text('others',old('others')) !!}
 			            @if ($errors->has('others'))
@@ -1450,12 +1648,14 @@
 					<ul>
 						<a href="#" class="data-tool" data-field="salary" rel="formOpen"><i class="fa fa-wrench"></i></a>
 						{!! Form::open(['route' => ['sal-drop',$emp->id],'class' => 'data-tool']) !!}
-							<button><i class="fa fa-remove"></i></button>
+							<button class="delete-entry"><i class="fa fa-remove"></i></button>
 						{!! Form::close() !!}
 						<li>Basic: QAR {{$emp->salary()->first()->basic}}</li>
 						<li>Transpo: QAR {{$emp->salary()->first()->transpo?$emp->salary()->first()->transpo:'--'}}</li>
 						<li>Accomodation: QAR {{$emp->salary()->first()->accomodation?$emp->salary()->first()->accomodation:'--'}}</li>
 						<li>Work Nature: QAR {{$emp->salary()->first()->work_nature?$emp->salary()->first()->work_nature:'--'}}</li>
+						<li>Food: QAR {{$emp->salary()->first()->food?$emp->salary()->first()->food:'--'}}</li>
+						<li>Special: QAR {{$emp->salary()->first()->special?$emp->salary()->first()->special:'--'}}</li>
 						<li>Others: QAR {{$emp->salary()->first()->others?$emp->salary()->first()->others:'--'}}</li>
 						<li>Total: QAR {{$emp->salary()->first()->total}}</li>
 					</ul>
@@ -1494,6 +1694,24 @@
 			            @if ($errors->has('work_nature'))
 			                <span class="error">
 			                    <strong>{{ $errors->first('work_nature') }}</strong>
+			                </span>
+			            @endif
+			            </div>
+			            <div>
+			            {!! Form::label('food','Food') !!}
+			            {!! Form::text('food',old('food')) !!}
+			            @if ($errors->has('food'))
+			                <span class="error">
+			                    <strong>{{ $errors->first('food') }}</strong>
+			                </span>
+			            @endif
+			            </div>
+			            <div>
+			            {!! Form::label('special','Special') !!}
+			            {!! Form::text('special',old('special')) !!}
+			            @if ($errors->has('special'))
+			                <span class="error">
+			                    <strong>{{ $errors->first('special') }}</strong>
 			                </span>
 			            @endif
 			            </div>
@@ -1562,7 +1780,7 @@
 					<ul>
 						<a href="#" class="data-tool" data-field="warning{{$warning->id}}" rel="formOpen"><i class="fa fa-wrench"></i></a>
 						{!! Form::open(['route' => ['warning-drop',$warning->id],'class' => 'data-tool']) !!}
-							<button><i class="fa fa-remove"></i></button>
+							<button class="delete-entry"><i class="fa fa-remove"></i></button>
 						{!! Form::close() !!}
 						<li>Date: {{$warning->warning_date->format('F d, Y')}}</li>
 						<li>Violation: {{$warning->violation}}</li>
@@ -1669,7 +1887,7 @@
 					<ul>
 						<a href="#" class="data-tool" data-field="ai{{$ai->id}}" rel="formOpen"><i class="fa fa-wrench"></i></a>
 						{!! Form::open(['route' => ['ai-drop',$ai->id],'class' => 'data-tool']) !!}
-							<button><i class="fa fa-remove"></i></button>
+							<button class="delete-entry"><i class="fa fa-remove"></i></button>
 						{!! Form::close() !!}
 						<li>Date: {{$ai->ai_date->format('F d, Y')}}</li>
 						<li>Type: {{$ai->ai_type}}</li>
@@ -1721,7 +1939,7 @@
 					<ul>
 						<a href="#" class="data-tool" data-field="ai{{$ai->id}}" rel="formOpen"><i class="fa fa-wrench"></i></a>
 						{!! Form::open(['route' => ['ai-drop',$ai->id],'class' => 'data-tool']) !!}
-							<button><i class="fa fa-remove"></i></button>
+							<button class="delete-entry"><i class="fa fa-remove"></i></button>
 						{!! Form::close() !!}
 						<li>Date: {{$ai->ai_date->format('F d, Y')}}</li>
 						<li>Type: {{$ai->ai_type}}</li>
@@ -1827,7 +2045,7 @@
 						<ul>
 							<a href="#" class="data-tool" data-field="ot{{$v->id}}" rel="formOpen"><i class="fa fa-wrench"></i></a>
 							{!! Form::open(['route' => ['ot-drop',$v->id],'class' => 'data-tool']) !!}
-								<button><i class="fa fa-remove"></i></button>
+								<button class="delete-entry"><i class="fa fa-remove"></i></button>
 							{!! Form::close() !!}
 							<li>Date: {{$v->ot_date->format('F d, Y')}}</li>
 							<li>Type: {{$v->ot_type}}</li>
@@ -1930,8 +2148,8 @@
 			$(tabId).show();
 		});
 
-		$('#vac_from,#vac_to').datepicker();
-		$('#vac_from,#vac_to').datepicker("option", "dateFormat", "yy-mm-dd");
+		$('#vac_from,#vac_to,#vac_from_time,#vac_to_time').datepicker();
+		$('#vac_from,#vac_to,#vac_from_time,#vac_to_time').datepicker("option", "dateFormat", "yy-mm-dd");
 
 		@if($vacation['on'])
 			if($('#vacation{{$vacation['current']->id}}Form #vac_from').attr('value') != undefined){
@@ -2134,8 +2352,36 @@
 			});
 		}
 
+		$('.time-input').inputmask("yyyy-mm-dd hh:mm:ss", {
+                mask: "y-1-2 h:s:s",
+                placeholder: "yyyy-mm-dd hh:mm:ss",
+                alias: "datetime",
+                separator: "-",
+                leapday: "-02-29",
+                regex: {
+                    val2pre: function(separator) {
+                        var escapedSeparator = Inputmask.escapeRegex.call(this, separator);
+                        return new RegExp("((0[13-9]|1[012])" + escapedSeparator + "[0-3])|(02" + escapedSeparator + "[0-2])");
+                    },
+                    val2: function(separator) {
+                        var escapedSeparator = Inputmask.escapeRegex.call(this, separator);
+                        return new RegExp("((0[1-9]|1[012])" + escapedSeparator + "(0[1-9]|[12][0-9]))|((0[13-9]|1[012])" + escapedSeparator + "30)|((0[13578]|1[02])" + escapedSeparator + "31)");
+                    },
+                    val1pre: new RegExp("[01]"),
+                    val1: new RegExp("0[1-9]|1[012]")
+                },
+                onKeyDown: function(e, buffer, caretPos, opts) {}
+            });
+
 		$.ajaxSetup({
 	    	headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+	  	});
+
+	  	$('.delete-entry').click(function(e){
+	  		e.preventDefault();
+	  		if(confirm("Are you sure you want to delete this entry?")){
+	  			$(this).parent().submit();
+	  		}
 	  	});
 
 	  	$('select#airport').append('<option value="">--Select Airport--</option><option value="ABJ">Abidjan (ABJ)</option><option value="ZVJ">Abu Dhabi (BUS) (ZVJ)</option><option value="ABV">Abuja (ABV)</option><option value="ACC">Accra (ACC)</option><option value="ADD">Addis Ababa (ADD)</option><option value="ADL">Adelaide (ADL)</option><option value="AMD">Ahmedabad (AMD)</option><option value="ZVH">Al Ain (BUS) (ZVH)</option><option value="HBE">Alexandria (HBE)</option><option value="ALG">Algiers (ALG)</option><option value="AMM">Amman (AMM)</option><option value="AMS">Amsterdam (AMS)</option><option value="ATH">Athens (ATH)</option><option value="AKL">Auckland (AKL)</option><option value="BGW">Baghdad (BGW)</option><option value="BAH">Bahrain (BAH)</option><option value="DPS">Bali (DPS)</option><option value="BKK">Bangkok (BKK)</option><option value="BCN">Barcelona (BCN)</option><option value="BSR">Basra (BSR)</option><option value="PEK">Beijing (PEK)</option><option value="BEY">Beirut (BEY)</option><option value="BLR">Bengaluru (BLR)</option><option value="BHX">Birmingham (BHX)</option><option value="BLQ">Bologna (BLQ)</option><option value="BOS">Boston (BOS)</option><option value="BNE">Brisbane (BNE)</option><option value="BRU">Brussels (BRU)</option><option value="BUD">Budapest (BUD)</option><option value="EZE">Buenos Aires (EZE)</option><option value="CAI">Cairo (CAI)</option><option value="CPT">Cape Town (CPT)</option><option value="CMN">Casablanca (CMN)</option><option value="CEB">Cebu (CEB)</option><option value="MAA">Chennai (MAA)</option><option value="ORD">Chicago (ORD)</option><option value="CHC">Christchurch (CHC)</option><option value="CRK">Clark (CRK)</option><option value="CMB">Colombo (CMB)</option><option value="CPH">Copenhagen (CPH)</option><option value="DKR">Dakar (DKR)</option><option value="DFW">Dallas (DFW)</option><option value="DAM">Damascus (DAM)</option><option value="DMM">Dammam (DMM)</option><option value="DAR">Dar Es Salaam (DAR)</option><option value="DEL">Delhi (DEL)</option><option value="DAC">Dhaka (DAC)</option><option value="DXB">Dubai (DXB)</option><option value="DUB">Dublin (DUB)</option><option value="DUR">Durban (DUR)</option><option value="DUS">D&#252;sseldorf (DUS)</option><option value="EBB">Entebbe (EBB)</option><option value="EBL">Erbil (EBL)</option><option value="FLL">Fort Lauderdale (FLL)</option><option value="FRA">Frankfurt (FRA)</option><option value="GVA">Geneva (GVA)</option><option value="GLA">Glasgow (GLA)</option><option value="CAN">Guangzhou (CAN)</option><option value="HAM">Hamburg (HAM)</option><option value="HAN">Hanoi (HAN)</option><option value="HRE">Harare (HRE)</option><option value="SGN">Ho Chi Minh City (SGN)</option><option value="HKG">Hong Kong (HKG)</option><option value="IAH">Houston (IAH)</option><option value="HYD">Hyderabad (HYD)</option><option value="ISB">Islamabad (ISB)</option><option value="IST">Istanbul (IST)</option><option value="SAW">Istanbul Sabiha Gokcen (SAW)</option><option value="CGK">Jakarta (CGK)</option><option value="JED">Jeddah (JED)</option><option value="JNB">Johannesburg (JNB)</option><option value="KBL">Kabul (KBL)</option><option value="KHI">Karachi (KHI)</option><option value="KRT">Khartoum (KRT)</option><option value="COK">Kochi (COK)</option><option value="CCU">Kolkata (CCU)</option><option value="CCJ">Kozhikode (CCJ)</option><option value="KUL">Kuala Lumpur (KUL)</option><option value="KWI">Kuwait (KWI)</option><option value="LOS">Lagos (LOS)</option><option value="LHE">Lahore (LHE)</option><option value="LCA">Larnaca (LCA)</option><option value="LIS">Lisbon (LIS)</option><option value="LGW">London Gatwick (LGW)</option><option value="LHR">London Heathrow (LHR)</option><option value="LAX">Los Angeles (LAX)</option><option value="LAD">Luanda (LAD)</option><option value="LUN">Lusaka (LUN)</option><option value="LYS">Lyon (LYS)</option><option value="MAD">Madrid (MAD)</option><option value="MLE">Male (MLE)</option><option value="MLA">Malta (MLA)</option><option value="MAN">Manchester (MAN)</option><option value="MNL">Manila (MNL)</option><option value="MHD">Mashhad (MHD)</option><option value="MRU">Mauritius (MRU)</option><option value="MED">Medina (Madinah) (MED)</option><option value="MEL">Melbourne (MEL)</option><option value="MXP">Milan (MXP)</option><option value="DME">Moscow (DME)</option><option value="MUX">Multan (MUX)</option><option value="BOM">Mumbai (BOM)</option><option value="MUC">Munich (MUC)</option><option value="MCT">Muscat (MCT)</option><option value="NBO">Nairobi (NBO)</option><option value="JFK">New York (JFK)</option><option value="EWR">Newark (EWR)</option><option value="NCL">Newcastle (NCL)</option><option value="NCE">Nice (NCE)</option><option value="MCO">Orlando (MCO)</option><option value="KIX">Osaka (KIX)</option><option value="OSL">Oslo (OSL)</option><option value="CDG">Paris (CDG)</option><option value="PER">Perth (PER)</option><option value="PEW">Peshawar (PEW)</option><option value="PNH">Phnom Penh (PNH)</option><option value="HKT">Phuket (HKT)</option><option value="PRG">Prague (PRG)</option><option value="GIG">Rio de Janeiro (GIG)</option><option value="RUH">Riyadh (RUH)</option><option value="FCO">Rome (FCO)</option><option value="SFO">San Francisco (SFO)</option><option value="SAH">Sana&#39;a (SAH)</option><option value="GRU">S&#227;o Paulo (GRU)</option><option value="SEA">Seattle (SEA)</option><option value="ICN">Seoul (ICN)</option><option value="SEZ">Seychelles (SEZ)</option><option value="PVG">Shanghai (PVG)</option><option value="SKT">Sialkot (SKT)</option><option value="SIN">Singapore (SIN)</option><option value="LED">St Petersburg (LED)</option><option value="ARN">Stockholm (ARN)</option><option value="SYD">Sydney (SYD)</option><option value="TPE">Taipei (TPE)</option><option value="IKA">Tehran (IKA)</option><option value="TRV">Thiruvananthapuram (TRV)</option><option value="HND">Tokyo Haneda (HND)</option><option value="NRT">Tokyo Narita (NRT)</option><option value="YYZ">Toronto (YYZ)</option><option value="TIP">Tripoli (TIP)</option><option value="TUN">Tunis (TUN)</option><option value="VCE">Venice (VCE)</option><option value="VIE">Vienna (VIE)</option><option value="WAW">Warsaw (WAW)</option><option value="IAD">Washington Dulles (IAD)</option><option value="RGN">Yangon (RGN)</option><option value="INC">Yinchuan (INC)</option><option value="ZAG">Zagreb (ZAG)</option><option value="CGO">Zhengzhou (CGO)</option>');
