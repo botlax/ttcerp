@@ -59,7 +59,7 @@ Add Employee | {{config('app.name')}}
                 </div>
                 <div>            
                     {!! Form::label('designation', 'Designation') !!}
-                    {!! Form::select('designation', ['' => '--Select Designation--', 'plumber' => 'Plumber', 'carpenter' => 'Carpenter', 'steel fixer' => 'Steel Fixer', 'leadman' => 'Leadman','foreman' => 'Foreman', 'mason' => 'Mason','driver' => 'Driver','cleaner' => 'Cleaner','painter' => 'Painter','labor' => 'Labor','mechanic' => 'Mechanic','watchman' => 'Watchman','project engineer' => 'Project / Site Engineer','project manager' => 'Project Manager','safety officer' => 'Safety Officer','office staff' => 'Office Staff','Management' => 'Management'], old('designation')) !!}
+                    {!! Form::select('designation', ['' => '--Select Designation--', 'plumber' => 'Plumber', 'carpenter' => 'Carpenter', 'steel fixer' => 'Steel Fixer', 'leadman' => 'Leadman','foreman' => 'Foreman', 'mason' => 'Mason','driver' => 'Driver','cleaner' => 'Cleaner','painter' => 'Painter','labor' => 'Labor','mechanic' => 'Mechanic','watchman' => 'Watchman','project engineer' => 'Project / Site Engineer','project manager' => 'Project Manager','safety officer' => 'Safety Officer','office staff' => 'Office Staff','management' => 'Management'], old('designation')) !!}
                     @if ($errors->has('designation'))
                         <span class="error">
                             <strong>{{ $errors->first('designation') }}</strong>
