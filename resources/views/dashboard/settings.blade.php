@@ -75,6 +75,14 @@ Application Settings | {{config('app.name')}}
             @endif
             </div>
 
+            <span>Receive a notification </span>{!! Form::number('vac', old('vac')) !!}<span> days prior to Employee departure</span>
+			@if ($errors->has('vac'))
+                <span class="error">
+                    <strong>{{ $errors->first('vac') }}</strong>
+                </span>
+            @endif
+            </div>
+
 			{!! Form::submit('Update') !!}
 		{!! Form::close() !!}
 

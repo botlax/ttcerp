@@ -753,6 +753,7 @@ class HomeController extends Controller
                 'hc' => 'required|numeric',
                 'license' => 'required|numeric',
                 'visa' => 'required|numeric',
+                'vac' => 'required|numeric',
             ]);
 
             $settings = Settings::first();
