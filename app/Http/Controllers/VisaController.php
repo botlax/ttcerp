@@ -40,10 +40,7 @@ class VisaController extends Controller
     public function used()
     {
         $visas = Visa::orderBy('nationality','ASC')
-                ->where('status','used')
-                ->groupBy('nationality','interior','app_num','occupation','gender','visa_expiry_date','year')
-                ->select(\DB::raw('count(*) as total'), 'nationality','interior','app_num','occupation','gender','visa_expiry_date','year')
-                ->get();
+                ->where('status','used')->get();
         $nats = $this->getNat();
         return view('dashboard.visas-used', compact('visas','nats'));
     }
@@ -136,8 +133,6 @@ class VisaController extends Controller
                 ->where('occupation',$occOperator,$occupation)
                 ->where('nationality',$natOperator,$nationality)
                 ->where('status','used')
-                ->groupBy('nationality','interior','app_num','occupation','gender','visa_expiry_date','year')
-                ->select(\DB::raw('count(*) as total'), 'nationality','interior','app_num','occupation','gender','visa_expiry_date','year')
                 ->orderBy('nationality','ASC')
                 ->get();
 
@@ -167,6 +162,7 @@ class VisaController extends Controller
         $years = $this->getYears();
         $nats = $this->getNat();
         $emps = User::sort()->orderBy('emp_id','ASC')->get();
+        //dd($visa->user()->first());
         return view('dashboard.visa-edit',compact('visa','years','nats','emps'));
     }
 
@@ -203,9 +199,14 @@ class VisaController extends Controller
             $visa->status = 'used';
             $visa->emp_id = $request->input('status');
         }
+        else{
+          if($visa->status == 'used'){
+            $visa->status = 'available';
+            $visa->emp_id = null;
+          }
+        }
 
         $visa->save();
-
         flash('Successfully updated.')->success();
         return redirect('visa');
     }

@@ -67,13 +67,13 @@ Used Visas | {{config('app.name')}}
 
 			<a href="{{url('visa')}}">Available Visas</a>
 			<a href="{{url('visa/used')}}">Used Visas</a>
-			<a href="#" class="compress">Compress Results</a>
-			<a href="#" class="expand">Expand Results</a>
 		</div>
 		@if(count($visas->toArray()))
 		<table id="employees" class="emp-list">
 			<thead>
   				<tr>
+  					<th>Emp No.</th>
+  					<th>Name</th>
 				    <th>Interior No.</th>
 				    <th>Application No.</th>
 				    <th>Year</th>
@@ -81,13 +81,15 @@ Used Visas | {{config('app.name')}}
 				    <th>Type</th>
 				    <th>Occupation</th>
 				    <th>Nationality</th>
-				    <th class="balance">Balance</th>
+				    <th class="balance">tools</th>
   				</tr>
 			</thead>
 			<tbody>
 				<?php $total = 0; ?>
 				@foreach($visas as $visa)
 				<tr>
+					<td>{{$visa->user()->first()->emp_id}}</td>
+					<td>{{$visa->user()->first()->name}}</td>
 					<td>{{$visa->interior}}</td>
 					<td>{{$visa->app_num}}</td>
 					<td>{{$visa->year}}</td>
@@ -95,13 +97,19 @@ Used Visas | {{config('app.name')}}
 					<td>{{$visa->gender}}</td>
 					<td>{{$visa->occupation}}</td>
 					<td>{{$visa->nationality}}</td>
-					<td>{{$visa->total}}</td>
+					<td class="ph">
+						<a href="{{url('visa'.'/'.$visa->id.'/edit')}}"><i class="fa fa-wrench"></i></a>
+						<a href="#delete-leanmodal" data-id="{{$visa->user()->first()->id}}" class="delete" rel="leanModal" title="delete"><i class="fa fa-remove"></i></a>
+						<form method="POST" action="{{url('visa'.'/'.$visa->id.'/delete')}}" accept-charset="UTF-8" style="display: none; position: relative;" id="delete{{$visa->user()->first()->id}}">
+						{{Form::token()}}
+						</form>
+					</td>
 				</tr>
-				<?php $total = $total + $visa->total; ?>
+				
 				@endforeach
 				<tr>
-					<td colspan="7"></td>
-					<th>{{$total}}</th>
+					<th colspan="9">Total</th>
+					<th>{{count($visas->toArray())}}</th>
 				</tr>
 			</tbody>
 		</table>
@@ -136,41 +144,6 @@ Used Visas | {{config('app.name')}}
 			$('#delete'+visaId).submit();
 		});
 
-		$.ajaxSetup({
-        	headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-      	});
-
-		$(document).on('click','.expand',function(){
-
-			$.ajax({
-			    url: '{{url('visa/expand')}}',
-			    dataType:'JSON',
-			    type: "POST",
-			    data: {'status':'used'},
-			    success: function(data){
-			    	$('#employees tbody').html('');
-			    	var visas = '';
-			    	for(var i in data){
-			    		visas = visas + '<tr><td>'+data[i]['interior']+'</td>' + '<td>'+data[i]['app_num']+'</td>' + '<td>'+data[i]['year']+'</td>' + '<td>'+data[i]['visaExpiry']+'</td>' + '<td>'+data[i]['gender']+'</td>' + '<td>'+data[i]['occupation']+'</td>' + '<td>'+data[i]['nationality']+'</td>' + '<td class="ph"><a href="http://laravel.dev/visa/'+data[i]['id']+'/edit"><i class="fa fa-wrench"></i></a><a href="#delete-leanmodal" data-id="'+data[i]['id']+'" class="delete" rel="leanModal" title="delete"><i class="fa fa-remove"></i></a><form method="POST" action="http://laravel.dev/visa/'+data[i]['id']+'/delete" accept-charset="UTF-8" style="display: none; position: relative;" id="delete'+data[i]['id']+'"><input name="_token" type="hidden" value="'+$('meta[name=_token]').attr('content')+'"></form></td></tr>';
-			    	}
-			    	$('#employees .balance').html('Tools').addClass('ph');
-			    	$('#employees tbody').html(visas);
-			    },
-			    error: function(data){
-
-			    }
-			});
-
-
-			return false;
-		});
-
-		$(document).on('click','.compress',function(){
-
-			location.reload();
-			return false;
-		});
-		
 	});
 @endsection
 

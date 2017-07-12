@@ -104,7 +104,13 @@ Edit Visa | {{config('app.name')}}
                     <select id="status" name="status">
                         <option value="">--Select Employee--</option>
                         @foreach($emps as $emp)
-                        <option value="{{$emp->id}}">{{$emp->emp_id}} - {{$emp->name}}</option>
+                        <option 
+                        @if($emp->visa()->first())
+                            @if($emp->visa()->first()->id == $visa->id)
+                                selected
+                            @endif
+                        @endif
+                        value="{{$emp->id}}">{{$emp->emp_id}} - {{$emp->name}}</option>
                         @endforeach
                     </select>
                 </div>
