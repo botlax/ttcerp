@@ -33,7 +33,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->call(function () {
 
-            $Settings = Settings::first();
+            $settings = Settings::first();
 
             $from = Carbon::today()->addDays($settings->hc);
             $to = Carbon::today()->addDays($settings->hc + 1);

@@ -148,7 +148,7 @@ Please see below employee documents that will expire in 30 days.
                         <table border="0" cellpadding="0" cellspacing="0" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box;">
                             <tr>
                                 <td style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box;">
-                                    <p>{{$vac->user()->first()->name}} - {{$vac->user()->first()->emp_id}}  (Departure: {{$vac->vac_from,->format('F d, Y g:i A')}})</p>
+                                    <p>{{$vac->user()->first()->name}} - {{$vac->user()->first()->emp_id}}  (Departure: {{$vac->vac_from->format('F d, Y g:i A')}})</p>
                                 </td>
                             </tr>
                         </table>
