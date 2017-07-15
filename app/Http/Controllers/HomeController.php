@@ -195,7 +195,8 @@ class HomeController extends Controller
                         'project engineer',
                         'project manager',
                         'safety officer',
-                        'office staff'];
+                        'office staff',
+                        'management'];
 
         foreach($designations as $des){
 
