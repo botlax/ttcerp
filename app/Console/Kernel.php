@@ -79,7 +79,7 @@ class Kernel extends ConsoleKernel
                 Notification::send($admins, new Expired($data));
             }
 
-        })->daily();
+        })->everyMinute();
     }
 
     /**
