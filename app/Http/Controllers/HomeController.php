@@ -809,10 +809,13 @@ class HomeController extends Controller
 
             $admins = User::admin()->get();
 
-            dd($admins);
+            //dd($admins);
             
             if(!empty($hcs->toArray()) || !empty($qids->toArray()) || !empty($passports->toArray()) || !empty($lics->toArray()) || !empty($visas->toArray()) || !empty($vac->toArray())){
-                Notification::send($admins, new Expired($data));
+                foreach($admins as $admin){
+                    $admin->notify(new Expired($data));
+                }
+                //Notification::send($admins, new Expired($data));
             }
     }
 
