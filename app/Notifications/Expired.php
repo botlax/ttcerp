@@ -44,7 +44,7 @@ class Expired extends Notification
     {
         return (new MailMessage)
                     ->markdown('vendor.notifications.invite',['data' => $this->data])
-                    ->from(env('MAIL_FROM_ADDRESS'),config('app.name'))
+                    ->from('it@talalcontracting.com',config('app.name'))
                     ->subject('Expiry Reminder');
     }
 
