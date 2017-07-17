@@ -51,6 +51,7 @@ Route::post('/hc/search', 'HomeController@hcSearch')->name('hc-search');
 Route::post('/license/search', 'HomeController@licSearch')->name('lic-search');
 
 Route::get('/logs', 'HomeController@logs');
+Route::get('/test', 'HomeController@test');
 Route::get('/settings', 'HomeController@settings');
 Route::post('/settings', 'HomeController@updateSettings')->name('settings');
 
