@@ -11,6 +11,7 @@ use App\Logs;
 use App\Settings;
 use App\Emergency;
 use App\Cancel;
+use App\Visa;
 use Carbon\Carbon;
 use Validator;
 use Illuminate\Support\Facades\Storage;
