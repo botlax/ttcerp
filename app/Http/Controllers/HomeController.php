@@ -808,6 +808,8 @@ class HomeController extends Controller
             $data['vac'] = $vac;
 
             $admins = User::admin()->get();
+
+            dd($admins);
             
             if(!empty($hcs->toArray()) || !empty($qids->toArray()) || !empty($passports->toArray()) || !empty($lics->toArray()) || !empty($visas->toArray()) || !empty($vac->toArray())){
                 Notification::send($admins, new Expired($data));
