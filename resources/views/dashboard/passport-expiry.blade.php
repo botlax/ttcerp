@@ -56,6 +56,7 @@ Passport Expiry | {{config('app.name')}}
 		{!! Form::close() !!}
 
 		<a href="{{url('passport-expiry')}}">Summary</a>
+		<a href="{{url('passport-expiry/expired')}}">Expired</a>
 		</div>
 
 		@if(!empty($emps->toArray()))

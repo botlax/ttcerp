@@ -56,6 +56,7 @@ Health Card Expiry | {{config('app.name')}}
 		{!! Form::close() !!}
 
 		<a href="{{url('hc-expiry')}}">Summary</a>
+		<a href="{{url('hc-expiry/expired')}}">Expired</a>
 		</div>
 
 		@if(!empty($emps->toArray()))

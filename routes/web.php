@@ -45,6 +45,11 @@ Route::get('/passport-expiry', 'HomeController@passportExpiry');
 Route::get('/hc-expiry', 'HomeController@hcExpiry');
 Route::get('/license-expiry', 'HomeController@licenseExpiry');
 
+Route::get('/qid-expiry/expired', 'HomeController@qidExpired');
+Route::get('/passport-expiry/expired', 'HomeController@passportExpired');
+Route::get('/hc-expiry/expired', 'HomeController@hcExpired');
+Route::get('/license-expiry/expired', 'HomeController@licenseExpired');
+
 Route::post('/qid/search', 'HomeController@qidSearch')->name('qid-search');
 Route::post('/passport/search', 'HomeController@passSearch')->name('pass-search');
 Route::post('/hc/search', 'HomeController@hcSearch')->name('hc-search');

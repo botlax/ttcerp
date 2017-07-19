@@ -5,7 +5,7 @@
 @endsection
 
 @section('title')
-Passport Expiry | {{config('app.name')}}
+Passport Expired | {{config('app.name')}}
 @endsection
 
 @section('header')
@@ -28,12 +28,12 @@ Passport Expiry | {{config('app.name')}}
 		id-card
 	@endslot
 	@slot('headerTitle')
-		Passport Expiry
+		Passport Expired
 	@endslot
 	@slot('content')
 		<div id="heading" class="nh ps">
 		<h4>TALAL TRADING and CONTRACTING COMPANY</h4>
-		<h5>LIST PASSPORTS EXPIRING BETWEEN<br/>{{$from->format('F d, Y')}} TO {{$to->format('F d, Y')}}</h5>
+		<h5>LIST OF EXPIRED PASSPORTS</h5>
 		</div>
 
 		<div id="tools" class="ph">
@@ -94,6 +94,7 @@ Passport Expiry | {{config('app.name')}}
 		@else
 		<p>Empty list.</p>
 		@endif
+
 
 	@endslot
 @endcomponent

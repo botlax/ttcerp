@@ -613,6 +613,15 @@ class HomeController extends Controller
         return view('dashboard.qid-expiry',compact('emps'));
     }
 
+    public function qidExpired(){
+
+        $date = Carbon::today();
+
+        $emps = User::sort()->where('qid_expiry','<',$date)->orderBy('qid_expiry','DESC')->get();
+
+        return view('dashboard.qid-expired',compact('emps'));
+    }
+
     public function passportExpiry(){
         $from = Carbon::today();
         $to = Carbon::today()->addMonth(1);
@@ -620,6 +629,14 @@ class HomeController extends Controller
         $emps = User::sort()->where('passport_expiry','>=',$from)->where('passport_expiry','<=',$to)->orderBy('passport_expiry','DESC')->get();
 
         return view('dashboard.passport-expiry',compact('emps'));
+    }
+
+    public function passportExpired(){
+        $date = Carbon::today();
+
+        $emps = User::sort()->where('passport_expiry','<',$date)->orderBy('passport_expiry','DESC')->get();
+
+        return view('dashboard.passport-expired',compact('emps'));
     }
 
     public function hcExpiry(){
@@ -631,6 +648,14 @@ class HomeController extends Controller
         return view('dashboard.hc-expiry',compact('emps'));
     }
 
+    public function hcExpired(){
+        $date = Carbon::today();
+
+        $emps = User::sort()->where('hc_expiry','<',$date)->orderBy('hc_expiry','DESC')->get();
+
+        return view('dashboard.hc-expired',compact('emps'));
+    }
+
     public function licenseExpiry(){
 
         $from = Carbon::today();
@@ -639,6 +664,15 @@ class HomeController extends Controller
         $lics = License::where('expiry_date','>=',$from)->where('expiry_date','<=',$to)->orderBy('expiry_date','DESC')->get();
 
         return view('dashboard.license-expiry',compact('lics'));
+    }
+
+    public function licenseExpired(){
+
+        $date = Carbon::today();
+
+        $lics = License::where('expiry_date','<',$date)->orderBy('expiry_date','DESC')->get();
+
+        return view('dashboard.license-expired',compact('lics'));
     }
 
     public function qidSearch(Request $request){

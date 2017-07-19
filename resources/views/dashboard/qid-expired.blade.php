@@ -5,7 +5,7 @@
 @endsection
 
 @section('title')
-Passport Expiry | {{config('app.name')}}
+QID Expired | {{config('app.name')}}
 @endsection
 
 @section('header')
@@ -17,7 +17,7 @@ Passport Expiry | {{config('app.name')}}
 @section('content')
 
 @component('dashboard.partials.nav-panel')
-	@slot('passClass')
+	@slot('qidClass')
 		active
 	@endslot
 @endcomponent
@@ -25,19 +25,19 @@ Passport Expiry | {{config('app.name')}}
 
 @component('dashboard.partials.content')
 	@slot('headerFA')
-		id-card
+		id-badge
 	@endslot
 	@slot('headerTitle')
-		Passport Expiry
+		QID Expired
 	@endslot
 	@slot('content')
 		<div id="heading" class="nh ps">
 		<h4>TALAL TRADING and CONTRACTING COMPANY</h4>
-		<h5>LIST PASSPORTS EXPIRING BETWEEN<br/>{{$from->format('F d, Y')}} TO {{$to->format('F d, Y')}}</h5>
+		<h5>LIST OF EXPIRED QIDs</h5>
 		</div>
 
 		<div id="tools" class="ph">
-		{!! Form::open(['route' => 'pass-search','id' => 'searchForm']) !!}
+		{!! Form::open(['route' => 'qid-search','id' => 'searchForm']) !!}
 			{!! Form::label('from','From') !!}
 			{!! Form::text('from') !!}
 			@if ($errors->has('from'))
@@ -55,8 +55,8 @@ Passport Expiry | {{config('app.name')}}
 			{!! Form::submit('search') !!}
 		{!! Form::close() !!}
 
-		<a href="{{url('passport-expiry')}}">Summary</a>
-		<a href="{{url('passport-expiry/expired')}}">Expired</a>
+		<a href="{{url('qid-expiry')}}">Summary</a>
+		<a href="{{url('qid-expiry/expired')}}">Expired</a>
 		</div>
 
 		@if(!empty($emps->toArray()))
@@ -68,10 +68,10 @@ Passport Expiry | {{config('app.name')}}
 					    <th rowspan="2">Name</th>
 					    <th rowspan="2">Nationality</th>
 					    <th rowspan="2">Join Date</th>
-					    <th colspan="2">Passport</th>
+					    <th colspan="2">Residency Permit</th>
 	  				</tr>
 	  				<tr>
-					    <th>Passport No.</th>
+					    <th>QID</th>
 					    <th>Exp Date</th>
 	  				</tr>
 				</thead>
@@ -84,8 +84,8 @@ Passport Expiry | {{config('app.name')}}
 						<td><a href="{{url('employees/'.$emp->id)}}">{{$emp->name}}</a></td>
 						<td>{{$emp->nationality?$emp->nationality:'--'}}</td>
 						<td>{{$emp->joined?$emp->joined->format('d/m/Y'):'--'}}</td>
-						<td>{{$emp->passport}}</td>
-						<td>{{$emp->passport_expiry->format('d/m/Y')}}</td>
+						<td>{{$emp->qid}}</td>
+						<td>{{$emp->qid_expiry->format('d/m/Y')}}</td>
 					</tr>
 					<?php $x++; ?>
 					@endforeach

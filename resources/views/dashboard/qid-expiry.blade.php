@@ -56,6 +56,7 @@ QID Expiry | {{config('app.name')}}
 		{!! Form::close() !!}
 
 		<a href="{{url('qid-expiry')}}">Summary</a>
+		<a href="{{url('qid-expiry/expired')}}">Expired</a>
 		</div>
 
 		@if(!empty($emps->toArray()))

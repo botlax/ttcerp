@@ -5,7 +5,7 @@
 @endsection
 
 @section('title')
-Passport Expiry | {{config('app.name')}}
+Health Card Expired | {{config('app.name')}}
 @endsection
 
 @section('header')
@@ -17,7 +17,7 @@ Passport Expiry | {{config('app.name')}}
 @section('content')
 
 @component('dashboard.partials.nav-panel')
-	@slot('passClass')
+	@slot('hcClass')
 		active
 	@endslot
 @endcomponent
@@ -25,19 +25,19 @@ Passport Expiry | {{config('app.name')}}
 
 @component('dashboard.partials.content')
 	@slot('headerFA')
-		id-card
+		medkit
 	@endslot
 	@slot('headerTitle')
-		Passport Expiry
+		Health Card Expired
 	@endslot
 	@slot('content')
 		<div id="heading" class="nh ps">
 		<h4>TALAL TRADING and CONTRACTING COMPANY</h4>
-		<h5>LIST PASSPORTS EXPIRING BETWEEN<br/>{{$from->format('F d, Y')}} TO {{$to->format('F d, Y')}}</h5>
+		<h5>LIST OF EXPIRED HEALTH CARDS</h5>
 		</div>
 
 		<div id="tools" class="ph">
-		{!! Form::open(['route' => 'pass-search','id' => 'searchForm']) !!}
+		{!! Form::open(['route' => 'hc-search','id' => 'searchForm']) !!}
 			{!! Form::label('from','From') !!}
 			{!! Form::text('from') !!}
 			@if ($errors->has('from'))
@@ -55,12 +55,12 @@ Passport Expiry | {{config('app.name')}}
 			{!! Form::submit('search') !!}
 		{!! Form::close() !!}
 
-		<a href="{{url('passport-expiry')}}">Summary</a>
-		<a href="{{url('passport-expiry/expired')}}">Expired</a>
+		<a href="{{url('hc-expiry')}}">Summary</a>
+		<a href="{{url('hc-expiry/expired')}}">Expired</a>
 		</div>
 
 		@if(!empty($emps->toArray()))
-			<table id="employees" class="table7">
+			<table id="employees" class="table8">
 				<thead>
 	  				<tr>
 					    <th rowspan="2">SN</th>
@@ -68,10 +68,11 @@ Passport Expiry | {{config('app.name')}}
 					    <th rowspan="2">Name</th>
 					    <th rowspan="2">Nationality</th>
 					    <th rowspan="2">Join Date</th>
-					    <th colspan="2">Passport</th>
+					    <th rowspan="2">QID</th>
+					    <th colspan="2">Health Card</th>
 	  				</tr>
 	  				<tr>
-					    <th>Passport No.</th>
+					    <th>Health Card No.</th>
 					    <th>Exp Date</th>
 	  				</tr>
 				</thead>
@@ -84,8 +85,9 @@ Passport Expiry | {{config('app.name')}}
 						<td><a href="{{url('employees/'.$emp->id)}}">{{$emp->name}}</a></td>
 						<td>{{$emp->nationality?$emp->nationality:'--'}}</td>
 						<td>{{$emp->joined?$emp->joined->format('d/m/Y'):'--'}}</td>
-						<td>{{$emp->passport}}</td>
-						<td>{{$emp->passport_expiry->format('d/m/Y')}}</td>
+						<td>{{$emp->qid?$emp->qid:'--'}}</td>
+						<td>{{$emp->health_card}}</td>
+						<td>{{$emp->hc_expiry->format('d/m/Y')}}</td>
 					</tr>
 					<?php $x++; ?>
 					@endforeach
@@ -94,6 +96,7 @@ Passport Expiry | {{config('app.name')}}
 		@else
 		<p>Empty list.</p>
 		@endif
+
 
 	@endslot
 @endcomponent

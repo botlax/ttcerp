@@ -52,6 +52,7 @@ License Expiry | {{config('app.name')}}
 		{!! Form::close() !!}
 
 		<a href="{{url('license-expiry')}}">Summary</a>
+		<a href="{{url('license-expiry/expired')}}">Expired</a>
 		</div>
 
 		@if(!empty($lics->toArray()))
