@@ -116,7 +116,7 @@ Employees | {{config('app.name')}}
 					<tr>
 						<td>{{$x}}</td>
 						<td>{{$vac->user()->first()->emp_id}}</td>
-						<td><a href="{{url('employees/'.$emp->id)}}">{{$vac->user()->first()->name}}</a></td>
+						<td><a href="{{url('employees/'.$vac->user()->first()->id)}}">{{$vac->user()->first()->name}}</a></td>
 						<td>{{$vac->user()->first()->nationality}}</td>
 						<td>{{$vac->user()->first()->joined?$vac->user()->first()->joined->format('d/m/Y'):'--'}}</td>
 						<td>{{$vac->user()->first()->dob?$vac->user()->first()->dob->format('d/m/Y'):'--'}}</td>
