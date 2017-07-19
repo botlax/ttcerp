@@ -355,10 +355,10 @@ class HomeController extends Controller
             $basic = $emp->salary()->first()->basic;
             $margin = new Carbon('2005-1-1');
             if($emp->joined < $margin){
-                $gratuity = ($margin->diffInYears(Carbon::today()))*$basic;
+                $gratuity = ($margin->diffInYears(Carbon::today()))*(($basic/30)*21);
             }
             else{
-                $gratuity = ($emp->joined->diffInYears(Carbon::today()))*$basic;
+                $gratuity = ($emp->joined->diffInYears(Carbon::today()))*(($basic/30)*21);
             }
         }else{
             $gratuity = null;
@@ -767,7 +767,7 @@ class HomeController extends Controller
         return redirect()->back();
     }
 
-    
+   
 
     public function getNat(){
         return ["" => "--Select Nationality--",

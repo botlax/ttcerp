@@ -693,30 +693,19 @@
 								{!! Form::hidden('field','cv') !!}
 					            {!! Form::submit('delete',['class' => 'file-delete']) !!}
 							{!! Form::close() !!}
-							{!! Form::open(['route' => ['file-update',$files->id], 'files' => true, 'class' => 'file-form']) !!}
-								{!! Form::hidden('field','cv') !!}
-								{!! Form::label('cv','Upload CV',['class' => 'upload-label']) !!}
-								{!! Form::file('cv',['class'=>'inputfile']) !!}
-								@if ($errors->has('cv'))
-					                <span class="error">
-					                    <strong>{{ $errors->first('cv') }}</strong>
-					                </span>
-					            @endif
-					            {!! Form::submit('upload') !!}
-							{!! Form::close() !!}
-							@else
-							{!! Form::open(['route' => ['file-update',$files->id], 'files' => true, 'class' => 'file-form']) !!}
-								{!! Form::hidden('field','cv') !!}
-								{!! Form::label('cv','Upload CV',['class' => 'upload-label']) !!}
-								{!! Form::file('cv',['class'=>'inputfile']) !!}
-								@if ($errors->has('cv'))
-					                <span class="error">
-					                    <strong>{{ $errors->first('cv') }}</strong>
-					                </span>
-					            @endif
-					            {!! Form::submit('upload') !!}
-							{!! Form::close() !!}
+							
 							@endif
+							{!! Form::open(['route' => ['file-update',$files->id], 'files' => true, 'class' => 'file-form']) !!}
+								{!! Form::hidden('field','cv') !!}
+								{!! Form::label('cv','Upload CV',['class' => 'upload-label']) !!}
+								{!! Form::file('cv',['class'=>'inputfile']) !!}
+								@if ($errors->has('cv'))
+					                <span class="error">
+					                    <strong>{{ $errors->first('cv') }}</strong>
+					                </span>
+					            @endif
+					            {!! Form::submit('upload') !!}
+					        {!! Form::close() !!}
 						</li>
 						<li>Passport: 
 							@if($files->passport)
@@ -725,30 +714,18 @@
 								{!! Form::hidden('field','passport') !!}
 					            {!! Form::submit('delete',['class' => 'file-delete']) !!}
 							{!! Form::close() !!}
-							{!! Form::open(['route' => ['file-update',$files->id], 'files' => true, 'class' => 'file-form']) !!}
-								{!! Form::hidden('field','passport') !!}
-								{!! Form::label('passport','Upload Passport',['class' => 'upload-label']) !!}
-								{!! Form::file('passport',['class'=>'inputfile']) !!}
-								@if ($errors->has('passport'))
-					                <span class="error">
-					                    <strong>{{ $errors->first('passport') }}</strong>
-					                </span>
-					            @endif
-					            {!! Form::submit('upload') !!}
-							{!! Form::close() !!}
-							@else
-							{!! Form::open(['route' => ['file-update',$files->id], 'files' => true, 'class' => 'file-form']) !!}
-								{!! Form::hidden('field','passport') !!}
-								{!! Form::label('passport','Upload Passport',['class' => 'upload-label']) !!}
-								{!! Form::file('passport',['class'=>'inputfile']) !!}
-								@if ($errors->has('passport'))
-					                <span class="error">
-					                    <strong>{{ $errors->first('passport') }}</strong>
-					                </span>
-					            @endif
-					            {!! Form::submit('upload') !!}
-							{!! Form::close() !!}
 							@endif
+							{!! Form::open(['route' => ['file-update',$files->id], 'files' => true, 'class' => 'file-form']) !!}
+								{!! Form::hidden('field','passport') !!}
+								{!! Form::label('passport1','Upload Passport',['class' => 'upload-label']) !!}
+								{!! Form::file('passport1',['class'=>'inputfile']) !!}
+								@if ($errors->has('passport'))
+					                <span class="error">
+					                    <strong>{{ $errors->first('passport') }}</strong>
+					                </span>
+					            @endif
+					            {!! Form::submit('upload') !!}
+							{!! Form::close() !!}
 						</li>
 						<li>QID: 
 							@if($files->qid)
@@ -757,30 +734,19 @@
 								{!! Form::hidden('field','qid') !!}
 					            {!! Form::submit('delete',['class' => 'file-delete']) !!}
 							{!! Form::close() !!}
-							{!! Form::open(['route' => ['file-update',$files->id], 'files' => true, 'class' => 'file-form']) !!}
-								{!! Form::hidden('field','qid') !!}
-								{!! Form::label('qid','Upload QID',['class' => 'upload-label']) !!}
-								{!! Form::file('qid',['class'=>'inputfile']) !!}
-								@if ($errors->has('qid'))
-					                <span class="error">
-					                    <strong>{{ $errors->first('qid') }}</strong>
-					                </span>
-					            @endif
-					            {!! Form::submit('upload') !!}
-							{!! Form::close() !!}
-							@else
-							{!! Form::open(['route' => ['file-update',$files->id], 'files' => true, 'class' => 'file-form']) !!}
-								{!! Form::hidden('field','qid') !!}
-								{!! Form::label('qid','Upload QID',['class' => 'upload-label']) !!}
-								{!! Form::file('qid',['class'=>'inputfile']) !!}
-								@if ($errors->has('qid'))
-					                <span class="error">
-					                    <strong>{{ $errors->first('qid') }}</strong>
-					                </span>
-					            @endif
-					            {!! Form::submit('upload') !!}
-							{!! Form::close() !!}
+							
 							@endif
+							{!! Form::open(['route' => ['file-update',$files->id], 'files' => true, 'class' => 'file-form']) !!}
+								{!! Form::hidden('field','qid') !!}
+								{!! Form::label('qid1','Upload QID',['class' => 'upload-label']) !!}
+								{!! Form::file('qid1',['class'=>'inputfile']) !!}
+								@if ($errors->has('qid'))
+					                <span class="error">
+					                    <strong>{{ $errors->first('qid') }}</strong>
+					                </span>
+					            @endif
+					            {!! Form::submit('upload') !!}
+							{!! Form::close() !!}
 						</li>
 						<li>Contract: 
 							@if($files->contract)
@@ -789,30 +755,20 @@
 								{!! Form::hidden('field','contract') !!}
 					            {!! Form::submit('delete',['class' => 'file-delete']) !!}
 							{!! Form::close() !!}
-							{!! Form::open(['route' => ['file-update',$files->id], 'files' => true, 'class' => 'file-form']) !!}
-								{!! Form::hidden('field','contract') !!}
-								{!! Form::label('contract','Upload Contract',['class' => 'upload-label']) !!}
-								{!! Form::file('contract',['class'=>'inputfile']) !!}
-								@if ($errors->has('contract'))
-					                <span class="error">
-					                    <strong>{{ $errors->first('contract') }}</strong>
-					                </span>
-					            @endif
-					            {!! Form::submit('upload') !!}
-							{!! Form::close() !!}
-							@else
-							{!! Form::open(['route' => ['file-update',$files->id], 'files' => true, 'class' => 'file-form']) !!}
-								{!! Form::hidden('field','contract') !!}
-								{!! Form::label('contract','Upload Contract',['class' => 'upload-label']) !!}
-								{!! Form::file('contract',['class'=>'inputfile']) !!}
-								@if ($errors->has('contract'))
-					                <span class="error">
-					                    <strong>{{ $errors->first('contract') }}</strong>
-					                </span>
-					            @endif
-					            {!! Form::submit('upload') !!}
-							{!! Form::close() !!}
+							
 							@endif
+							{!! Form::open(['route' => ['file-update',$files->id], 'files' => true, 'class' => 'file-form']) !!}
+								{!! Form::hidden('field','contract') !!}
+								{!! Form::label('contract','Upload Contract',['class' => 'upload-label']) !!}
+								{!! Form::file('contract',['class'=>'inputfile']) !!}
+								@if ($errors->has('contract'))
+					                <span class="error">
+					                    <strong>{{ $errors->first('contract') }}</strong>
+					                </span>
+					            @endif
+					            {!! Form::submit('upload') !!}
+							{!! Form::close() !!}
+							
 						</li>
 						<li>Visa: 
 							@if($files->visa)
@@ -821,30 +777,18 @@
 								{!! Form::hidden('field','visa') !!}
 					            {!! Form::submit('delete',['class' => 'file-delete']) !!}
 							{!! Form::close() !!}
-							{!! Form::open(['route' => ['file-update',$files->id], 'files' => true, 'class' => 'file-form']) !!}
-								{!! Form::hidden('field','visa') !!}
-								{!! Form::label('visa','Upload Visa',['class' => 'upload-label']) !!}
-								{!! Form::file('visa',['class'=>'inputfile']) !!}
-								@if ($errors->has('visa'))
-					                <span class="error">
-					                    <strong>{{ $errors->first('visa') }}</strong>
-					                </span>
-					            @endif
-					            {!! Form::submit('upload') !!}
-							{!! Form::close() !!}
-							@else
-							{!! Form::open(['route' => ['file-update',$files->id], 'files' => true, 'class' => 'file-form']) !!}
-								{!! Form::hidden('field','visa') !!}
-								{!! Form::label('visa','Upload Visa',['class' => 'upload-label']) !!}
-								{!! Form::file('visa',['class'=>'inputfile']) !!}
-								@if ($errors->has('visa'))
-					                <span class="error">
-					                    <strong>{{ $errors->first('visa') }}</strong>
-					                </span>
-					            @endif
-					            {!! Form::submit('upload') !!}
-							{!! Form::close() !!}
 							@endif
+							{!! Form::open(['route' => ['file-update',$files->id], 'files' => true, 'class' => 'file-form']) !!}
+								{!! Form::hidden('field','visa') !!}
+								{!! Form::label('visa','Upload Visa',['class' => 'upload-label']) !!}
+								{!! Form::file('visa',['class'=>'inputfile']) !!}
+								@if ($errors->has('visa'))
+					                <span class="error">
+					                    <strong>{{ $errors->first('visa') }}</strong>
+					                </span>
+					            @endif
+					            {!! Form::submit('upload') !!}
+							{!! Form::close() !!}
 						</li>
 						<li>Blood Group: 
 							@if($files->blood_group)
@@ -853,30 +797,19 @@
 								{!! Form::hidden('field','blood_group') !!}
 					            {!! Form::submit('delete',['class' => 'file-delete']) !!}
 							{!! Form::close() !!}
-							{!! Form::open(['route' => ['file-update',$files->id], 'files' => true, 'class' => 'file-form']) !!}
-								{!! Form::hidden('field','blood_group') !!}
-								{!! Form::label('blood_group','Upload Blood Group',['class' => 'upload-label']) !!}
-								{!! Form::file('blood_group',['class'=>'inputfile']) !!}
-								@if ($errors->has('blood_group'))
-					                <span class="error">
-					                    <strong>{{ $errors->first('blood_group') }}</strong>
-					                </span>
-					            @endif
-					            {!! Form::submit('upload') !!}
-							{!! Form::close() !!}
-							@else
-							{!! Form::open(['route' => ['file-update',$files->id], 'files' => true, 'class' => 'file-form']) !!}
-								{!! Form::hidden('field','blood_group') !!}
-								{!! Form::label('blood_group','Upload Blood Group',['class' => 'upload-label']) !!}
-								{!! Form::file('blood_group',['class'=>'inputfile']) !!}
-								@if ($errors->has('blood_group'))
-					                <span class="error">
-					                    <strong>{{ $errors->first('blood_group') }}</strong>
-					                </span>
-					            @endif
-					            {!! Form::submit('upload') !!}
-							{!! Form::close() !!}
 							@endif
+							{!! Form::open(['route' => ['file-update',$files->id], 'files' => true, 'class' => 'file-form']) !!}
+								{!! Form::hidden('field','blood_group') !!}
+								{!! Form::label('blood_group','Upload Blood Group',['class' => 'upload-label']) !!}
+								{!! Form::file('blood_group',['class'=>'inputfile']) !!}
+								@if ($errors->has('blood_group'))
+					                <span class="error">
+					                    <strong>{{ $errors->first('blood_group') }}</strong>
+					                </span>
+					            @endif
+					            {!! Form::submit('upload') !!}
+							{!! Form::close() !!}
+							
 						</li>
 						<li>Job Offer:
 							@if($files->job_offer)
@@ -885,30 +818,19 @@
 								{!! Form::hidden('field','job_offer') !!}
 					            {!! Form::submit('delete',['class' => 'file-delete']) !!}
 							{!! Form::close() !!}
-							{!! Form::open(['route' => ['file-update',$files->id], 'files' => true, 'class' => 'file-form']) !!}
-								{!! Form::hidden('field','job_offer') !!}
-								{!! Form::label('job_offer','Upload Job Offer',['class' => 'upload-label']) !!}
-								{!! Form::file('job_offer',['class'=>'inputfile']) !!}
-								@if ($errors->has('job_offer'))
-					                <span class="error">
-					                    <strong>{{ $errors->first('job_offer') }}</strong>
-					                </span>
-					            @endif
-					            {!! Form::submit('upload') !!}
-							{!! Form::close() !!}
-							@else
-							{!! Form::open(['route' => ['file-update',$files->id], 'files' => true, 'class' => 'file-form']) !!}
-								{!! Form::hidden('field','job_offer') !!}
-								{!! Form::label('job_offer','Upload Job Offer',['class' => 'upload-label']) !!}
-								{!! Form::file('job_offer',['class'=>'inputfile']) !!}
-								@if ($errors->has('job_offer'))
-					                <span class="error">
-					                    <strong>{{ $errors->first('job_offer') }}</strong>
-					                </span>
-					            @endif
-					            {!! Form::submit('upload') !!}
-							{!! Form::close() !!}
 							@endif
+							{!! Form::open(['route' => ['file-update',$files->id], 'files' => true, 'class' => 'file-form']) !!}
+								{!! Form::hidden('field','job_offer') !!}
+								{!! Form::label('job_offer','Upload Job Offer',['class' => 'upload-label']) !!}
+								{!! Form::file('job_offer',['class'=>'inputfile']) !!}
+								@if ($errors->has('job_offer'))
+					                <span class="error">
+					                    <strong>{{ $errors->first('job_offer') }}</strong>
+					                </span>
+					            @endif
+					            {!! Form::submit('upload') !!}
+							{!! Form::close() !!}
+							
 						</li>
 					</ul>
 				@else
@@ -924,8 +846,8 @@
 			            @endif
 					</div>
 					<div>
-						{!! Form::label('passport','Upload Passport',['class' => 'upload-label']) !!}
-						{!! Form::file('passport',['class'=>'inputfile']) !!}
+						{!! Form::label('passport1','Upload Passport',['class' => 'upload-label']) !!}
+						{!! Form::file('passport1',['class'=>'inputfile']) !!}
 						@if ($errors->has('passport'))
 			                <span class="error">
 			                    <strong>{{ $errors->first('passport') }}</strong>
@@ -933,8 +855,8 @@
 			            @endif
 					</div>
 					<div>
-						{!! Form::label('qid','Upload QID',['class' => 'upload-label']) !!}
-						{!! Form::file('qid',['class'=>'inputfile']) !!}
+						{!! Form::label('qid1','Upload QID',['class' => 'upload-label']) !!}
+						{!! Form::file('qid1',['class'=>'inputfile']) !!}
 						@if ($errors->has('qid'))
 			                <span class="error">
 			                    <strong>{{ $errors->first('qid') }}</strong>
@@ -1092,8 +1014,8 @@
 						{!! Form::close() !!}
 						<li>From: {{$vacation['current']->vac_from->format('F d, Y')}}</li>
 						<li>To: {{$vacation['current']->vac_to->format('F d, Y')}}</li>
-						<li>Departure: {{$vacation['current']->vac_to_time->format('F d, Y g:i a')}}</li>
-						<li>Arrival: {{$vacation['current']->vac_from_time->format('F d, Y g:i a')}}</li>
+						<li>Departure: {{$vacation['current']->vac_to_time?$vacation['current']->vac_to_time->format('F d, Y g:i a'):''}}</li>
+						<li>Arrival: {{$vacation['current']->vac_from_time?$vacation['current']->vac_from_time->format('F d, Y g:i a'):''}}</li>
 						<li>Airlines: {{$vacation['current']->airlines}}</li>
 						<li>Ticket: <a href="{{$vacation['current']->ticket?$vacation['current']->ticket:'#'}}">Ticket <i class="fa fa-download"></i></a></li>
 						<li>Exit Permit: <a href="{{$vacation['current']->exit_permit?$vacation['current']->exit_permit:'#'}}">Exit Permit <i class="fa fa-download"></i></a></li>
@@ -1211,8 +1133,8 @@
 						{!! Form::close() !!}
 						<li>From: {{$vacation['upcoming']->vac_from->format('F d, Y')}}</li>
 						<li>To: {{$vacation['upcoming']->vac_to->format('F d, Y')}}</li>
-						<li>Departure: {{$vacation['upcoming']->vac_to_time->format('F d, Y g:i a')}}</li>
-						<li>Arrival: {{$vacation['upcoming']->vac_from_time->format('F d, Y g:i a')}}</li>
+						<li>Departure: {{$vacation['upcoming']->vac_to_time?$vacation['upcoming']->vac_to_time->format('F d, Y g:i a'):''}}</li>
+						<li>Arrival: {{$vacation['upcoming']->vac_from_time?$vacation['upcoming']->vac_from_time->format('F d, Y g:i a'):''}}</li>
 						<li>Airlines: {{$vacation['upcoming']->airlines}}</li>
 						<li>Ticket: <a href="{{$vacation['upcoming']->ticket?$vacation['upcoming']->ticket:'#'}}">Ticket <i class="fa fa-download"></i></a></li>
 						<li>Exit Permit: <a href="{{$vacation['upcoming']->exit_permit?$vacation['upcoming']->exit_permit:'#'}}">Exit Permit <i class="fa fa-download"></i></a></li>
@@ -1331,8 +1253,8 @@
 						{!! Form::close() !!}
 						<li>From: {{$vac->vac_from->format('F d, Y')}}</li>
 						<li>To: {{$vac->vac_to->format('F d, Y')}}</li>
-						<li>Departure: {{$vac->vac_to_time->format('F d, Y g:i a')}}</li>
-						<li>Arrival: {{$vac->vac_from_time->format('F d, Y g:i a')}}</li>
+						<li>Departure: {{$vac->vac_to_time?$vac->vac_to_time->format('F d, Y g:i a'):''}}</li>
+						<li>Arrival: {{$vac->vac_from_time?$vac->vac_from_time->format('F d, Y g:i a'):''}}</li>
 						<li>Airlines: {{$vac->airlines}}</li>
 						<li>Ticket: <a href="{{$vac->ticket?$vac->ticket:'#'}}">Ticket <i class="fa fa-download"></i></a></li>
 						<li>Exit Permit: <a href="{{$vac->exit_permit?$vac->exit_permit:'#'}}">Exit Permit <i class="fa fa-download"></i></a></li>
@@ -2377,7 +2299,7 @@
 	    	headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
 	  	});
 
-	  	$('.delete-entry').click(function(e){
+	  	$('.delete-entry,.file-delete').click(function(e){
 	  		e.preventDefault();
 	  		if(confirm("Are you sure you want to delete this entry?")){
 	  			$(this).parent().submit();

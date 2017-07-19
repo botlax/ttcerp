@@ -61,6 +61,8 @@ class FileController extends Controller
         $errorMessages['visa.mimes'] = $request->file('visa')?$request->file('visa')->getClientOriginalName().' invalid file type. Accepted file type:pdf,jpg,jpeg,png,gif':'';
         $errorMessages['passport.mimes'] = $request->file('passport')?$request->file('passport')->getClientOriginalName().' invalid file type. Accepted file type:pdf,jpg,jpeg,png,gif':'';
         $errorMessages['qid.mimes'] = $request->file('qid')?$request->file('qid')->getClientOriginalName().' invalid file type. Accepted file type:pdf,jpg,jpeg,png,gif':'';
+        $errorMessages['passport1.mimes'] = $request->file('passport1')?$request->file('passport1')->getClientOriginalName().' invalid file type. Accepted file type:pdf,jpg,jpeg,png,gif':'';
+        $errorMessages['qid1.mimes'] = $request->file('qid1')?$request->file('qid1')->getClientOriginalName().' invalid file type. Accepted file type:pdf,jpg,jpeg,png,gif':'';
         $errorMessages['job_offer.mimes'] = $request->file('job_offer')?$request->file('job_offer')->getClientOriginalName().' invalid file type. Accepted file type:doc,docx,xls,xlsx,pdf,jpg,jpeg,png,gif':'';
         $errorMessages['blood_group.mimes'] = $request->file('blood_group')?$request->file('blood_group')->getClientOriginalName().' invalid file type. Accepted file type:pdf,jpg,jpeg,png,gif':'';
 
@@ -70,6 +72,8 @@ class FileController extends Controller
         $errorMessages['visa.max'] = 'Max file size exceeded:2mb';
         $errorMessages['passport.max'] = 'Max file size exceeded:2mb';
         $errorMessages['qid.max'] = 'Max file size exceeded:2mb';
+        $errorMessages['passport1.max'] = 'Max file size exceeded:2mb';
+        $errorMessages['qid1.max'] = 'Max file size exceeded:2mb';
         $errorMessages['job_offer.max'] = 'Max file size exceeded:2mb';
         $errorMessages['blood_group.max'] = 'Max file size exceeded:2mb';
 
@@ -80,6 +84,8 @@ class FileController extends Controller
             'visa' => 'mimes:pdf,jpg,jpeg,png,gif|max:2048',
             'passport' => 'mimes:pdf,jpg,jpeg,png,gif|max:2048',
             'qid' => 'mimes:pdf,jpg,jpeg,png,gif|max:2048',
+            'passport1' => 'mimes:pdf,jpg,jpeg,png,gif|max:2048',
+            'qid1' => 'mimes:pdf,jpg,jpeg,png,gif|max:2048',
             'job_offer' => 'mimes:doc,docx,xls,xlsx,pdf,jpg,jpeg,png,gif|max:2048',
             'blood_group' => 'mimes:pdf,jpg,jpeg,png,gif|max:2048',
         ],$errorMessages);
@@ -87,7 +93,7 @@ class FileController extends Controller
         $file = New Files(['emp_id' => $id]);
 
         foreach($request->file() as $field => $f){
-            $f->storeAs('public/files/'.$user->emp_id.'/',$field.'.'.$f->getClientOriginalExtension());
+            $f->storeAs('public/files/'.$user->emp_id.'/',str_replace('1', '', $field).'.'.$f->getClientOriginalExtension());
             switch ($field) {
                 case 'cv':
                     $file->cv = url('storage/files/').'/'.$user->emp_id.'/'.$field.'.'.$f->getClientOriginalExtension();
@@ -106,6 +112,12 @@ class FileController extends Controller
                     break;
                 case 'qid':
                     $file->qid = url('storage/files/').'/'.$user->emp_id.'/'.$field.'.'.$f->getClientOriginalExtension();
+                    break;
+                case 'passport1':
+                    $file->passport = url('storage/files/').'/'.$user->emp_id.'/'.str_replace('1', '', $field).'.'.$f->getClientOriginalExtension();
+                    break;
+                case 'qid1':
+                    $file->qid = url('storage/files/').'/'.$user->emp_id.'/'.str_replace('1', '', $field).'.'.$f->getClientOriginalExtension();
                     break;
                 case 'job_offer':
                     $file->job_offer = url('storage/files/').'/'.$user->emp_id.'/'.$field.'.'.$f->getClientOriginalExtension();
@@ -161,6 +173,8 @@ class FileController extends Controller
         $errorMessages['visa.mimes'] = $request->file('visa')?$request->file('visa')->getClientOriginalName().' invalid file type. Accepted file type:pdf,jpg,jpeg,png,gif':'';
         $errorMessages['passport.mimes'] = $request->file('passport')?$request->file('passport')->getClientOriginalName().' invalid file type. Accepted file type:pdf,jpg,jpeg,png,gif':'';
         $errorMessages['qid.mimes'] = $request->file('qid')?$request->file('qid')->getClientOriginalName().' invalid file type. Accepted file type:pdf,jpg,jpeg,png,gif':'';
+        $errorMessages['passport1.mimes'] = $request->file('passport1')?$request->file('passport1')->getClientOriginalName().' invalid file type. Accepted file type:pdf,jpg,jpeg,png,gif':'';
+        $errorMessages['qid1.mimes'] = $request->file('qid1')?$request->file('qid1')->getClientOriginalName().' invalid file type. Accepted file type:pdf,jpg,jpeg,png,gif':'';
         $errorMessages['job_offer.mimes'] = $request->file('job_offer')?$request->file('job_offer')->getClientOriginalName().' invalid file type. Accepted file type:doc,docx,xls,xlsx,pdf,jpg,jpeg,png,gif':'';
         $errorMessages['blood_group.mimes'] = $request->file('blood_group')?$request->file('blood_group')->getClientOriginalName().' invalid file type. Accepted file type:pdf,jpg,jpeg,png,gif':'';
 
@@ -170,6 +184,8 @@ class FileController extends Controller
         $errorMessages['visa.max'] = 'Max file size exceeded:2mb';
         $errorMessages['passport.max'] = 'Max file size exceeded:2mb';
         $errorMessages['qid.max'] = 'Max file size exceeded:2mb';
+        $errorMessages['passport1.max'] = 'Max file size exceeded:2mb';
+        $errorMessages['qid1.max'] = 'Max file size exceeded:2mb';
         $errorMessages['job_offer.max'] = 'Max file size exceeded:2mb';
         $errorMessages['blood_group.max'] = 'Max file size exceeded:2mb';
 
@@ -180,6 +196,8 @@ class FileController extends Controller
             'visa' => 'mimes:pdf,jpg,jpeg,png,gif|max:2048',
             'passport' => 'mimes:pdf,jpg,jpeg,png,gif|max:2048',
             'qid' => 'mimes:pdf,jpg,jpeg,png,gif|max:2048',
+            'passport1' => 'mimes:pdf,jpg,jpeg,png,gif|max:2048',
+            'qid1' => 'mimes:pdf,jpg,jpeg,png,gif|max:2048',
             'job_offer' => 'mimes:doc,docx,xls,xlsx,pdf,jpg,jpeg,png,gif|max:2048',
             'blood_group' => 'mimes:pdf,jpg,jpeg,png,gif|max:2048',
         ],$errorMessages);
@@ -192,7 +210,7 @@ class FileController extends Controller
         }
       
         foreach($request->file() as $field => $f){
-            $f->storeAs('public/files/'.$user->emp_id.'/',$field.'.'.$f->getClientOriginalExtension());
+            $f->storeAs('public/files/'.$user->emp_id.'/',str_replace('1', '', $field).'.'.$f->getClientOriginalExtension());
             switch ($field) {
                 case 'cv':
                     $file->cv = url('storage/files/').'/'.$user->emp_id.'/'.$field.'.'.$f->getClientOriginalExtension();
@@ -211,6 +229,12 @@ class FileController extends Controller
                     break;
                 case 'qid':
                     $file->qid = url('storage/files/').'/'.$user->emp_id.'/'.$field.'.'.$f->getClientOriginalExtension();
+                    break;
+                case 'passport1':
+                    $file->passport = url('storage/files/').'/'.$user->emp_id.'/'.str_replace('1', '', $field).'.'.$f->getClientOriginalExtension();
+                    break;
+                case 'qid1':
+                    $file->qid = url('storage/files/').'/'.$user->emp_id.'/'.str_replace('1', '', $field).'.'.$f->getClientOriginalExtension();
                     break;
                 case 'job_offer':
                     $file->job_offer = url('storage/files/').'/'.$user->emp_id.'/'.$field.'.'.$f->getClientOriginalExtension();
