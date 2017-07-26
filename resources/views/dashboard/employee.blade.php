@@ -580,25 +580,8 @@
 	                    <strong>{{ $errors->first('degree') }}</strong>
 	                </span>
 	            @endif
-				{!! Form::submit('Add') !!}
-				<button class="cancel"><i class="fa fa-remove"></i></button>
-			{!! Form::close() !!}
-			</div>
-		<!--============Grad Date===========-->
-			<div class="separate">
-			<h4>Graduation Date</h4>
-			@if($emp->grad_date)
-			<p>{{$emp->grad_date->format('F d, Y')}}</p>
-			<a href="#" data-field="grad_date" rel="formOpen"><i class="fa fa-wrench"></i></a>
-			{!! Form::open(['route' => ['emp-drop',$emp->id],'class' => 'emp-delete']) !!}
-	            {!! Form::hidden('field','grad_date') !!}
-				<button class="delete-entry"><i class="fa fa-remove"></i></button>
-			{!! Form::close() !!}
-			@else
-			<a href="#" data-field="grad_date" rel="formOpen"><i class="fa fa-plus">Add Work Start Date</i></a>
-			@endif
-			{!! Form::model($emp,['route' => ['emp-update',$emp->id], 'id' => 'grad_dateForm', 'class' => 'userUpdateForm']) !!}
-				{!! Form::label('grad_date', 'Graduation Date') !!}
+
+	            {!! Form::label('grad_date', 'Graduation Date') !!}
 	            {!! Form::text('grad_date', old('grad_date'),['placeholder'=>'yyyy-mm-dd','id'=>'grad_date']) !!}
 				@if ($errors->has('grad_date'))
 	                <span class="error">
@@ -608,6 +591,15 @@
 				{!! Form::submit('Add') !!}
 				<button class="cancel"><i class="fa fa-remove"></i></button>
 			{!! Form::close() !!}
+			</div>
+		<!--============Grad Date===========-->
+			<div class="separate">
+			<h4>Graduation Date</h4>
+			@if($emp->grad_date)
+			<p>{{$emp->grad_date->format('F d, Y')}}</p>
+			@else
+			<p>--</p>
+			@endif
 			</div>
 		<!--============Experience===========-->
 			<div class="separate">

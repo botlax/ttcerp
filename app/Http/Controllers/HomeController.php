@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Notifications\Expired;
 use Illuminate\Support\Facades\Notification;
 use Auth;
+use Illuminate\Support\Collection;
+use Excel;
 
 class HomeController extends Controller
 {
@@ -32,6 +34,27 @@ class HomeController extends Controller
         $this->middleware('auth');
         $this->middleware('god')->only(['destroy','logs']);
         $this->middleware('spectator')->only(['store','update','delete','add','edit','drop','destroy']);
+    }
+
+    public function test()
+    {
+        return view('dashboard.test');
+    }
+
+    public function postTest(Request $request)
+    {
+        //dd($request->file());
+
+        Excel::load($request->file('file'))->each(function (Collection $csvLine) {
+
+             $test = [
+                 'name' => "{$csvLine->get('first_name')} {$csvLine->get('last_name')}",
+                 'job' => $csvLine->get('job'),
+             ];
+
+             dd($test);
+
+        });
     }
 
     /**
@@ -252,7 +275,8 @@ class HomeController extends Controller
             'passport_expiry' => 'nullable|date|required_with:passport',
             'health_card' => 'nullable|required_with:hc_expiry',
             'hc_expiry' => 'nullable|date|required_with:health_card',
-            'grad_date' => 'nullable|date',
+            'degree' => 'nullable|required_with:grad_date',
+            'grad_date' => 'nullable|date|required_with:degree',
             'work_start_date' => 'nullable|date',
             'mobile' => 'nullable|numeric|digits:8',
             'children' => 'nullable|numeric',
@@ -385,7 +409,8 @@ class HomeController extends Controller
             'passport_expiry' => 'nullable|date|required_with:passport',
             'health_card' => 'nullable|required_with:hc_expiry',
             'hc_expiry' => 'nullable|date|required_with:health_card',
-            'grad_date' => 'nullable|date',
+            'degree' => 'nullable|required_with:grad_date',
+            'grad_date' => 'nullable|date|required_with:degree',
             'work_start_date' => 'nullable|date',
             'mobile' => 'nullable|numeric|digits:8',
             'children' => 'nullable|numeric',
@@ -586,8 +611,6 @@ class HomeController extends Controller
                 break;
             case 'degree':
                 $user->degree = null;
-                break;
-            case 'grad_date':
                 $user->grad_date = null;
                 break;
             case 'work_start_date':
