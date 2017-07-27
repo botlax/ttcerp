@@ -100,7 +100,7 @@ class CreateTables extends Migration
             $table->string('blood_group',100)->nullable();
             $table->string('diploma',100)->nullable();
             $table->string('englic',100)->nullable();
-            $table->string('health_card',100)->nullable();
+            $table->string('hc_file',100)->nullable();
             $table->integer('emp_id')->unsigned();
             $table->foreign('emp_id')
                   ->references('id')->on('users')

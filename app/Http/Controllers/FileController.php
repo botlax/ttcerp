@@ -67,7 +67,7 @@ class FileController extends Controller
         $errorMessages['blood_group.mimes'] = $request->file('blood_group')?$request->file('blood_group')->getClientOriginalName().' invalid file type. Accepted file type:pdf,jpg,jpeg,png,gif':'';
         $errorMessages['diploma.mimes'] = $request->file('diploma')?$request->file('diploma')->getClientOriginalName().' invalid file type. Accepted file type:pdf,jpg,jpeg,png,gif':'';
         $errorMessages['englic.mimes'] = $request->file('englic')?$request->file('englic')->getClientOriginalName().' invalid file type. Accepted file type:pdf,jpg,jpeg,png,gif':'';
-        $errorMessages['health_card.mimes'] = $request->file('health_card')?$request->file('health_card')->getClientOriginalName().' invalid file type. Accepted file type:pdf,jpg,jpeg,png,gif':'';
+        $errorMessages['hc_file.mimes'] = $request->file('hc_file')?$request->file('hc_file')->getClientOriginalName().' invalid file type. Accepted file type:pdf,jpg,jpeg,png,gif':'';
 
         $errorMessages['cv.max'] = 'Max file size exceeded:2mb';
         $errorMessages['photo.max'] = 'Max file size exceeded:1mb';
@@ -81,7 +81,7 @@ class FileController extends Controller
         $errorMessages['blood_group.max'] = 'Max file size exceeded:2mb';
         $errorMessages['diploma.max'] = 'Max file size exceeded:2mb';
         $errorMessages['englic.max'] = 'Max file size exceeded:2mb';
-        $errorMessages['health_card.max'] = 'Max file size exceeded:2mb';
+        $errorMessages['hc_file.max'] = 'Max file size exceeded:2mb';
 
         $this->validate($request,[
             'cv' => 'mimes:doc,docx,xls,xlsx,pdf|max:2048',
@@ -96,7 +96,7 @@ class FileController extends Controller
             'blood_group' => 'mimes:pdf,jpg,jpeg,png,gif|max:2048',
             'diploma' => 'mimes:pdf,jpg,jpeg,png,gif|max:2048',
             'englic' => 'mimes:pdf,jpg,jpeg,png,gif|max:2048',
-            'health_card' => 'mimes:pdf,jpg,jpeg,png,gif|max:2048',
+            'hc_file' => 'mimes:pdf,jpg,jpeg,png,gif|max:2048',
         ],$errorMessages);
 
         $file = New Files(['emp_id' => $id]);
@@ -140,8 +140,8 @@ class FileController extends Controller
                 case 'englic':
                     $file->englic = url('storage/files/').'/'.$user->emp_id.'/'.$field.'.'.$f->getClientOriginalExtension();
                     break;
-                case 'health_card':
-                    $file->health_card = url('storage/files/').'/'.$user->emp_id.'/'.$field.'.'.$f->getClientOriginalExtension();
+                case 'hc_file':
+                    $file->hc_file = url('storage/files/').'/'.$user->emp_id.'/'.$field.'.'.$f->getClientOriginalExtension();
                     break;
             }
         }
@@ -197,7 +197,7 @@ class FileController extends Controller
         $errorMessages['blood_group.mimes'] = $request->file('blood_group')?$request->file('blood_group')->getClientOriginalName().' invalid file type. Accepted file type:pdf,jpg,jpeg,png,gif':'';
         $errorMessages['diploma.mimes'] = $request->file('diploma')?$request->file('diploma')->getClientOriginalName().' invalid file type. Accepted file type:pdf,jpg,jpeg,png,gif':'';
         $errorMessages['englic.mimes'] = $request->file('englic')?$request->file('englic')->getClientOriginalName().' invalid file type. Accepted file type:pdf,jpg,jpeg,png,gif':'';
-        $errorMessages['health_card.mimes'] = $request->file('health_card')?$request->file('health_card')->getClientOriginalName().' invalid file type. Accepted file type:pdf,jpg,jpeg,png,gif':'';
+        $errorMessages['hc_file.mimes'] = $request->file('hc_file')?$request->file('hc_file')->getClientOriginalName().' invalid file type. Accepted file type:pdf,jpg,jpeg,png,gif':'';
 
         $errorMessages['cv.max'] = 'Max file size exceeded:2mb';
         $errorMessages['photo.max'] = 'Max file size exceeded:1mb';
@@ -211,7 +211,7 @@ class FileController extends Controller
         $errorMessages['blood_group.max'] = 'Max file size exceeded:2mb';
         $errorMessages['diploma.max'] = 'Max file size exceeded:2mb';
         $errorMessages['englic.max'] = 'Max file size exceeded:2mb';
-        $errorMessages['health_card.max'] = 'Max file size exceeded:2mb';
+        $errorMessages['hc_file.max'] = 'Max file size exceeded:2mb';
 
         $this->validate($request,[
             'cv' => 'mimes:doc,docx,xls,xlsx,pdf|max:2048',
@@ -226,7 +226,7 @@ class FileController extends Controller
             'blood_group' => 'mimes:pdf,jpg,jpeg,png,gif|max:2048',
             'diploma' => 'mimes:pdf,jpg,jpeg,png,gif|max:2048',
             'englic' => 'mimes:pdf,jpg,jpeg,png,gif|max:2048',
-            'health_card' => 'mimes:pdf,jpg,jpeg,png,gif|max:2048',
+            'hc_file' => 'mimes:pdf,jpg,jpeg,png,gif|max:2048',
         ],$errorMessages);
 
         $file = Files::findOrFail($id);
@@ -275,8 +275,8 @@ class FileController extends Controller
                 case 'englic':
                     $file->englic = url('storage/files/').'/'.$user->emp_id.'/'.$field.'.'.$f->getClientOriginalExtension();
                     break;
-                case 'health_card':
-                    $file->health_card = url('storage/files/').'/'.$user->emp_id.'/'.$field.'.'.$f->getClientOriginalExtension();
+                case 'hc_file':
+                    $file->hc_file = url('storage/files/').'/'.$user->emp_id.'/'.$field.'.'.$f->getClientOriginalExtension();
                     break;
             }
         }
@@ -334,8 +334,8 @@ class FileController extends Controller
             case 'englic':
                 $file->englic = null;
                 break;
-            case 'health_card':
-                $file->health_card = null;
+            case 'hc_file':
+                $file->hc_file = null;
                 break;
         }
 

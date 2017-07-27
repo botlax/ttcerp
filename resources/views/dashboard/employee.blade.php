@@ -741,21 +741,21 @@
 							{!! Form::close() !!}
 						</li>
 						<li>Health Card: 
-							@if($files->health_card)
-							<a href="{{$files->health_card}}"><i class="fa fa-download"></i></a>
+							@if($files->hc_file)
+							<a href="{{$files->hc_file}}"><i class="fa fa-download"></i></a>
 							{!! Form::open(['route' => ['file-delete',$files->id]]) !!}
-								{!! Form::hidden('field','health_card') !!}
+								{!! Form::hidden('field','hc_file') !!}
 					            {!! Form::submit('delete',['class' => 'file-delete']) !!}
 							{!! Form::close() !!}
 							
 							@endif
 							{!! Form::open(['route' => ['file-update',$files->id], 'files' => true, 'class' => 'file-form']) !!}
-								{!! Form::hidden('field','health_card') !!}
-								{!! Form::label('health_card','Upload Health Card',['class' => 'upload-label']) !!}
-								{!! Form::file('health_card',['class'=>'inputfile']) !!}
-								@if ($errors->has('health_card'))
+								{!! Form::hidden('field','hc_file') !!}
+								{!! Form::label('hc_file','Upload Health Card',['class' => 'upload-label']) !!}
+								{!! Form::file('hc_file',['class'=>'inputfile']) !!}
+								@if ($errors->has('hc_file'))
 					                <span class="error">
-					                    <strong>{{ $errors->first('health_card') }}</strong>
+					                    <strong>{{ $errors->first('hc_file') }}</strong>
 					                </span>
 					            @endif
 					            {!! Form::submit('upload') !!}
@@ -919,11 +919,11 @@
 			            @endif
 					</div>
 					<div>
-						{!! Form::label('health_card','Upload Health Card',['class' => 'upload-label']) !!}
-						{!! Form::file('health_card',['class'=>'inputfile']) !!}
-						@if ($errors->has('health_card'))
+						{!! Form::label('hc_file','Upload Health Card',['class' => 'upload-label']) !!}
+						{!! Form::file('hc_file',['class'=>'inputfile']) !!}
+						@if ($errors->has('hc_file'))
 			                <span class="error">
-			                    <strong>{{ $errors->first('health_card') }}</strong>
+			                    <strong>{{ $errors->first('hc_file') }}</strong>
 			                </span>
 			            @endif
 					</div>
