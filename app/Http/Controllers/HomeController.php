@@ -303,9 +303,10 @@ class HomeController extends Controller
     public function show($id)
     {
         $emp = User::findOrFail($id);
-        $next = User::sort()->where('emp_id','>',$emp->emp_id)->orderBy('emp_id','ASC')->first();
-        $prev = User::sort()->where('emp_id','<',$emp->emp_id)->orderBy('emp_id','DESC')->first();
+        $next = User::where('role','<>','cancel')->where('emp_id','>',$emp->emp_id)->orderBy('emp_id','ASC')->first();
+        $prev = User::where('role','<>','cancel')->where('emp_id','<',$emp->emp_id)->orderBy('emp_id','DESC')->first();
 
+        dd($prev);
         $emergency = $emp->emergency()->first();
 
         $files = $emp->files()->first();
