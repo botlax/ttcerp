@@ -306,7 +306,6 @@ class HomeController extends Controller
         $next = User::where('role','<>','cancel')->where('emp_id','>',$emp->emp_id)->orderBy('emp_id','ASC')->first();
         $prev = User::where('role','<>','cancel')->where('emp_id','<',$emp->emp_id)->orderBy('emp_id','DESC')->first();
 
-        dd($prev);
         $emergency = $emp->emergency()->first();
 
         $files = $emp->files()->first();
