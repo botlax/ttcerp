@@ -740,6 +740,69 @@
 					            {!! Form::submit('upload') !!}
 							{!! Form::close() !!}
 						</li>
+						<li>Health Card: 
+							@if($files->health_card)
+							<a href="{{$files->health_card}}"><i class="fa fa-download"></i></a>
+							{!! Form::open(['route' => ['file-delete',$files->id]]) !!}
+								{!! Form::hidden('field','health_card') !!}
+					            {!! Form::submit('delete',['class' => 'file-delete']) !!}
+							{!! Form::close() !!}
+							
+							@endif
+							{!! Form::open(['route' => ['file-update',$files->id], 'files' => true, 'class' => 'file-form']) !!}
+								{!! Form::hidden('field','health_card') !!}
+								{!! Form::label('health_card','Upload Health Card',['class' => 'upload-label']) !!}
+								{!! Form::file('health_card',['class'=>'inputfile']) !!}
+								@if ($errors->has('health_card'))
+					                <span class="error">
+					                    <strong>{{ $errors->first('health_card') }}</strong>
+					                </span>
+					            @endif
+					            {!! Form::submit('upload') !!}
+							{!! Form::close() !!}
+						</li>
+						<li>Diploma: 
+							@if($files->diploma)
+							<a href="{{$files->diploma}}"><i class="fa fa-download"></i></a>
+							{!! Form::open(['route' => ['file-delete',$files->id]]) !!}
+								{!! Form::hidden('field','diploma') !!}
+					            {!! Form::submit('delete',['class' => 'file-delete']) !!}
+							{!! Form::close() !!}
+							
+							@endif
+							{!! Form::open(['route' => ['file-update',$files->id], 'files' => true, 'class' => 'file-form']) !!}
+								{!! Form::hidden('field','diploma') !!}
+								{!! Form::label('diploma','Upload Diploma',['class' => 'upload-label']) !!}
+								{!! Form::file('diploma',['class'=>'inputfile']) !!}
+								@if ($errors->has('diploma'))
+					                <span class="error">
+					                    <strong>{{ $errors->first('diploma') }}</strong>
+					                </span>
+					            @endif
+					            {!! Form::submit('upload') !!}
+							{!! Form::close() !!}
+						</li>
+						<li>MMUP License: 
+							@if($files->englic)
+							<a href="{{$files->englic}}"><i class="fa fa-download"></i></a>
+							{!! Form::open(['route' => ['file-delete',$files->id]]) !!}
+								{!! Form::hidden('field','englic') !!}
+					            {!! Form::submit('delete',['class' => 'file-delete']) !!}
+							{!! Form::close() !!}
+							
+							@endif
+							{!! Form::open(['route' => ['file-update',$files->id], 'files' => true, 'class' => 'file-form']) !!}
+								{!! Form::hidden('field','englic') !!}
+								{!! Form::label('englic','Upload MMUP License',['class' => 'upload-label']) !!}
+								{!! Form::file('englic',['class'=>'inputfile']) !!}
+								@if ($errors->has('englic'))
+					                <span class="error">
+					                    <strong>{{ $errors->first('englic') }}</strong>
+					                </span>
+					            @endif
+					            {!! Form::submit('upload') !!}
+							{!! Form::close() !!}
+						</li>
 						<li>Contract: 
 							@if($files->contract)
 							<a href="{{$files->contract}}"><i class="fa fa-download"></i></a>
@@ -852,6 +915,33 @@
 						@if ($errors->has('qid'))
 			                <span class="error">
 			                    <strong>{{ $errors->first('qid') }}</strong>
+			                </span>
+			            @endif
+					</div>
+					<div>
+						{!! Form::label('health_card','Upload Health Card',['class' => 'upload-label']) !!}
+						{!! Form::file('health_card',['class'=>'inputfile']) !!}
+						@if ($errors->has('health_card'))
+			                <span class="error">
+			                    <strong>{{ $errors->first('health_card') }}</strong>
+			                </span>
+			            @endif
+					</div>
+					<div>
+						{!! Form::label('diploma','Upload Diploma',['class' => 'upload-label']) !!}
+						{!! Form::file('diploma',['class'=>'inputfile']) !!}
+						@if ($errors->has('diploma'))
+			                <span class="error">
+			                    <strong>{{ $errors->first('diploma') }}</strong>
+			                </span>
+			            @endif
+					</div>
+					<div>
+						{!! Form::label('englic','Upload MMUP License',['class' => 'upload-label']) !!}
+						{!! Form::file('englic',['class'=>'inputfile']) !!}
+						@if ($errors->has('englic'))
+			                <span class="error">
+			                    <strong>{{ $errors->first('englic') }}</strong>
 			                </span>
 			            @endif
 					</div>

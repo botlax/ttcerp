@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Files extends Model
 {
     protected $table = 'files';
-    protected $fillable = ['cv','passport','contract','qid','visa','photo','job_offer','emp_id','blood_group'];
+    protected $fillable = ['cv','passport','contract','qid','visa','photo','job_offer','emp_id','blood_group','diploma','englic','health_card'];
     public $timestamps = false;
 
     public function user(){
@@ -39,6 +39,15 @@ class Files extends Model
                 break;
             case 'blood_group':
                 return str_replace(url('storage/files/').'/'.$user_id.'/', '', $file->blood_group);
+                break;
+            case 'diploma':
+                return str_replace(url('storage/files/').'/'.$user_id.'/', '', $file->diploma);
+                break;
+            case 'englic':
+                return str_replace(url('storage/files/').'/'.$user_id.'/', '', $file->englic);
+                break;
+            case 'health_card':
+                return str_replace(url('storage/files/').'/'.$user_id.'/', '', $file->health_card);
                 break;
         }
     }
