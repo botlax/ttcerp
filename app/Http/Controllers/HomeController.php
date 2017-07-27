@@ -303,8 +303,8 @@ class HomeController extends Controller
     public function show($id)
     {
         $emp = User::findOrFail($id);
-        $next = User::where('emp_id','>',$emp->emp_id)->orderBy('emp_id','ASC')->first();
-        $prev = User::where('emp_id','<',$emp->emp_id)->orderBy('emp_id','DESC')->first();
+        $next = User::sort()->where('emp_id','>',$emp->emp_id)->orderBy('emp_id','ASC')->first();
+        $prev = User::sort()->where('emp_id','<',$emp->emp_id)->orderBy('emp_id','DESC')->first();
 
         $emergency = $emp->emergency()->first();
 
