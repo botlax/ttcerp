@@ -275,9 +275,9 @@ class HomeController extends Controller
             'passport_expiry' => 'nullable|date|required_with:passport',
             'health_card' => 'nullable|required_with:hc_expiry',
             'hc_expiry' => 'nullable|date|required_with:health_card',
-            'degree' => 'nullable|required_with:grad_date',
-            'grad_date' => 'nullable|date|required_with:degree',
-            'work_start_date' => 'nullable|date',
+            'degree' => 'nullable|required_with:grad_date|required_with:work_start_date',
+            'grad_date' => 'nullable|date|required_with:degree|required_with:work_start_date',
+            'work_start_date' => 'nullable|date|required_with:degree|required_with:grad_date',
             'mobile' => 'nullable|numeric|digits:8',
             'children' => 'nullable|numeric',
             'location' => 'nullable|required_with:location_prefix',
@@ -409,9 +409,9 @@ class HomeController extends Controller
             'passport_expiry' => 'nullable|date|required_with:passport',
             'health_card' => 'nullable|required_with:hc_expiry',
             'hc_expiry' => 'nullable|date|required_with:health_card',
-            'degree' => 'nullable|required_with:grad_date',
-            'grad_date' => 'nullable|date|required_with:degree',
-            'work_start_date' => 'nullable|date',
+            'degree' => 'nullable|required_with:grad_date|required_with:work_start_date',
+            'grad_date' => 'nullable|date|required_with:degree|required_with:work_start_date',
+            'work_start_date' => 'nullable|date|required_with:degree|required_with:grad_date',
             'mobile' => 'nullable|numeric|digits:8',
             'children' => 'nullable|numeric',
             'location' => 'nullable|required_with:location_prefix',
@@ -612,8 +612,6 @@ class HomeController extends Controller
             case 'degree':
                 $user->degree = null;
                 $user->grad_date = null;
-                break;
-            case 'work_start_date':
                 $user->work_start_date = null;
                 break;
         }
@@ -622,7 +620,6 @@ class HomeController extends Controller
         $this->addLog('Deleted '.$field.' details of '.$user->name);
         flash('successfully deleted!')->success();
         return redirect()->back();
-
 
     }
 

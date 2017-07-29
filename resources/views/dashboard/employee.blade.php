@@ -561,16 +561,18 @@
 			</div>
 		<!--============Degree===========-->
 			<div class="separate">
-			<h4>Degree</h4>
+			<h4>Education / Career</h4>
 			@if($emp->degree)
-			<p>{{$emp->degree}}</p>
+			<p>Degree: {{$emp->degree}}</p>
+			<p>Graduation Date: {{$emp->grad_date->format('F d, Y')}}</p>
+			<p>Years of Experience: {{$emp->work_start_date->diffInYears(\Carbon\Carbon::today())}}</p>
 			<a href="#" data-field="degree" rel="formOpen"><i class="fa fa-wrench"></i></a>
 			{!! Form::open(['route' => ['emp-drop',$emp->id],'class' => 'emp-delete']) !!}
 	            {!! Form::hidden('field','degree') !!}
 				<button class="delete-entry"><i class="fa fa-remove"></i></button>
 			{!! Form::close() !!}
 			@else
-			<a href="#" data-field="degree" rel="formOpen"><i class="fa fa-plus">Add Degree</i></a>
+			<a href="#" data-field="degree" rel="formOpen"><i class="fa fa-plus">Add Education / Career</i></a>
 			@endif
 			{!! Form::model($emp,['route' => ['emp-update',$emp->id], 'id' => 'degreeForm', 'class' => 'userUpdateForm']) !!}
 				{!! Form::label('degree', 'Degree') !!}	
@@ -588,34 +590,8 @@
 	                    <strong>{{ $errors->first('grad_date') }}</strong>
 	                </span>
 	            @endif
-				{!! Form::submit('Add') !!}
-				<button class="cancel"><i class="fa fa-remove"></i></button>
-			{!! Form::close() !!}
-			</div>
-		<!--============Grad Date===========-->
-			<div class="separate">
-			<h4>Graduation Date</h4>
-			@if($emp->grad_date)
-			<p>{{$emp->grad_date->format('F d, Y')}}</p>
-			@else
-			<p>--</p>
-			@endif
-			</div>
-		<!--============Experience===========-->
-			<div class="separate">
-			<h4>Years of Experience</h4>
-			@if($emp->work_start_date)
-			<p>{{$emp->work_start_date->diffInYears(\Carbon\Carbon::today())}}</p>
-			<a href="#" data-field="work_start_date" rel="formOpen"><i class="fa fa-wrench"></i></a>
-			{!! Form::open(['route' => ['emp-drop',$emp->id],'class' => 'emp-delete']) !!}
-	            {!! Form::hidden('field','work_start_date') !!}
-				<button class="delete-entry"><i class="fa fa-remove"></i></button>
-			{!! Form::close() !!}
-			@else
-			<a href="#" data-field="work_start_date" rel="formOpen"><i class="fa fa-plus">Add Work Start Date</i></a>
-			@endif
-			{!! Form::model($emp,['route' => ['emp-update',$emp->id], 'id' => 'work_start_dateForm', 'class' => 'userUpdateForm']) !!}
-				{!! Form::label('work_start_date', 'Professional Start Date') !!}
+
+	            {!! Form::label('work_start_date', 'Professional Start Date') !!}
 	            {!! Form::text('work_start_date', old('work_start_date'),['placeholder'=>'yyyy-mm-dd','id'=>'work_start_date']) !!}
 				@if ($errors->has('work_start_date'))
 	                <span class="error">
@@ -626,6 +602,7 @@
 				<button class="cancel"><i class="fa fa-remove"></i></button>
 			{!! Form::close() !!}
 			</div>
+			
 		<!--============Airport===========-->
 			<div class="separate">
 			<h4>Home Destination Airport</h4>
