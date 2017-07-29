@@ -35,7 +35,7 @@ class BatchController extends Controller
         $errorMessages = [];
 
         for($i = 0;$i < count($files);$i++){
-            $errorMessages['files.'.$i.'.mimes'] = $files[$i]->getClientOriginalName().' Invalid file type. Accepted file type:zip,rar,dwg,docx,xlsx,pdf';
+            $errorMessages['files.'.$i.'.mimes'] = $files[$i]->getClientOriginalName().' Invalid file type. Accepted file type:pdf,jpg,png,jpeg,gif,bmp,docx,doc,xlsx,xls';
             $errorMessages['files.'.$i.'.max'] = $files[$i]->getClientOriginalName().' Max file size exceeded. Max:50mb';
         }
 
@@ -94,6 +94,15 @@ class BatchController extends Controller
 		                case 'blood_group':
 		                    $f->blood_group = url('storage/files/').'/'.$emp_id.'/'.$type.'.'.$file->getClientOriginalExtension();
 		                    break;
+		                case 'diploma':
+		                    $f->diploma = url('storage/files/').'/'.$emp_id.'/'.$type.'.'.$file->getClientOriginalExtension();
+		                    break;
+		                case 'englic':
+		                    $f->englic = url('storage/files/').'/'.$emp_id.'/'.$type.'.'.$file->getClientOriginalExtension();
+		                    break;
+		                case 'hc_files':
+		                    $f->hc_files = url('storage/files/').'/'.$emp_id.'/'.$type.'.'.$file->getClientOriginalExtension();
+		                    break;
 		            }
 
 		            $f->save();
@@ -126,6 +135,15 @@ class BatchController extends Controller
 		                    break;
 		                case 'blood_group':
 		                    $f->blood_group = url('storage/files/').'/'.$emp_id.'/'.$type.'.'.$file->getClientOriginalExtension();
+		                    break;
+		                case 'diploma':
+		                    $f->diploma = url('storage/files/').'/'.$emp_id.'/'.$type.'.'.$file->getClientOriginalExtension();
+		                    break;
+		                case 'englic':
+		                    $f->englic = url('storage/files/').'/'.$emp_id.'/'.$type.'.'.$file->getClientOriginalExtension();
+		                    break;
+		                case 'hc_files':
+		                    $f->hc_files = url('storage/files/').'/'.$emp_id.'/'.$type.'.'.$file->getClientOriginalExtension();
 		                    break;
 		            }
 
