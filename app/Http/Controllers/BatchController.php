@@ -100,8 +100,8 @@ class BatchController extends Controller
 		                case 'englic':
 		                    $f->englic = url('storage/files/').'/'.$emp_id.'/'.$type.'.'.$file->getClientOriginalExtension();
 		                    break;
-		                case 'hc_files':
-		                    $f->hc_files = url('storage/files/').'/'.$emp_id.'/'.$type.'.'.$file->getClientOriginalExtension();
+		                case 'hc_file':
+		                    $f->hc_file = url('storage/files/').'/'.$emp_id.'/'.$type.'.'.$file->getClientOriginalExtension();
 		                    break;
 		            }
 
@@ -142,8 +142,8 @@ class BatchController extends Controller
 		                case 'englic':
 		                    $f->englic = url('storage/files/').'/'.$emp_id.'/'.$type.'.'.$file->getClientOriginalExtension();
 		                    break;
-		                case 'hc_files':
-		                    $f->hc_files = url('storage/files/').'/'.$emp_id.'/'.$type.'.'.$file->getClientOriginalExtension();
+		                case 'hc_file':
+		                    $f->hc_file = url('storage/files/').'/'.$emp_id.'/'.$type.'.'.$file->getClientOriginalExtension();
 		                    break;
 		            }
 
