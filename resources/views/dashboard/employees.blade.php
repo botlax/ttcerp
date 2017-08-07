@@ -48,7 +48,7 @@ Employees | {{config('app.name')}}
 				{!! Form::label('adj', 'Employees ') !!}
 				{!! Form::select('adj',['' => '--Select--', '1' => 'with', '0' => 'without']) !!}
 
-				{!! Form::select('attr',['' => '--Select Attribute--', 'photo' => 'Photo', 'cv' => 'CV', 'contract' => 'Contract', 'qid' => 'QID', 'passport' => 'Passport', 'visa' => 'Visa', 'job_offer' => 'Job Offer', 'blood_group' => 'Blood Group','license' => 'License', 'salary' => 'Salary Details']) !!}
+				{!! Form::select('attr',['' => '--Select Attribute--', 'photo' => 'Photo', 'cv' => 'CV', 'contract' => 'Contract', 'qid' => 'QID', 'passport' => 'Passport', 'visa' => 'Visa', 'job_offer' => 'Job Offer', 'blood_group' => 'Blood Group', 'diploma' => 'Diploma', 'englic' => 'MMUP License', 'hc_file' => 'Health Card','license' => 'License', 'salary' => 'Salary Details']) !!}
 				{!! Form::submit('search') !!}
 			{!! Form::close() !!}
 			</div>
