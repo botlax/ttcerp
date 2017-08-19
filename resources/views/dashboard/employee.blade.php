@@ -1073,8 +1073,8 @@
 						{!! Form::close() !!}
 						<li>From: {{$vacation['current']->vac_from->format('F d, Y')}}</li>
 						<li>To: {{$vacation['current']->vac_to->format('F d, Y')}}</li>
-						<li>Departure: {{$vacation['current']->vac_to_time?$vacation['current']->vac_to_time->format('F d, Y g:i a'):''}}</li>
-						<li>Arrival: {{$vacation['current']->vac_from_time?$vacation['current']->vac_from_time->format('F d, Y g:i a'):''}}</li>
+						<li>Departure: {{$vacation['current']->vac_from_time?$vacation['current']->vac_from_time->format('F d, Y g:i a'):''}}</li>
+						<li>Arrival: {{$vacation['current']->vac_to_time?$vacation['current']->vac_to_time->format('F d, Y g:i a'):''}}</li>
 						<li>Airlines: {{$vacation['current']->airlines}}</li>
 						<li>Ticket: <a href="{{$vacation['current']->ticket?$vacation['current']->ticket:'#'}}">Ticket <i class="fa fa-download"></i></a></li>
 						<li>Exit Permit: <a href="{{$vacation['current']->exit_permit?$vacation['current']->exit_permit:'#'}}">Exit Permit <i class="fa fa-download"></i></a></li>
@@ -1192,8 +1192,8 @@
 						{!! Form::close() !!}
 						<li>From: {{$vacation['upcoming']->vac_from->format('F d, Y')}}</li>
 						<li>To: {{$vacation['upcoming']->vac_to->format('F d, Y')}}</li>
-						<li>Departure: {{$vacation['upcoming']->vac_to_time?$vacation['upcoming']->vac_to_time->format('F d, Y g:i a'):''}}</li>
-						<li>Arrival: {{$vacation['upcoming']->vac_from_time?$vacation['upcoming']->vac_from_time->format('F d, Y g:i a'):''}}</li>
+						<li>Departure: {{$vacation['upcoming']->vac_from_time?$vacation['upcoming']->vac_from_time->format('F d, Y g:i a'):''}}</li>
+						<li>Arrival: {{$vacation['upcoming']->vac_to_time?$vacation['upcoming']->vac_to_time->format('F d, Y g:i a'):''}}</li>
 						<li>Airlines: {{$vacation['upcoming']->airlines}}</li>
 						<li>Ticket: <a href="{{$vacation['upcoming']->ticket?$vacation['upcoming']->ticket:'#'}}">Ticket <i class="fa fa-download"></i></a></li>
 						<li>Exit Permit: <a href="{{$vacation['upcoming']->exit_permit?$vacation['upcoming']->exit_permit:'#'}}">Exit Permit <i class="fa fa-download"></i></a></li>
@@ -1312,8 +1312,8 @@
 						{!! Form::close() !!}
 						<li>From: {{$vac->vac_from->format('F d, Y')}}</li>
 						<li>To: {{$vac->vac_to->format('F d, Y')}}</li>
-						<li>Departure: {{$vac->vac_to_time?$vac->vac_to_time->format('F d, Y g:i a'):''}}</li>
-						<li>Arrival: {{$vac->vac_from_time?$vac->vac_from_time->format('F d, Y g:i a'):''}}</li>
+						<li>Departure: {{$vac->vac_from_time?$vac->vac_from_time->format('F d, Y g:i a'):''}}</li>
+						<li>Arrival: {{$vac->vac_to_time?$vac->vac_to_time->format('F d, Y g:i a'):''}}</li>
 						<li>Airlines: {{$vac->airlines}}</li>
 						<li>Ticket: <a href="{{$vac->ticket?$vac->ticket:'#'}}">Ticket <i class="fa fa-download"></i></a></li>
 						<li>Exit Permit: <a href="{{$vac->exit_permit?$vac->exit_permit:'#'}}">Exit Permit <i class="fa fa-download"></i></a></li>
