@@ -332,7 +332,7 @@ class VacationController extends Controller
             Storage::delete('public/vacation/'.$user->emp_id.'/'.$vac->id.'/'.Vacation::fileName($vac->vacation_form,$user->emp_id,$vac->id));
         }
 
-        $vac->delete();
+        Vacation::destroy($id);
         $this->addLog('deleted a vacation record of '.$user->name);
         flash('Successfully deleted!')->success();
         return redirect()->back();
