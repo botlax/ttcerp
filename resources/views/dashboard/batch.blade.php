@@ -63,6 +63,12 @@ Batch Upload | {{config('app.name')}}
                     {!! Form::select('file_type', ['' => '--Select File Type--','photo' => 'Photos', 'cv' => 'CV', 'contract' => 'Contract', 'qid' => 'QID', 'passport' => 'Passport', 'visa' => 'Visa', 'job_offer' => 'Job Offer', 'blood_group' => 'Blood Group', 'diploma' => 'Diploma', 'englic' => 'MMUP License', 'hc_file' => 'Health Card'], old('file_type')) !!}
                     
                 </div>
+
+                <div>            
+                    {!! Form::label('mode', 'Mode') !!}
+                    {!! Form::select('mode', ['file' => 'File Upload','csv' => 'Excel Sheet'], old('mode')) !!}
+                    
+                </div>
         			{!! Form::submit('Add') !!}
             </div>
         </div>
