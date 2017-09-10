@@ -60,7 +60,7 @@ Batch Upload | {{config('app.name')}}
         		
                 <div>            
                     {!! Form::label('file_type', 'File Type') !!}
-                    {!! Form::select('file_type', ['' => '--Select File Type--','photo' => 'Photos', 'cv' => 'CV', 'contract' => 'Contract', 'qid' => 'QID', 'passport' => 'Passport', 'visa' => 'Visa', 'job_offer' => 'Job Offer', 'blood_group' => 'Blood Group', 'diploma' => 'Diploma', 'englic' => 'MMUP License', 'hc_file' => 'Health Card'], old('file_type')) !!}
+                    {!! Form::select('file_type', ['' => '--Select File Type--','photo' => 'Photos', 'cv' => 'CV', 'contract' => 'Contract', 'qid' => 'QID', 'passport' => 'Passport', 'visa' => 'Visa', 'job_offer' => 'Job Offer', 'blood_group' => 'Blood Group', 'diploma' => 'Diploma', 'englic' => 'MMUP License', 'hc_file' => 'Health Card', 'license' => 'License'], old('file_type')) !!}
                     
                 </div>
 

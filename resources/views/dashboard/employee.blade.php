@@ -627,15 +627,6 @@
 				<button class="cancel"><i class="fa fa-remove"></i></button>
 			{!! Form::close() !!}
 			</div>
-		<!--============Gratuity===========-->
-			<div class="separate">
-			<h4>Gratuity</h4>
-			@if($emp->salary()->first())
-			<p>QAR {{$gratuity}}</p>
-			@else
-			<p class="note ph">Please add salary details to obtain total gratuity.</p>
-			@endif
-			</div>
 		</div>
 	</div>
 	<div class="row tab clearfix ph">
@@ -1046,7 +1037,7 @@
 			            @endif
 			            </div>
 			            <div>
-			            {!! Form::label('vacation_form','Upload Vacation Form',['class' => 'upload-label']) !!}
+			            {!! Form::label('vacation_form','Upload Vacation Settlement',['class' => 'upload-label']) !!}
 			            {!! Form::file('vacation_form',['class'=>'inputfile']) !!}
 			            @if ($errors->has('vacation_form'))
 			                <span class="error">
@@ -1079,7 +1070,7 @@
 						<li>Ticket: <a href="{{$vacation['current']->ticket?$vacation['current']->ticket:'#'}}">Ticket <i class="fa fa-download"></i></a></li>
 						<li>Exit Permit: <a href="{{$vacation['current']->exit_permit?$vacation['current']->exit_permit:'#'}}">Exit Permit <i class="fa fa-download"></i></a></li>
 						<li>Original Form: <a href="{{$vacation['current']->original_form?$vacation['current']->original_form:'#'}}">Original Form <i class="fa fa-download"></i></a></li>
-						<li>Vacation Form: <a href="{{$vacation['current']->vacation_form?$vacation['current']->vacation_form:'#'}}">Vacation Form <i class="fa fa-download"></i></a></li>
+						<li>Vacation Settlement: <a href="{{$vacation['current']->vacation_form?$vacation['current']->vacation_form:'#'}}">Vacation Settlement <i class="fa fa-download"></i></a></li>
 						@if($emp->salary()->first())
 						<li>Leave Pay: QAR {{round(intval($vacation['current']->leave_wpay)*($emp->salary()->first()->total/30),2)}}</li>
 						@else
@@ -1165,7 +1156,7 @@
 			            @endif
 			            </div>
 			            <div>
-			            {!! Form::label('vacation_form','Upload Vacation Form',['class' => 'upload-label']) !!}
+			            {!! Form::label('vacation_form','Upload Vacation Settlement',['class' => 'upload-label']) !!}
 			            {!! Form::file('vacation_form',['class'=>'inputfile']) !!}
 			            @if ($errors->has('vacation_form'))
 			                <span class="error">
@@ -1198,7 +1189,7 @@
 						<li>Ticket: <a href="{{$vacation['upcoming']->ticket?$vacation['upcoming']->ticket:'#'}}">Ticket <i class="fa fa-download"></i></a></li>
 						<li>Exit Permit: <a href="{{$vacation['upcoming']->exit_permit?$vacation['upcoming']->exit_permit:'#'}}">Exit Permit <i class="fa fa-download"></i></a></li>
 						<li>Original Form: <a href="{{$vacation['upcoming']->original_form?$vacation['upcoming']->original_form:'#'}}">Original Form <i class="fa fa-download"></i></a></li>
-						<li>Vacation Form: <a href="{{$vacation['upcoming']->vacation_form?$vacation['upcoming']->vacation_form:'#'}}">Vacation Form <i class="fa fa-download"></i></a></li>
+						<li>Vacation Settlement: <a href="{{$vacation['upcoming']->vacation_form?$vacation['upcoming']->vacation_form:'#'}}">Vacation Settlement <i class="fa fa-download"></i></a></li>
 						@if($emp->salary()->first())
 						<li>Leave Pay: QAR {{round(intval($vacation['upcoming']->leave_wpay)*($emp->salary()->first()->total/30),2)}}</li>
 						@else
@@ -1285,7 +1276,7 @@
 			            @endif
 			            </div>
 			            <div>
-			            {!! Form::label('vacation_form','Upload Vacation Form',['class' => 'upload-label']) !!}
+			            {!! Form::label('vacation_form','Upload Vacation Settlement',['class' => 'upload-label']) !!}
 			            {!! Form::file('vacation_form',['class'=>'inputfile']) !!}
 			            @if ($errors->has('vacation_form'))
 			                <span class="error">
@@ -1318,7 +1309,7 @@
 						<li>Ticket: <a href="{{$vac->ticket?$vac->ticket:'#'}}">Ticket <i class="fa fa-download"></i></a></li>
 						<li>Exit Permit: <a href="{{$vac->exit_permit?$vac->exit_permit:'#'}}">Exit Permit <i class="fa fa-download"></i></a></li>
 						<li>Original Form: <a href="{{$vac->original_form?$vac->original_form:'#'}}">Original Form <i class="fa fa-download"></i></a></li>
-						<li>Vacation Form: <a href="{{$vac->vacation_form?$vac->vacation_form:'#'}}">Vacation Form <i class="fa fa-download"></i></a></li>
+						<li>Vacation Settlement: <a href="{{$vac->vacation_form?$vac->vacation_form:'#'}}">Vacation Settlement <i class="fa fa-download"></i></a></li>
 						@if($emp->salary()->first())
 						<li>Leave Pay: QAR {{round(intval($vac->leave_wpay)*($emp->salary()->first()->total/30),2)}}</li>
 						@else
@@ -1407,7 +1398,7 @@
 		            @endif
 		            </div>
 		            <div>
-		            {!! Form::label('vacation_form','Upload Vacation Form',['class' => 'upload-label']) !!}
+		            {!! Form::label('vacation_form','Upload Vacation Settlement',['class' => 'upload-label']) !!}
 		            {!! Form::file('vacation_form',['class'=>'inputfile']) !!}
 		            @if ($errors->has('vacation_form'))
 		                <span class="error">
