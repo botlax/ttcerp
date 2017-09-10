@@ -67,12 +67,14 @@ class BatchController extends Controller
 	        	if($user){
 	        		if($type == 'license'){
 	        			if($user->license()->first()){
-	        				$f = $user->license()->first()->file;
-	        				if($f){
-					            Storage::delete('public/license/'.$emp_id.'/'.License::fileName($f,$emp_id));
+	        				$f = $user->license()->first();
+	        				if($f->file){
+					            Storage::delete('public/license/'.$emp_id.'/'.License::fileName($f->file,$emp_id));
 					        }
 
 					        $file->storeAs('public/license/'.$emp_id.'/','license.'.$file->getClientOriginalExtension());
+					        $f->file = url('storage/license/').'/'.$emp_id.'/'.'license.'.$file->getClientOriginalExtension();
+					        $f->save();
 	        			}
 	        			else{
 	        				$fails[] = $emp_id;
