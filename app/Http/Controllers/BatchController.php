@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Validator;
 use App\Files;
 use App\User;
+use App\License;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Collection;
 use Excel;
