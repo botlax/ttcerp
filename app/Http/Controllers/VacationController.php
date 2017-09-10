@@ -260,9 +260,15 @@ class VacationController extends Controller
 
         $data['vac_from'] = $request->input('vac_from');
         $data['vac_to'] = $request->input('vac_to');
-        $data['vac_from_time'] = $request->input('vac_from_time');
-        $data['vac_to_time'] = $request->input('vac_to_time');
         $data['airlines'] = $request->input('airlines');
+
+        if($request->input('var_from_time')){
+            $data['vac_from_time'] = $request->input('vac_from_time');
+        }
+
+        if($request->input('var_to_time')){
+            $data['vac_to_time'] = $request->input('vac_to_time');
+        }
 
         if($request->file('ticket')){
             $f = $request->file('ticket');
