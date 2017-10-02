@@ -153,7 +153,7 @@
                     'Head Of Tender Department'   =>  'Head Of Tender Department',
                     'Heavy Driver'  =>  'Heavy Driver',
                     'In-charge, Steel Fixer Grp' =>  'In-charge, Steel Fixer Grp',
-                    'In-charge, Painter Grp'' =>  'In-charge, Painter Grp',
+                    'In-charge, Painter Grp' =>  'In-charge, Painter Grp',
                     'In-charge, Mason Grp' =>  'In-charge, Mason Grp',
                     'JCB Operator' =>  'JCB Operator',
                     'Labourer'   =>  'Labourer',
