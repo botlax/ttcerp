@@ -58,17 +58,53 @@ Edit {{$emp->name}} | {{config('app.name')}}
                     @endif
                 </div>
                 <div>            
-                    {!! Form::label('designation', 'Designation') !!}
-                    {!! Form::select('designation', ['' => '--Select Designation--', 'plumber' => 'Plumber', 'carpenter' => 'Carpenter', 'steel fixer' => 'Steel Fixer', 'leadman' => 'Leadman','foreman' => 'Foreman', 'mason' => 'Mason','driver' => 'Driver','cleaner' => 'Cleaner','painter' => 'Painter','labor' => 'Labor','mechanic' => 'Mechanic','watchman' => 'Watchman','project engineer' => 'Project / Site Engineer','project manager' => 'Project Manager','safety officer' => 'Safety Officer','office staff' => 'Office Staff','management' => 'Management'], $emp->designation?strtolower($emp->designation):null) !!}
-                    @if ($errors->has('designation'))
-                        <span class="error">
-                            <strong>{{ $errors->first('designation') }}</strong>
-                        </span>
-                    @endif
-                </div>
-                <div>            
                     {!! Form::label('position', 'Position') !!}
-                    {!! Form::select('position', ['' => '--Select Position--','Accountant'  =>  'Accountant','Assist. Foreman'  =>  'Assist. Foreman','Block Mason' =>  'Block Mason','Camp Boss'   =>  'Camp Boss' ,'Camp Cleaner' =>  'Camp Cleaner','Camp Security'  =>  'Camp Security','Civil Engineer-Purchase'   =>  'Civil Engineer-Purchase','Decorative Painter'  =>  'Decorative Painter','Draftsman'    =>  'Draftsman','Driver'    =>  'Driver','Elect / Plumber'  =>  'Elect / Plumber','Executive Manager'   =>  'Executive Manager','General Manager'   =>  'General Manager','General Service Assistant'   =>  'General Service Assistant','General Service Manager'   =>  'General Service Manager','Head Of Tender Department'   =>  'Head Of Tender Department','Heavy Driver'  =>  'Heavy Driver','In-charge, Steel Fixer Grp' =>  'In-charge, Steel Fixer Grp','JCB Operator' =>  'JCB Operator','Labourer'   =>  'Labourer','Leadman'    =>  'Leadman','Male Nurse'  =>  'Male Nurse','Mason'    =>  'Mason','Mechanic'  =>  'Mechanic','Mechanic Assistant' =>  'Mechanic Assistant','Office Boy'   =>  'Office Boy','Office Security'  =>  'Office Security','Painter' =>  'Painter','Plumber' =>  'Plumber','Project Engineer'    =>  'Project Engineer','Projects Manager'   =>  'Projects Manager','Public Relation Manager'    =>  'Public Relation Manager','Purchase Representative' =>  'Purchase Representative','QS / Estimator'  =>  'QS / Estimator','Safety Officer'   =>  'Safety Officer','Secretary'    =>  'Secretary','Secretary/IT Assistant'    =>  'Secretary/IT Assistant','Shutter Carpenter'    =>  'Shutter Carpenter','Steel Fixer'   =>  'Steel Fixer','Store Kepeer'    =>  'Store Kepeer','Technical Engineer' =>  'Technical Engineer','Timekeeper'   =>  'Timekeeper','Watchman' =>  'Watchman'], $emp->position?$emp->position:null) !!}
+                    {!! Form::select('position', ['' => '--Select Position--',
+                    'Accountant'  =>  'Accountant',
+                    'Assist. Foreman'  =>  'Assist. Foreman',
+                    'Block Mason' =>  'Block Mason',
+                    'Camp Boss'   =>  'Camp Boss' ,
+                    'Camp Cleaner' =>  'Camp Cleaner',
+                    'Camp Security'  =>  'Camp Security',
+                    'Civil Engineer-Purchase'   =>  'Civil Engineer-Purchase',
+                    'Decorative Painter'  =>  'Decorative Painter',
+                    'Draftsman'    =>  'Draftsman',
+                    'Driver'    =>  'Driver',
+                    'Elect / Plumber'  =>  'Elect / Plumber',
+                    'Executive Manager'   =>  'Executive Manager',
+                    'General Manager'   =>  'General Manager',
+                    'General Service Assistant'   =>  'General Service Assistant',
+                    'General Service Manager'   =>  'General Service Manager',
+                    'Head Of Tender Department'   =>  'Head Of Tender Department',
+                    'Heavy Driver'  =>  'Heavy Driver',
+                    'In-charge, Steel Fixer Grp' =>  'In-charge, Steel Fixer Grp',
+                    'In-charge, Steel Fixer Grp' =>  'In-charge, Painter Grp',
+                    'In-charge, Steel Fixer Grp' =>  'In-charge, Mason Grp',
+                    'JCB Operator' =>  'JCB Operator',
+                    'Labourer'   =>  'Labourer',
+                    'Leadman'    =>  'Leadman',
+                    'Male Nurse'  =>  'Male Nurse',
+                    'Mason'    =>  'Mason',
+                    'Mechanic'  =>  'Mechanic',
+                    'Mechanic Assistant' =>  'Mechanic Assistant',
+                    'Office Boy'   =>  'Office Boy',
+                    'Office Security'  =>  'Office Security',
+                    'Painter' =>  'Painter',
+                    'Plumber' =>  'Plumber',
+                    'Project Engineer'    =>  'Project Engineer',
+                    'Project Manager'   =>  'Project Manager',
+                    'Public Relation Manager'    =>  'Public Relation Manager',
+                    'Purchase Representative' =>  'Purchase Representative',
+                    'QS / Estimator'  =>  'QS / Estimator',
+                    'Safety Officer'   =>  'Safety Officer',
+                    'Secretary'    =>  'Secretary',
+                    'Secretary/IT Assistant'    =>  'Secretary/IT Assistant',
+                    'Shutter Carpenter'    =>  'Shutter Carpenter',
+                    'Steel Fixer'   =>  'Steel Fixer',
+                    'Store Kepeer'    =>  'Store Kepeer',
+                    'Technical Engineer' =>  'Technical Engineer',
+                    'Timekeeper'   =>  'Timekeeper',
+                    'Watchman' =>  'Watchman'], $emp->position?$emp->position:null) !!}
                     @if ($errors->has('position'))
                         <span class="error">
                             <strong>{{ $errors->first('position') }}</strong>

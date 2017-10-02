@@ -18,8 +18,6 @@ use Illuminate\Support\Facades\Storage;
 use App\Notifications\Expired;
 use Illuminate\Support\Facades\Notification;
 use Auth;
-use Illuminate\Support\Collection;
-use Excel;
 
 class HomeController extends Controller
 {
@@ -90,21 +88,21 @@ class HomeController extends Controller
     {
 
         $s = $request->input('q');
-        $d = $request->input('designation');
+        $d = $request->input('position');
 
-        if(!$request->input('q') && !$request->input('designation')){
+        if(!$request->input('q') && !$request->input('position')){
             $employees = User::sort();
         }
-        elseif(!$request->input('q') && $request->input('designation')){
-            $employees = User::sort()->where('designation',$d);
+        elseif(!$request->input('q') && $request->input('position')){
+            $employees = User::sort()->where('position',$d);
         }
-        elseif($request->input('q') && !$request->input('designation')){
+        elseif($request->input('q') && !$request->input('position')){
             $employees = User::sort()->where(function($q)use($s){
                 $q->where('name','like','%'.$s.'%')->orWhere('qid','like',$s.'%')->orWhere('emp_id','like','%'.$s.'%');
             });
         }
-        elseif($request->input('q') && $request->input('designation')){
-            $employees = User::sort()->where('designation',$d)->where(function($q)use($s){
+        elseif($request->input('q') && $request->input('position')){
+            $employees = User::sort()->where('position',$d)->where(function($q)use($s){
                 $q->where('name','like','%'.$s.'%')->orWhere('qid','like', $s.'%')->orWhere('emp_id','like','%'.$s.'%');
             });
         }
@@ -175,21 +173,21 @@ class HomeController extends Controller
     {
 
         $s = $request->input('q');
-        $d = $request->input('designation');
+        $d = $request->input('position');
 
-        if(!$request->input('q') && !$request->input('designation')){
+        if(!$request->input('q') && !$request->input('position')){
             $employees = User::cancelled();
         }
-        elseif(!$request->input('q') && $request->input('designation')){
-            $employees = User::cancelled()->where('designation',$d);
+        elseif(!$request->input('q') && $request->input('position')){
+            $employees = User::cancelled()->where('position',$d);
         }
-        elseif($request->input('q') && !$request->input('designation')){
+        elseif($request->input('q') && !$request->input('position')){
             $employees = User::cancelled()->where(function($q)use($s){
                 $q->where('name','like','%'.$s.'%')->orWhere('qid','like',$s.'%')->orWhere('emp_id','like','%'.$s.'%');
             });
         }
-        elseif($request->input('q') && $request->input('designation')){
-            $employees = User::cancelled()->where('designation',$d)->where(function($q)use($s){
+        elseif($request->input('q') && $request->input('position')){
+            $employees = User::cancelled()->where('position',$d)->where(function($q)use($s){
                 $q->where('name','like','%'.$s.'%')->orWhere('qid','like',$s.'%')->orWhere('emp_id','like','%'.$s.'%');
             });
         }
@@ -204,42 +202,70 @@ class HomeController extends Controller
 
         $date = Carbon::today();
 
-        $designations = ['plumber', 
-                        'carpenter', 
-                        'steel fixer', 
-                        'leadman',
-                        'foreman', 
-                        'mason',
-                        'driver',
-                        'cleaner',
-                        'painter',
-                        'labor',
-                        'mechanic',
-                        'watchman',
-                        'project engineer',
-                        'project manager',
-                        'safety officer',
-                        'office staff',
-                        'management'];
+        $designations = ['Accountant',
+                        'Assist. Foreman',
+                        'Block Mason',
+                        'Camp Boss' ,
+                        'Camp Cleaner',
+                        'Camp Security',
+                        'Civil Engineer-Purchase',
+                        'Decorative Painter',
+                        'Draftsman',
+                        'Driver',
+                        'Elect / Plumber',
+                        'Executive Manager',
+                        'General Manager',
+                        'General Service Assistant',
+                        'General Service Manager',
+                        'Head Of Tender Department',
+                        'Heavy Driver',
+                        'In-charge, Steel Fixer Grp',
+                        'In-charge, Painter Grp',
+                        'In-charge, Mason Grp',
+                        'JCB Operator',
+                        'Labourer',
+                        'Leadman',
+                        'Male Nurse',
+                        'Mason',
+                        'Mechanic',
+                        'Mechanic Assistant',
+                        'Office Boy',
+                        'Office Security',
+                        'Painter',
+                        'Plumber',
+                        'Project Engineer',
+                        'Project Manager',
+                        'Public Relation Manager',
+                        'Purchase Representative',
+                        'QS / Estimator',
+                        'Safety Officer',
+                        'Secretary',
+                        'Secretary/IT Assistant',
+                        'Shutter Carpenter',
+                        'Steel Fixer',
+                        'Store Kepeer',
+                        'Technical Engineer',
+                        'Timekeeper',
+                        'Watchman'];
 
         foreach($designations as $des){
 
-            $total[$des] = User::sort()->where('designation',$des)->count();
+            $total[$des] = User::sort()->where('position',$des)->count();
  
-            $vac[$des] = User::sort()->where('designation',$des)->whereHas('vacation',function($q)use($date){ $q->where('vac_from','<=',$date)->where('vac_to','>=',$date); })->count();
+            $vac[$des] = User::sort()->where('position',$des)->whereHas('vacation',function($q)use($date){ $q->where('vac_from','<=',$date)->where('vac_to','>=',$date); })->count();
 
             $duty[$des] = $total[$des] - $vac[$des];
 
 
-            $pal[$des] = User::sort()->where('designation',$des)->where('nationality','Palestinian')->count();
-            $jor[$des] = User::sort()->where('designation',$des)->where('nationality','Jordanian')->count();
-            $pak[$des] = User::sort()->where('designation',$des)->where('nationality','Pakistani')->count();
-            $egp[$des] = User::sort()->where('designation',$des)->where('nationality','Egyptian')->count();
-            $ind[$des] = User::sort()->where('designation',$des)->where('nationality','Indian')->count();
-            $nep[$des] = User::sort()->where('designation',$des)->where('nationality','Nepalese')->count();
-            $phi[$des] = User::sort()->where('designation',$des)->where('nationality','Filipino')->count();
-            $srl[$des] = User::sort()->where('designation',$des)->where('nationality','Sri Lankan')->count();
-            $ban[$des] = User::sort()->where('designation',$des)->where('nationality','Bangladeshi')->count();
+            $pal[$des] = User::sort()->where('position',$des)->where('nationality','Palestinian')->count();
+            $jor[$des] = User::sort()->where('position',$des)->where('nationality','Jordanian')->count();
+            $pak[$des] = User::sort()->where('position',$des)->where('nationality','Pakistani')->count();
+            $egp[$des] = User::sort()->where('position',$des)->where('nationality','Egyptian')->count();
+            $ind[$des] = User::sort()->where('position',$des)->where('nationality','Indian')->count();
+            $nep[$des] = User::sort()->where('position',$des)->where('nationality','Nepalese')->count();
+            $phi[$des] = User::sort()->where('position',$des)->where('nationality','Filipino')->count();
+            $srl[$des] = User::sort()->where('position',$des)->where('nationality','Sri Lankan')->count();
+            $ban[$des] = User::sort()->where('position',$des)->where('nationality','Bangladeshi')->count();
         }
         
 
@@ -264,7 +290,6 @@ class HomeController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'nullable|email',
-            'designation' => 'required',
             'position' => 'required',
             'nationality' => 'required',
             'joined' => 'required|date',
