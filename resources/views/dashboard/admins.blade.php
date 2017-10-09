@@ -30,7 +30,15 @@ Administration Management | {{config('app.name')}}
 	@if(count($admins))
 		<ul id="admin-list">
 		@foreach($admins as $admin)
-			<li><span>{{$admin->name}} - {{$admin->role}}</span><a href="{{url('admins/'.$admin->id.'/edit')}}" class="edit" title="edit"><i class="fa fa-wrench"></i></a><a href="#delete-leanmodal" data-id="{{$admin->id}}" class="delete" rel="leanModal" title="delete"><i class="fa fa-remove"></i></a></li><br/>
+			<li><span>{{$admin->name}} - 
+			@if($admin->role == 'god')
+				Administrator
+			@elseif($admin->role == 'admin')
+				Power User
+			@else
+				Spectator
+			@endif
+			</span><a href="{{url('admins/'.$admin->id.'/edit')}}" class="edit" title="edit"><i class="fa fa-wrench"></i></a><a href="#delete-leanmodal" data-id="{{$admin->id}}" class="delete" rel="leanModal" title="delete"><i class="fa fa-remove"></i></a></li><br/>
 			{!! Form::open(['route' => ['admin-delete',$admin->id],'style' => 'display: none;','id' => 'delete'.$admin->id]) !!}{!! Form::close() !!}
 		@endforeach()
 		</ul>
