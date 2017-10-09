@@ -33,7 +33,7 @@ Employees | {{config('app.name')}}
 	@slot('content')
 		<div id="heading" class="nh ps">
 		<h4>TALAL TRADING and CONTRACTING COMPANY</h4>
-		<h5>NAME LIST OF {{$d?strtoupper($d):'EMPLOYEES'}} WORKING WITH COMPANY<br/>AS OF {{date('d/m/Y')}}</h5>
+		<h5>NAME LIST OF {{$d?strtoupper($d):'EMPLOYEES'}} {{$d?strtoupper($d):'EMPLOYEES'}} WORKING WITH COMPANY<br/>AS OF {{date('d/m/Y')}}</h5>
 
 		</div>
 		<div id="tools" class="ph">
@@ -85,6 +85,7 @@ Employees | {{config('app.name')}}
                     'Technical Engineer' =>  'Technical Engineer',
                     'Timekeeper'   =>  'Timekeeper',
                     'Watchman' =>  'Watchman']) !!}
+                    {!! Form::select('nationality',$nats) !!}
 				{!! Form::submit('search') !!}
 			{!! Form::close() !!}
 

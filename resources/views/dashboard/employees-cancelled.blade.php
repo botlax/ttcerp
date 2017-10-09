@@ -84,6 +84,7 @@ Cancelled Employees | {{config('app.name')}}
                     'Technical Engineer' =>  'Technical Engineer',
                     'Timekeeper'   =>  'Timekeeper',
                     'Watchman' =>  'Watchman']) !!}
+                    {!! Form::select('nationality',$nats) !!}
 				{!! Form::submit('search') !!}
 			{!! Form::close() !!}
 			<a href="{{url('employees')}}">Employees</a>

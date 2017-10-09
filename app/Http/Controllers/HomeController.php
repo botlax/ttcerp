@@ -70,6 +70,7 @@ class HomeController extends Controller
     {
         $employees = User::sort()->get();
 
+        $nats = $this->getNat();
         $from = Carbon::today();
         $to = Carbon::tomorrow();
 
@@ -81,15 +82,34 @@ class HomeController extends Controller
             $q->where('vac_to','<=',$to)->where('vac_to','>=',$from);
         })->orderBy('vac_from','DESC')->get();
 
-        return view('dashboard.employees',compact('employees','vacation'));
+        return view('dashboard.employees',compact('employees','vacation','nats'));
     }
 
     public function empSearch(Request $request)
     {
 
+        $nats = $this->getNat();
         $s = $request->input('q');
         $d = $request->input('position');
+        $n = $request->input('nationality');
 
+
+        $employees = User::sort();
+        if($s){
+            $employees = $employees->where(function($q)use($s){
+                $q->where('name','like','%'.$s.'%')->orWhere('qid','like',$s.'%')->orWhere('emp_id','like','%'.$s.'%');
+            });
+        }
+
+        if($d){
+            $employees = $employees->where('position',$d);
+        }
+
+        if($n){
+            $employees = $employees->where('nationality',$n);
+        }
+
+/*
         if(!$request->input('q') && !$request->input('position')){
             $employees = User::sort();
         }
@@ -106,7 +126,7 @@ class HomeController extends Controller
                 $q->where('name','like','%'.$s.'%')->orWhere('qid','like', $s.'%')->orWhere('emp_id','like','%'.$s.'%');
             });
         }
-
+*/
         $emp_id = $employees->pluck('id')->toArray();
         $employees = $employees->get();
 
@@ -123,12 +143,12 @@ class HomeController extends Controller
             $q->where('vac_to','<=',$to)->where('vac_to','>=',$from);
         })->orderBy('vac_from','DESC')->get();
 
-        return view('dashboard.employees-search',compact('employees','vacation','s','d'));
+        return view('dashboard.employees-search',compact('employees','vacation','s','d','n','nats'));
     }
 
     public function advSearch(Request $request)
     {
-
+        $nats = $this->getNat();
         $adj = intval($request->input('adj'));
         $attr = $request->input('attr');
 
@@ -166,40 +186,41 @@ class HomeController extends Controller
         $employees = $employees->get();
         $adj = $adj == 1?'with':'without';
 
-        return view('dashboard.employees-advsearch',compact('employees','adj','attr'));
+        return view('dashboard.employees-advsearch',compact('employees','adj','attr','nats'));
     }
 
     public function cancelSearch(Request $request)
     {
 
+        $nats = $this->getNat();
         $s = $request->input('q');
         $d = $request->input('position');
+        $n = $request->input('nationality');
 
-        if(!$request->input('q') && !$request->input('position')){
-            $employees = User::cancelled();
-        }
-        elseif(!$request->input('q') && $request->input('position')){
-            $employees = User::cancelled()->where('position',$d);
-        }
-        elseif($request->input('q') && !$request->input('position')){
-            $employees = User::cancelled()->where(function($q)use($s){
+
+        $employees = User::cancelled();
+        if($s){
+            $employees = $employees->where(function($q)use($s){
                 $q->where('name','like','%'.$s.'%')->orWhere('qid','like',$s.'%')->orWhere('emp_id','like','%'.$s.'%');
             });
         }
-        elseif($request->input('q') && $request->input('position')){
-            $employees = User::cancelled()->where('position',$d)->where(function($q)use($s){
-                $q->where('name','like','%'.$s.'%')->orWhere('qid','like',$s.'%')->orWhere('emp_id','like','%'.$s.'%');
-            });
+
+        if($d){
+            $employees = $employees->where('position',$d);
+        }
+
+        if($n){
+            $employees = $employees->where('nationality',$n);
         }
      
         $employees = $employees->get();
 
-        return view('dashboard.employees-cancelled-search',compact('employees'));
+        return view('dashboard.employees-cancelled-search',compact('employees','nats'));
     }
 
     public function empSummary()
     {
-
+        $nats = $this->getNat();
         $date = Carbon::today();
 
         $designations = ['Accountant',
@@ -269,13 +290,14 @@ class HomeController extends Controller
         }
         
 
-        return view('dashboard.employees-summary',compact('vac','total','duty','pal','jor','pak','egp','ind','nep','phi','srl','ban'));
+        return view('dashboard.employees-summary',compact('nats', 'vac','total','duty','pal','jor','pak','egp','ind','nep','phi','srl','ban'));
     }
 
     public function cancelled()
-    {
+    {   
+        $nats = $this->getNat();
         $employees = User::cancelled()->get();
-        return view('dashboard.employees-cancelled',compact('employees'));
+        return view('dashboard.employees-cancelled',compact('employees','nats'));
     }
 
     public function add()
