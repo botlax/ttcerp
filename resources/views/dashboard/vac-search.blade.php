@@ -86,7 +86,7 @@ Vacation | {{config('app.name')}}
 						<td>{{$vac->vac_from_time?$vac->vac_from_time->format('d/m/Y g:i a'):'--'}}</td>
 						<td>{{$vac->vac_to_time?$vac->vac_to_time->format('d/m/Y g:i a'):'--'}}</td>
 						<td>{{$vac->vac_from->format('d/m/Y')}}</td>
-						<td>{{$vac->vac_to->format('d/m/Y')}}</td>
+						<td>{{$vac->vac_from->diffInDays($vac->vac_to) == 171?'Open':$vac->vac_to->format('d/m/Y')}}</td>
 					</tr>
 					<?php $x++; ?>
 					@endforeach

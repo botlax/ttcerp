@@ -68,6 +68,16 @@ class HomeController extends Controller
 
     public function employees()
     {
+
+        session(['fields' => [
+            'empnum',
+            'nat',
+            'dob',
+            'jd',
+            'qid',
+            'passport',
+            'salary'
+        ]]);
         $employees = User::sort()->get();
 
         $nats = $this->getNat();
@@ -93,6 +103,12 @@ class HomeController extends Controller
         $d = $request->input('position');
         $n = $request->input('nationality');
 
+        if($request->input('fields')){
+            session(['fields' => $request->input('fields')]);
+        }
+        else{
+            session(['fields' => []]);
+        }
 
         $employees = User::sort();
         if($s){
@@ -152,6 +168,14 @@ class HomeController extends Controller
         $adj = intval($request->input('adj'));
         $attr = $request->input('attr');
 
+        if($request->input('fields')){
+            session(['fields' => $request->input('fields')]);
+        }
+        else{
+            session(['fields' => []]);
+        }
+            
+
         if($adj){
             if($attr == 'license'){
                 $employees = User::sort()->whereHas('license');
@@ -197,6 +221,12 @@ class HomeController extends Controller
         $d = $request->input('position');
         $n = $request->input('nationality');
 
+        if($request->input('fields')){
+            session(['fields' => $request->input('fields')]);
+        }
+        else{
+            session(['fields' => []]);
+        }
 
         $employees = User::cancelled();
         if($s){
@@ -224,50 +254,66 @@ class HomeController extends Controller
         $date = Carbon::today();
 
         $designations = ['Accountant',
-                        'Assist. Foreman',
-                        'Block Mason',
-                        'Camp Boss' ,
-                        'Camp Cleaner',
-                        'Camp Security',
-                        'Civil Engineer-Purchase',
-                        'Decorative Painter',
-                        'Draftsman',
-                        'Driver',
-                        'Elect / Plumber',
-                        'Executive Manager',
-                        'General Manager',
-                        'General Service Assistant',
-                        'General Service Manager',
-                        'Head Of Tender Department',
-                        'Heavy Driver',
-                        'In-charge, Steel Fixer Grp',
-                        'In-charge, Painter Grp',
-                        'In-charge, Mason Grp',
-                        'JCB Operator',
-                        'Labourer',
-                        'Leadman',
-                        'Male Nurse',
-                        'Mason',
-                        'Mechanic',
-                        'Mechanic Assistant',
-                        'Office Boy',
-                        'Office Security',
-                        'Painter',
-                        'Plumber',
-                        'Project Engineer',
-                        'Project Manager',
-                        'Public Relation Manager',
-                        'Purchase Representative',
-                        'QS / Estimator',
-                        'Safety Officer',
-                        'Secretary',
-                        'Secretary/IT Assistant',
-                        'Shutter Carpenter',
-                        'Steel Fixer',
-                        'Store Kepeer',
-                        'Technical Engineer',
-                        'Timekeeper',
-                        'Watchman'];
+                    'Administration Manager',
+                    'Assist. Accountant',
+                    'Assist. Foreman',
+                    'Block Mason',
+                    'Camp Boss',
+                    'Camp Cleaner',
+                    'Camp Security',
+                    'Civil Engineer',
+                    'Contracts Manager',
+                    'Decorative Painter',
+                    'Draftsman',
+                    'Plumber',
+                    'Electrician',
+                    'Equipment Operator',
+                    'Executive Manager',
+                    'Finance Manager',
+                    'Foreman',
+                    'General Manager',
+                    'General Service Assistant',
+                    'General Service Manager',
+                    'Head Of Tender Department',
+                    'Heavy Driver',
+                    'HR Manager',
+                    'HR Officer',
+                    'In-charge, Steel Fixer Grp',
+                    'In-charge, Painter Grp',
+                    'In-charge, Mason Grp',
+                    'JCB Operator',
+                    'Labourer',
+                    'Leadman',
+                    'Light Driver',
+                    'Male Nurse',
+                    'Mason',
+                    'Mechanic',
+                    'Mechanic Assistant',
+                    'Office Boy',
+                    'Office Security',
+                    'Operations Manager',
+                    'Painter',
+                    'Plumber',
+                    'Project Engineer',
+                    'Project Manager',
+                    'Public Relation Manager',
+                    'Public Relation Officer',
+                    'Purchase Engineer',
+                    'Purchase Manager',
+                    'Purchase Representative',
+                    'QS / Estimator',
+                    'Representative',
+                    'Safety Assist.',
+                    'Safety Officer',
+                    'Secretary',
+                    'Secretary/IT Assistant',
+                    'Shutter Carpenter',
+                    'Site Engineer',
+                    'Steel Fixer',
+                    'Store Kepeer',
+                    'Technical Engineer',
+                    'Timekeeper',
+                    'Watchman'];
 
         foreach($designations as $des){
 
@@ -297,6 +343,15 @@ class HomeController extends Controller
     {   
         $nats = $this->getNat();
         $employees = User::cancelled()->get();
+        session(['fields' => [
+            'empnum',
+            'nat',
+            'dob',
+            'jd',
+            'qid',
+            'passport',
+            'salary'
+        ]]);
         return view('dashboard.employees-cancelled',compact('employees','nats'));
     }
 
@@ -375,8 +430,8 @@ class HomeController extends Controller
             else{
                 $vacation['upcoming'] = null;
             }
-            if(!empty($emp->vacation()->where('vac_to','<',Carbon::today())->get()->toArray())){
-                $vacation['past'] = $emp->vacation()->where('vac_to','<',Carbon::today())->get();
+            if(!empty($emp->vacation()->where('vac_to','<=',Carbon::today())->get()->toArray())){
+                $vacation['past'] = $emp->vacation()->where('vac_to','<=',Carbon::today())->get();
             }else{
                 $vacation['past'] = null;
             }

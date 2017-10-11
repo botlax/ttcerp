@@ -136,45 +136,61 @@
 			{!! Form::model($emp,['route' => ['emp-update',$emp->id], 'id' => 'positionForm', 'class' => 'userUpdateForm']) !!}
 	            {!! Form::select('position',['' => '--Select Position--',
                     'Accountant'  =>  'Accountant',
+                    'Administration Manager'   =>  'Administration Manager',
+                    'Assist. Accountant'  =>  'Assist. Accountant',
                     'Assist. Foreman'  =>  'Assist. Foreman',
                     'Block Mason' =>  'Block Mason',
-                    'Camp Boss'   =>  'Camp Boss' ,
+                    'Camp Boss'   =>  'Camp Boss',
                     'Camp Cleaner' =>  'Camp Cleaner',
                     'Camp Security'  =>  'Camp Security',
-                    'Civil Engineer-Purchase'   =>  'Civil Engineer-Purchase',
+                    'Civil Engineer'   =>  'Civil Engineer',
+                    'Contracts Manager'   =>  'Contracts Manager',
                     'Decorative Painter'  =>  'Decorative Painter',
                     'Draftsman'    =>  'Draftsman',
-                    'Driver'    =>  'Driver',
-                    'Elect / Plumber'  =>  'Elect / Plumber',
+                    'Plumber'  =>  'Plumber',
+                    'Electrician'  =>  'Electrician',
+                    'Equipment Operator'   =>  'Equipment Operator',
                     'Executive Manager'   =>  'Executive Manager',
+                    'Finance Manager' => 'Finance Manager',
+                    'Foreman' => 'Foreman',
                     'General Manager'   =>  'General Manager',
                     'General Service Assistant'   =>  'General Service Assistant',
                     'General Service Manager'   =>  'General Service Manager',
                     'Head Of Tender Department'   =>  'Head Of Tender Department',
                     'Heavy Driver'  =>  'Heavy Driver',
+                    'HR Manager'   =>  'HR Manager',
+                    'HR Officer'   =>  'HR Officer',
                     'In-charge, Steel Fixer Grp' =>  'In-charge, Steel Fixer Grp',
                     'In-charge, Painter Grp' =>  'In-charge, Painter Grp',
                     'In-charge, Mason Grp' =>  'In-charge, Mason Grp',
                     'JCB Operator' =>  'JCB Operator',
                     'Labourer'   =>  'Labourer',
                     'Leadman'    =>  'Leadman',
+                    'Light Driver'    =>  'Light Driver',
                     'Male Nurse'  =>  'Male Nurse',
                     'Mason'    =>  'Mason',
                     'Mechanic'  =>  'Mechanic',
                     'Mechanic Assistant' =>  'Mechanic Assistant',
                     'Office Boy'   =>  'Office Boy',
                     'Office Security'  =>  'Office Security',
+                    'Operations Manager'   =>  'Operations Manager',
                     'Painter' =>  'Painter',
                     'Plumber' =>  'Plumber',
                     'Project Engineer'    =>  'Project Engineer',
                     'Project Manager'   =>  'Project Manager',
                     'Public Relation Manager'    =>  'Public Relation Manager',
+                    'Public Relation Officer'    =>  'Public Relation Officer',
+                    'Purchase Engineer'   =>  'Purchase Engineer',
+                    'Purchase Manager'   =>  'Purchase Manager',
                     'Purchase Representative' =>  'Purchase Representative',
                     'QS / Estimator'  =>  'QS / Estimator',
+                    'Representative' => 'Representative',
+                    'Safety Assist.'   =>  'Safety Assist.',
                     'Safety Officer'   =>  'Safety Officer',
                     'Secretary'    =>  'Secretary',
                     'Secretary/IT Assistant'    =>  'Secretary/IT Assistant',
                     'Shutter Carpenter'    =>  'Shutter Carpenter',
+                    'Site Engineer'    =>  'Site Engineer',
                     'Steel Fixer'   =>  'Steel Fixer',
                     'Store Kepeer'    =>  'Store Kepeer',
                     'Technical Engineer' =>  'Technical Engineer',
@@ -1108,7 +1124,16 @@
 							<button class="delete-entry"><i class="fa fa-remove"></i></button>
 						{!! Form::close() !!}
 						<li>From: {{$vacation['current']->vac_from->format('F d, Y')}}</li>
-						<li>To: {{$vacation['current']->vac_to->format('F d, Y')}}</li>
+						<li>To:
+							<?php
+								if($vacation['current']->vac_from->diffInDays($vacation['current']->vac_to) == 171){
+									echo 'Open';
+								}
+								else{
+									echo $vacation['current']->vac_to->format('F d, Y');
+								}
+							?>
+						</li>
 						<li>Departure: {{$vacation['current']->vac_from_time?$vacation['current']->vac_from_time->format('F d, Y g:i a'):''}}</li>
 						<li>Arrival: {{$vacation['current']->vac_to_time?$vacation['current']->vac_to_time->format('F d, Y g:i a'):''}}</li>
 						<li>Airlines: {{$vacation['current']->airlines}}</li>
@@ -1227,7 +1252,16 @@
 							<button class="delete-entry"><i class="fa fa-remove"></i></button>
 						{!! Form::close() !!}
 						<li>From: {{$vacation['upcoming']->vac_from->format('F d, Y')}}</li>
-						<li>To: {{$vacation['upcoming']->vac_to->format('F d, Y')}}</li>
+						<li>To:
+							<?php
+								if($vacation['upcoming']->vac_from->diffInDays($vacation['upcoming']->vac_to) == 171){
+									echo 'Open';
+								}
+								else{
+									echo $vacation['upcoming']->vac_to->format('F d, Y');
+								}
+							?>
+						</li>
 						<li>Departure: {{$vacation['upcoming']->vac_from_time?$vacation['upcoming']->vac_from_time->format('F d, Y g:i a'):''}}</li>
 						<li>Arrival: {{$vacation['upcoming']->vac_to_time?$vacation['upcoming']->vac_to_time->format('F d, Y g:i a'):''}}</li>
 						<li>Airlines: {{$vacation['upcoming']->airlines}}</li>
@@ -1341,13 +1375,23 @@
 						{!! Form::submit('Update') !!}
 						<button class="cancel"><i class="fa fa-remove"></i></button>
 					{!! Form::close() !!}
+
 					<ul>
 						<a href="#" class="data-tool" data-field="vacation{{$vac->id}}" rel="formOpen"><i class="fa fa-wrench"></i></a>
 						{!! Form::open(['route' => ['vac-drop',$vac->id],'class' => 'data-tool']) !!}
 							<button class="delete-entry"><i class="fa fa-remove"></i></button>
 						{!! Form::close() !!}
 						<li>From: {{$vac->vac_from->format('F d, Y')}}</li>
-						<li>To: {{$vac->vac_to->format('F d, Y')}}</li>
+						<li>To:
+							<?php
+								if($vac->vac_from->diffInDays($vac->vac_to) == 171){
+									echo 'Open';
+								}
+								else{
+									echo $vac->vac_to->format('F d, Y');
+								}
+							?>
+						</li>
 						<li>Departure: {{$vac->vac_from_time?$vac->vac_from_time->format('F d, Y g:i a'):''}}</li>
 						<li>Arrival: {{$vac->vac_to_time?$vac->vac_to_time->format('F d, Y g:i a'):''}}</li>
 						<li>Airlines: {{$vac->airlines}}</li>

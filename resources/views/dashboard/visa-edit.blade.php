@@ -81,7 +81,32 @@ Edit Visa | {{config('app.name')}}
             <div class="5u">
         		<div>            
                     {!! Form::label('occupation', 'Occupation') !!}
-                    {!! Form::select('occupation', ['Accountant' => 'Accountant', 'Carpenter' => 'Carpenter', 'Civil Engineer' => 'Civil Engineer', 'Draftsman' => 'Draftsman', 'Driver' => 'Driver', 'Engineer' => 'Engineer','Foreman' => 'Foreman', 'Labor' => 'Labor','Marble Technician' => 'Marble Technician','Mason' => 'Mason','Steel Fixer' => 'Steel Fixer','Tiles Maker' => 'Tiles Maker'], old('occupation')) !!}
+                    {!! Form::select('occupation', [ 
+						'Accountant' => 'Accountant',
+						'Arch. Engineer' => 'Arch. Engineer',
+						'Assist. Foreman' => 'Assist. Foreman',
+						'A/C Technician' => 'A/C Technician',
+						'Carpenter' => 'Carpenter', 
+						'Civil Engineer' => 'Civil Engineer', 
+						'Clerk' => 'Clerk',
+						'Draftsman' => 'Draftsman', 
+						'Driver' => 'Driver', 
+						'Electrician' => 'Electrician',
+						'Engineer' => 'Engineer',
+						'Equipment Operator' => 'Equipment Operator',
+						'Foreman' => 'Foreman', 
+						'Labor' => 'Labor',
+						'Marble Technician' => 'Marble Technician',
+						'Mason' => 'Mason',
+						'Mechanic' => 'Mechanic',
+						'MEP Engineer' => 'MEP Engineer',
+						'Painter' => 'Painter',
+						'Plumber' => 'Plumber',
+						'Representative' => 'Representative',
+						'Secretary' => 'Secretary',
+						'Steel Fixer' => 'Steel Fixer',
+						'Technician' => 'Technician',
+						'Tiles Maker' => 'Tiles Maker'], old('occupation')) !!}
                     @if ($errors->has('occupation'))
                         <span class="error">
                             <strong>{{ $errors->first('occupation') }}</strong>

@@ -61,10 +61,9 @@ class Kernel extends ConsoleKernel
 
             $visas = Visa::where('visa_expiry_date','>=',$from)->where('visa_expiry_date','<=',$to)->orderBy('visa_expiry_date','DESC')->get();
 
-            $from = Carbon::today()->subDays($settings->vac);
-            $to = Carbon::today()->subDays($settings->vac + 1);
+            $from = Carbon::today()->addDays($settings->vac);
 
-            $vac = Vacation::where('vac_from','>=',$from)->where('vac_to','<=',$to)->orderBy('vac_from','DESC')->get();
+        	$vac = Vacation::where('vac_from','<=',$from)->where('vac_from','>',Carbon::today())->orderBy('vac_from','DESC')->get();
 
             $data['hcs'] = $hcs;
             $data['qids'] = $qids;
@@ -78,6 +77,15 @@ class Kernel extends ConsoleKernel
             if(!empty($hcs->toArray()) || !empty($qids->toArray()) || !empty($passports->toArray()) || !empty($lics->toArray()) || !empty($visas->toArray()) || !empty($vac->toArray())){
                 Notification::send($admins, new Expired($data));
             }
+
+
+            $cancelled = Vacation::where('vac_to',Carbon::today())->where('vac_from',Carbon::today()->subDays(171))->get();
+
+	        foreach($cancelled as $cancel){
+	        	$user = $cancel->user()->first();
+	        	$user->role = 'cancel';
+	        	$user->save();
+	        }
 
         })->daily();
     }
