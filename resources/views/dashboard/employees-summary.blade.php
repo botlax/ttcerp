@@ -152,7 +152,7 @@ Employees | {{config('app.name')}}
 			
 			<a href="{{url('employees')}}">All</a>
 			<a href="{{url('cancelled')}}">Cancelled Employees</a>
-			<a href="{{url('employees/summary')}}">Summary</a>
+			<a href="{{url('employees/summary')}}">Manpower Report</a>
 			<a href="{{url('employees/add')}}"><i class="fa fa-plus"></i>Add Employee</a>
 		</div>
 		
