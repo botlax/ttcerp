@@ -73,19 +73,14 @@ class Kernel extends ConsoleKernel
             $data['vac'] = $vac;
 
             $admins = User::admin()->get();
-            
-            if(!empty($hcs->toArray()) || !empty($qids->toArray()) || !empty($passports->toArray()) || !empty($lics->toArray()) || !empty($visas->toArray()) || !empty($vac->toArray())){
-                Notification::send($admins, new Expired($data));
-            }
-
 
             $cancelled = Vacation::where('vac_to',Carbon::today())->where('vac_from',Carbon::today()->subDays(171))->get();
 
-	        foreach($cancelled as $cancel){
-	        	$user = $cancel->user()->first();
-	        	$user->role = 'cancel';
-	        	$user->save();
-	        }
+            $data['cancel'] = $cancelled;
+
+	        if(!empty($hcs->toArray()) || !empty($qids->toArray()) || !empty($passports->toArray()) || !empty($lics->toArray()) || !empty($visas->toArray()) || !empty($vac->toArray()) || !empty($cancelled->toArray())){
+                Notification::send($admins, new Expired($data));
+            }
 
         })->daily();
     }

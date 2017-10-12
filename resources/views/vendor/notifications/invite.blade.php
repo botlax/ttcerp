@@ -35,7 +35,7 @@ Please see below employee documents that will expire in 30 days.
 </table>
 @endforeach
 @endif
-
+<hr>
 @if(!empty($data['passports']->toArray()))
 <h2>Passports</h2>
 @foreach($data['passports'] as $pass)
@@ -60,7 +60,7 @@ Please see below employee documents that will expire in 30 days.
 </table>
 @endforeach
 @endif
-
+<hr>
 @if(!empty($data['hcs']->toArray()))
 <h2>Health Cards</h2>
 @foreach($data['hcs'] as $hc)
@@ -85,7 +85,7 @@ Please see below employee documents that will expire in 30 days.
 </table>
 @endforeach
 @endif
-
+<hr>
 @if(!empty($data['lics']->toArray()))
 <h2>Licenses</h2>
 @foreach($data['lics'] as $lic)
@@ -110,7 +110,7 @@ Please see below employee documents that will expire in 30 days.
 </table>
 @endforeach
 @endif
-
+<hr>
 @if(!empty($data['visas']->toArray()))
 <h2>Visas</h2>
 @foreach($data['visas'] as $visa)
@@ -135,7 +135,7 @@ Please see below employee documents that will expire in 30 days.
 </table>
 @endforeach
 @endif
-
+<hr>
 @if(!empty($data['vac']->toArray()))
 <h2>Vacations</h2>
 @foreach($data['vac'] as $vac)
@@ -149,6 +149,31 @@ Please see below employee documents that will expire in 30 days.
                             <tr>
                                 <td style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box;">
                                     <p>{{$vac->user()->first()->name}} - {{$vac->user()->first()->emp_id}}  (Departure: {{$vac->vac_from->format('F d, Y g:i A')}})</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+@endforeach
+@endif
+<hr>
+@if(!empty($data['cancel']->toArray()))
+<h2>The following are on leave for 170 days and will be automatically cancelled after 10 days.</h2>
+@foreach($data['cancel'] as $cancel)
+<table class="action" align="center" width="100%" cellpadding="0" cellspacing="0" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; margin: 30px auto; padding: 0; text-align: center; width: 100%; -premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 100%;">
+    <tr>
+        <td align="center" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box;">
+            <table width="100%" border="0" cellpadding="0" cellspacing="0" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box;">
+                <tr>
+                    <td align="center" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box;">
+                        <table border="0" cellpadding="0" cellspacing="0" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box;">
+                            <tr>
+                                <td style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box;">
+                                    <p>{{$cancel->user()->first()->name}} - {{$cancel->user()->first()->emp_id}}</p>
                                 </td>
                             </tr>
                         </table>
