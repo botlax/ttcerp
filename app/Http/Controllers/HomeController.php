@@ -146,17 +146,12 @@ class HomeController extends Controller
         $emp_id = $employees->pluck('id')->toArray();
         $employees = $employees->get();
 
-        $from = Carbon::today();
-        $to = Carbon::tomorrow();
-        
+        $today = Carbon::today();
+       
         $vacation = Vacation::whereHas('user',function($q)use($emp_id){
             $q->whereIn('id',$emp_id);
-        })->where(function($q)use($from,$to){
-            $q->where('vac_from','<=',$from)->where('vac_to','>=',$to);
-        })->orWhere(function($q)use($from,$to){
-            $q->where('vac_from','<=',$to)->where('vac_from','>=',$from);
-        })->orWhere(function($q)use($from,$to){
-            $q->where('vac_to','<=',$to)->where('vac_to','>=',$from);
+        })->where(function($q)use($today){
+            $q->where('vac_from','<=',$today)->where('vac_to','>=',$today);
         })->orderBy('vac_from','DESC')->get();
 
         return view('dashboard.employees-search',compact('employees','vacation','s','d','n','nats'));
