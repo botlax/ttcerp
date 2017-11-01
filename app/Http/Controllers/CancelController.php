@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Cancel;
 use App\User;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class CancelController extends Controller
 {
@@ -59,6 +60,11 @@ class CancelController extends Controller
 
        $cancel = Cancel::create($request->all());
        $emp->cancel()->save($cancel);
+
+       if(Carbon::today()->gte($cancel->cancel_date)){
+	        $emp->role = 'cancel';
+	        $emp->save();
+       }
 
        return redirect('cancelled');
     }

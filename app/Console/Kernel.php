@@ -9,6 +9,7 @@ use App\License;
 use App\Visa;
 use App\Settings;
 use App\Vacation;
+use App\Cancel;
 use Carbon\Carbon;
 use App\Notifications\Expired;
 use Illuminate\Support\Facades\Notification;
@@ -81,6 +82,15 @@ class Kernel extends ConsoleKernel
 	        if(!empty($hcs->toArray()) || !empty($qids->toArray()) || !empty($passports->toArray()) || !empty($lics->toArray()) || !empty($visas->toArray()) || !empty($vac->toArray()) || !empty($cancelled->toArray())){
                 Notification::send($admins, new Expired($data));
             }
+
+            $cancel = Cancel::where('cancel_date',Carbon::today())->get();
+
+            foreach($cancel as $c){
+            	$emp = $c->user()-first();
+            	$emp->role = 'cancel';
+            	$emp->save();
+            }
+
 
         })->daily();
     }

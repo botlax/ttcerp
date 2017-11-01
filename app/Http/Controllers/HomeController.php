@@ -623,8 +623,8 @@ class HomeController extends Controller
     public function delete($id)
     {
         $user = User::sort()->findOrFail($id);
-        $user->role = 'cancel';
-        $user->save();
+        #$user->role = 'cancel';
+        #$user->save();
 
         $this->addLog('Cancelled employee '.$user->name);
         flash('Employee successfully cancelled.')->success();
