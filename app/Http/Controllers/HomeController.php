@@ -390,6 +390,8 @@ class HomeController extends Controller
 
         $prefix = $request->input('location_prefix');
 
+        $designation = '.'; // some logic to decide user's plan
+        $request->request->add(['designation' => $designation]);
         User::create($request->all());
 
         $this->addLog('Added employee '.$request->input('name'));
