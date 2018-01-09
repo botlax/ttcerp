@@ -83,6 +83,7 @@ Edit Visa | {{config('app.name')}}
                     {!! Form::label('occupation', 'Occupation') !!}
                     {!! Form::select('occupation', [ 
 						'Accountant' => 'Accountant',
+						'Administrator' => 'Administrator',
 						'Arch. Engineer' => 'Arch. Engineer',
 						'Assist. Foreman' => 'Assist. Foreman',
 						'A/C Technician' => 'A/C Technician',
