@@ -83,6 +83,7 @@ Add Visa | {{config('app.name')}}
                     {!! Form::label('occupation', 'Occupation') !!}
                     {!! Form::select('occupation', ['' => '--Select Occupation--', 
 						'Accountant' => 'Accountant',
+						'Administrator' => 'Administrator',
 						'Arch. Engineer' => 'Arch. Engineer',
 						'Assist. Foreman' => 'Assist. Foreman',
 						'A/C Technician' => 'A/C Technician',
