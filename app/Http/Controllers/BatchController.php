@@ -216,6 +216,7 @@ class BatchController extends Controller
 			                    $user = User::where('emp_id',intval($result->id))->first();
 			                    if($user){
 			                    	$user->passport_expiry = $result->expiry;
+						$user->passport = $result->data;
 				                    $user->save();
 			                    }
 				                else{
@@ -226,6 +227,7 @@ class BatchController extends Controller
 			                  	$user = User::where('emp_id',intval($result->id))->first();
 			                    if($user){
 			                    	$user->qid_expiry = $result->expiry;
+						$user->qid = $result->data;
 				                    $user->save();
 			                    }
 				                else{
@@ -236,6 +238,7 @@ class BatchController extends Controller
 			                   	$user = User::where('emp_id',intval($result->id))->first();
 			                    if($user){
 			                    	$user->hc_expiry = $result->expiry;
+						$user->hc = $result->data;
 				                    $user->save();
 			                    }
 				                else{
