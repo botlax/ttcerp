@@ -290,9 +290,9 @@ Employees | {{config('app.name')}}
 						<td>{{$vac->user()->first()->salary()->first()?$vac->user()->first()->salary()->first()->subTotal:'--'}}</td>
 						@endif
 						<td class="ph">
-							<a href="{{url('employees/'.$emp->id.'/edit')}}"><i class="fa fa-wrench"></i></a>
-							<a href="#delete-leanmodal" data-id="{{$emp->id}}" class="delete" rel="leanModal" title="delete"><i class="fa fa-remove"></i></a>
-							{!! Form::open(['route' => ['emp-delete',$emp->id],'style' => 'display: none;','id' => 'delete'.$emp->id]) !!}{!! Form::close() !!}
+							<a href="{{url('employees/'.$vac->user()->first()->id.'/edit')}}"><i class="fa fa-wrench"></i></a>
+							<a href="#delete-leanmodal" data-id="{{$vac->user()->first()->id}}" class="delete" rel="leanModal" title="delete"><i class="fa fa-remove"></i></a>
+							{!! Form::open(['route' => ['emp-delete',$vac->user()->first()->id],'style' => 'display: none;','id' => 'delete'.$vac->user()->first()->id]) !!}{!! Form::close() !!}
 						</td>
 					</tr>
 					<?php $x++; ?>
